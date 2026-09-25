@@ -1,0 +1,10544 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Từ Vựng Theo Chủ Đề</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Noto+Sans:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #faf8f3;
+    --surface: #ffffff;
+    --surface-2: #f2ede1;
+    --text: #2a2622;
+    --text-muted: #756f63;
+    --border: #e6e0d3;
+    --vowel: #2c6e63;
+    --vowel-soft: #e4efec;
+    --consonant: #a9642a;
+    --consonant-soft: #f5e9dc;
+    --focus: #2c6e63;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #1c1a17; --surface: #242220; --surface-2: #2c2924;
+      --text: #ede8de; --text-muted: #a79e8f; --border: #3c372f;
+      --vowel: #6ec2b0; --vowel-soft: #223531;
+      --consonant: #e2985a; --consonant-soft: #3a2c1f; --focus: #6ec2b0;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #1c1a17; --surface: #242220; --surface-2: #2c2924;
+    --text: #ede8de; --text-muted: #a79e8f; --border: #3c372f;
+    --vowel: #6ec2b0; --vowel-soft: #223531;
+    --consonant: #e2985a; --consonant-soft: #3a2c1f; --focus: #6ec2b0;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans', 'Segoe UI', sans-serif;
+    padding-inline: 20px;
+    padding-block: 40px 64px;
+  }
+
+  .wrap { max-width: 780px; margin: 0 auto; }
+
+  .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--consonant); }
+
+  h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(28px, 6vw, 38px);
+    line-height: 1.12;
+    margin: 8px 0 10px;
+    text-wrap: balance;
+  }
+
+  .lede { font-size: 15.5px; line-height: 1.6; color: var(--text-muted); max-width: 62ch; }
+
+  .progress {
+    margin-top: 20px;
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+  }
+  .progress-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-size: 13px; }
+  .progress-top strong { font-family: 'Fraunces', Georgia, serif; font-size: 16px; color: var(--vowel); }
+  .progress-bar { margin-top: 8px; height: 6px; border-radius: 999px; background: var(--surface-2); overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--vowel); border-radius: 999px; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .legend span { font-size: 12.5px; color: var(--text-muted); background: var(--surface-2); border: 1px solid var(--border); border-radius: 999px; padding: 5px 12px; }
+
+  .toolbar { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
+
+  .search { position: relative; }
+  .search input {
+    width: 100%; font: inherit; font-size: 15px;
+    padding: 11px 14px 11px 38px; border-radius: 10px;
+    border: 1px solid var(--border); background: var(--surface); color: var(--text);
+  }
+  .search input:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+  .search svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; stroke: var(--text-muted); pointer-events: none; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chips a { font-size: 12.5px; font-weight: 600; color: var(--vowel); background: var(--vowel-soft); border-radius: 999px; padding: 6px 12px; text-decoration: none; white-space: nowrap; }
+  .chips a:hover, .chips a:focus-visible { outline: 1.5px solid var(--vowel); outline-offset: 1px; }
+
+  .empty { display: none; margin-top: 24px; padding: 18px; border: 1px dashed var(--border); border-radius: 10px; color: var(--text-muted); font-size: 14px; text-align: center; }
+  .empty.show { display: block; }
+
+  .category { margin-top: 34px; scroll-margin-top: 16px; }
+  .category-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 10px; }
+  .category-head h2 { font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 19px; margin: 0; }
+  .category-head .en { font-size: 12.5px; color: var(--text-muted); font-style: italic; }
+  .category-head .count { margin-left: auto; font-size: 11.5px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+
+  .tablewrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
+  table { width: 100%; border-collapse: collapse; min-width: 340px; font-size: 14px; }
+  thead th { text-align: left; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); padding: 9px 10px; border-bottom: 1px solid var(--border); }
+  th.num, td.num { width: 30px; text-align: right; padding-right: 6px; }
+  th.play, td.play { width: 34px; text-align: center; padding: 6px; }
+  tbody tr { border-bottom: 1px solid var(--border); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr.hide { display: none; }
+  td { padding: 9px 10px; vertical-align: middle; }
+  td.num { color: var(--text-muted); font-variant-numeric: tabular-nums; font-size: 12.5px; }
+  td.word { font-weight: 600; }
+  td.ipa { color: var(--vowel); font-size: 14.5px; white-space: nowrap; }
+  td.meaning { color: var(--text); }
+
+  .play-btn {
+    width: 26px; height: 26px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--consonant-soft); color: var(--consonant);
+    display: inline-flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;
+  }
+  .play-btn:hover { border-color: var(--consonant); }
+  .play-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+  .play-btn svg { width: 13px; height: 13px; }
+  body.no-speech .play-btn { display: none; }
+
+  footer { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--border); font-size: 12.5px; color: var(--text-muted); line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <p class="eyebrow">Tài liệu tham khảo · IELTS 6.5</p>
+  <h1>Từ Vựng Theo Chủ Đề</h1>
+  <p class="lede">
+    Kho từ vựng tiếng Anh chia theo chủ đề đời sống và IELTS, kèm phiên âm IPA (giọng Anh-Anh)
+    và nghĩa tiếng Việt — đang được bổ sung dần theo từng đợt, hướng tới mục tiêu 2000 từ.
+  </p>
+
+  <div class="progress">
+    <div class="progress-top">
+      <span>Tiến độ</span>
+      <strong id="progress-label">2000 / 2000 từ · 39 chủ đề</strong>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width: 100.0%"></div></div>
+  </div>
+
+  <div class="legend">
+    <span>Phiên âm: British RP</span>
+    <span>Bấm 🔊 để nghe máy đọc</span>
+  </div>
+
+  <div class="toolbar">
+    <div class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input id="q" type="text" placeholder="Tìm từ hoặc nghĩa… (vd. mother, tốt, /wiː/)" autocomplete="off">
+    </div>
+    <nav class="chips" id="chips"></nav>
+  </div>
+
+  <p class="empty" id="empty">Không tìm thấy từ nào khớp.</p>
+
+  <div id="categories"></div>
+
+  <footer>
+    Nguồn phiên âm: tổng hợp theo chuẩn British RP dùng trong từ điển Cambridge, cùng cách trình bày
+    ký hiệu như sách <em>English Pronunciation in Use – Elementary</em> đang dùng trong lộ trình học.
+    Nút 🔊 dùng giọng đọc có sẵn trên máy/trình duyệt (Web Speech API) để tham khảo nhanh — nên đối chiếu
+    thêm với audio gốc của sách hoặc từ điển khi luyện phát âm kỹ. Danh sách đang được mở rộng dần theo
+    từng đợt; các chủ đề mới sẽ được thêm vào đúng trang này.
+  </footer>
+</div>
+
+<script>
+(function () {
+  var DATA = [
+  {
+    "cat": "dai-tu",
+    "catVi": "Đại từ nhân xưng",
+    "catEn": "Pronouns",
+    "words": [
+      [
+        "I",
+        "aɪ",
+        "tôi"
+      ],
+      [
+        "you",
+        "juː",
+        "bạn"
+      ],
+      [
+        "he",
+        "hiː",
+        "anh ấy"
+      ],
+      [
+        "she",
+        "ʃiː",
+        "cô ấy"
+      ],
+      [
+        "we",
+        "wiː",
+        "chúng tôi"
+      ],
+      [
+        "they",
+        "ðeɪ",
+        "họ"
+      ]
+    ]
+  },
+  {
+    "cat": "gia-dinh",
+    "catVi": "Gia đình & con người",
+    "catEn": "Family & people",
+    "words": [
+      [
+        "mother",
+        "ˈmʌðə(r)",
+        "mẹ"
+      ],
+      [
+        "father",
+        "ˈfɑːðə(r)",
+        "bố"
+      ],
+      [
+        "brother",
+        "ˈbrʌðə(r)",
+        "anh/em trai"
+      ],
+      [
+        "sister",
+        "ˈsɪstə(r)",
+        "chị/em gái"
+      ],
+      [
+        "family",
+        "ˈfæməli",
+        "gia đình"
+      ],
+      [
+        "friend",
+        "frend",
+        "bạn bè"
+      ],
+      [
+        "child",
+        "tʃaɪld",
+        "trẻ em"
+      ],
+      [
+        "baby",
+        "ˈbeɪbi",
+        "em bé"
+      ]
+    ]
+  },
+  {
+    "cat": "so-dem",
+    "catVi": "Số đếm",
+    "catEn": "Numbers",
+    "words": [
+      [
+        "one",
+        "wʌn",
+        "một"
+      ],
+      [
+        "two",
+        "tuː",
+        "hai"
+      ],
+      [
+        "three",
+        "θriː",
+        "ba"
+      ],
+      [
+        "four",
+        "fɔː(r)",
+        "bốn"
+      ],
+      [
+        "five",
+        "faɪv",
+        "năm"
+      ],
+      [
+        "six",
+        "sɪks",
+        "sáu"
+      ],
+      [
+        "seven",
+        "ˈsevn",
+        "bảy"
+      ],
+      [
+        "eight",
+        "eɪt",
+        "tám"
+      ],
+      [
+        "nine",
+        "naɪn",
+        "chín"
+      ],
+      [
+        "ten",
+        "ten",
+        "mười"
+      ]
+    ]
+  },
+  {
+    "cat": "mau-sac",
+    "catVi": "Màu sắc",
+    "catEn": "Colours",
+    "words": [
+      [
+        "red",
+        "red",
+        "đỏ"
+      ],
+      [
+        "blue",
+        "bluː",
+        "xanh dương"
+      ],
+      [
+        "green",
+        "ɡriːn",
+        "xanh lá"
+      ],
+      [
+        "yellow",
+        "ˈjeləʊ",
+        "vàng"
+      ],
+      [
+        "black",
+        "blæk",
+        "đen"
+      ],
+      [
+        "white",
+        "waɪt",
+        "trắng"
+      ],
+      [
+        "orange",
+        "ˈɒrɪndʒ",
+        "cam"
+      ],
+      [
+        "brown",
+        "braʊn",
+        "nâu"
+      ]
+    ]
+  },
+  {
+    "cat": "thoi-gian",
+    "catVi": "Thời gian",
+    "catEn": "Time",
+    "words": [
+      [
+        "today",
+        "təˈdeɪ",
+        "hôm nay"
+      ],
+      [
+        "tomorrow",
+        "təˈmɒrəʊ",
+        "ngày mai"
+      ],
+      [
+        "yesterday",
+        "ˈjestədeɪ",
+        "hôm qua"
+      ],
+      [
+        "morning",
+        "ˈmɔːnɪŋ",
+        "buổi sáng"
+      ],
+      [
+        "afternoon",
+        "ˌɑːftəˈnuːn",
+        "buổi chiều"
+      ],
+      [
+        "evening",
+        "ˈiːvnɪŋ",
+        "buổi tối"
+      ],
+      [
+        "night",
+        "naɪt",
+        "ban đêm"
+      ],
+      [
+        "week",
+        "wiːk",
+        "tuần"
+      ],
+      [
+        "month",
+        "mʌnθ",
+        "tháng"
+      ],
+      [
+        "year",
+        "jɪə(r)",
+        "năm"
+      ]
+    ]
+  },
+  {
+    "cat": "do-an",
+    "catVi": "Đồ ăn & thức uống",
+    "catEn": "Food & drink",
+    "words": [
+      [
+        "water",
+        "ˈwɔːtə(r)",
+        "nước"
+      ],
+      [
+        "coffee",
+        "ˈkɒfi",
+        "cà phê"
+      ],
+      [
+        "tea",
+        "tiː",
+        "trà"
+      ],
+      [
+        "bread",
+        "bred",
+        "bánh mì"
+      ],
+      [
+        "rice",
+        "raɪs",
+        "cơm/gạo"
+      ],
+      [
+        "meat",
+        "miːt",
+        "thịt"
+      ],
+      [
+        "fish",
+        "fɪʃ",
+        "cá"
+      ],
+      [
+        "fruit",
+        "fruːt",
+        "trái cây"
+      ],
+      [
+        "vegetable",
+        "ˈvedʒtəbl",
+        "rau"
+      ],
+      [
+        "milk",
+        "mɪlk",
+        "sữa"
+      ]
+    ]
+  },
+  {
+    "cat": "dong-tu",
+    "catVi": "Động từ thường dùng",
+    "catEn": "Common verbs",
+    "words": [
+      [
+        "go",
+        "ɡəʊ",
+        "đi"
+      ],
+      [
+        "come",
+        "kʌm",
+        "đến"
+      ],
+      [
+        "eat",
+        "iːt",
+        "ăn"
+      ],
+      [
+        "drink",
+        "drɪŋk",
+        "uống"
+      ],
+      [
+        "sleep",
+        "sliːp",
+        "ngủ"
+      ],
+      [
+        "work",
+        "wɜːk",
+        "làm việc"
+      ],
+      [
+        "study",
+        "ˈstʌdi",
+        "học"
+      ],
+      [
+        "read",
+        "riːd",
+        "đọc"
+      ],
+      [
+        "write",
+        "raɪt",
+        "viết"
+      ],
+      [
+        "speak",
+        "spiːk",
+        "nói"
+      ],
+      [
+        "listen",
+        "ˈlɪsn",
+        "nghe"
+      ],
+      [
+        "watch",
+        "wɒtʃ",
+        "xem"
+      ],
+      [
+        "walk",
+        "wɔːk",
+        "đi bộ"
+      ],
+      [
+        "run",
+        "rʌn",
+        "chạy"
+      ],
+      [
+        "sit",
+        "sɪt",
+        "ngồi"
+      ],
+      [
+        "stand",
+        "stænd",
+        "đứng"
+      ],
+      [
+        "buy",
+        "baɪ",
+        "mua"
+      ],
+      [
+        "sell",
+        "sel",
+        "bán"
+      ],
+      [
+        "love",
+        "lʌv",
+        "yêu"
+      ],
+      [
+        "live",
+        "lɪv",
+        "sống"
+      ]
+    ]
+  },
+  {
+    "cat": "tinh-tu",
+    "catVi": "Tính từ thường dùng",
+    "catEn": "Common adjectives",
+    "words": [
+      [
+        "good",
+        "ɡʊd",
+        "tốt"
+      ],
+      [
+        "bad",
+        "bæd",
+        "tệ"
+      ],
+      [
+        "big",
+        "bɪɡ",
+        "to"
+      ],
+      [
+        "small",
+        "smɔːl",
+        "nhỏ"
+      ],
+      [
+        "happy",
+        "ˈhæpi",
+        "vui"
+      ],
+      [
+        "sad",
+        "sæd",
+        "buồn"
+      ],
+      [
+        "hot",
+        "hɒt",
+        "nóng"
+      ],
+      [
+        "cold",
+        "kəʊld",
+        "lạnh"
+      ],
+      [
+        "easy",
+        "ˈiːzi",
+        "dễ"
+      ],
+      [
+        "difficult",
+        "ˈdɪfɪkəlt",
+        "khó"
+      ],
+      [
+        "beautiful",
+        "ˈbjuːtɪfl",
+        "đẹp"
+      ],
+      [
+        "expensive",
+        "ɪkˈspensɪv",
+        "đắt"
+      ],
+      [
+        "cheap",
+        "tʃiːp",
+        "rẻ"
+      ],
+      [
+        "fast",
+        "fɑːst",
+        "nhanh"
+      ],
+      [
+        "slow",
+        "sləʊ",
+        "chậm"
+      ]
+    ]
+  },
+  {
+    "cat": "noi-chon",
+    "catVi": "Nơi chốn",
+    "catEn": "Places",
+    "words": [
+      [
+        "house",
+        "haʊs",
+        "nhà"
+      ],
+      [
+        "school",
+        "skuːl",
+        "trường học"
+      ],
+      [
+        "office",
+        "ˈɒfɪs",
+        "văn phòng"
+      ],
+      [
+        "hospital",
+        "ˈhɒspɪtl",
+        "bệnh viện"
+      ],
+      [
+        "market",
+        "ˈmɑːkɪt",
+        "chợ"
+      ],
+      [
+        "restaurant",
+        "ˈrestrɒnt",
+        "nhà hàng"
+      ],
+      [
+        "airport",
+        "ˈeəpɔːt",
+        "sân bay"
+      ],
+      [
+        "station",
+        "ˈsteɪʃn",
+        "ga/bến xe"
+      ],
+      [
+        "park",
+        "pɑːk",
+        "công viên"
+      ],
+      [
+        "city",
+        "ˈsɪti",
+        "thành phố"
+      ]
+    ]
+  },
+  {
+    "cat": "do-vat",
+    "catVi": "Đồ vật hằng ngày",
+    "catEn": "Everyday objects",
+    "words": [
+      [
+        "phone",
+        "fəʊn",
+        "điện thoại"
+      ],
+      [
+        "book",
+        "bʊk",
+        "sách"
+      ],
+      [
+        "money",
+        "ˈmʌni",
+        "tiền"
+      ]
+    ]
+  },
+  {
+    "cat": "co-the-suc-khoe",
+    "catVi": "Cơ thể & sức khỏe",
+    "catEn": "Body & health",
+    "words": [
+      [
+        "head",
+        "hed",
+        "đầu"
+      ],
+      [
+        "face",
+        "feɪs",
+        "mặt"
+      ],
+      [
+        "eye",
+        "aɪ",
+        "mắt"
+      ],
+      [
+        "ear",
+        "ɪə(r)",
+        "tai"
+      ],
+      [
+        "nose",
+        "nəʊz",
+        "mũi"
+      ],
+      [
+        "mouth",
+        "maʊθ",
+        "miệng"
+      ],
+      [
+        "tooth",
+        "tuːθ",
+        "răng"
+      ],
+      [
+        "tongue",
+        "tʌŋ",
+        "lưỡi"
+      ],
+      [
+        "hair",
+        "heə(r)",
+        "tóc"
+      ],
+      [
+        "neck",
+        "nek",
+        "cổ"
+      ],
+      [
+        "shoulder",
+        "ˈʃəʊldə(r)",
+        "vai"
+      ],
+      [
+        "arm",
+        "ɑːm",
+        "cánh tay"
+      ],
+      [
+        "hand",
+        "hænd",
+        "bàn tay"
+      ],
+      [
+        "finger",
+        "ˈfɪŋɡə(r)",
+        "ngón tay"
+      ],
+      [
+        "chest",
+        "tʃest",
+        "ngực"
+      ],
+      [
+        "back",
+        "bæk",
+        "lưng"
+      ],
+      [
+        "stomach",
+        "ˈstʌmək",
+        "bụng/dạ dày"
+      ],
+      [
+        "leg",
+        "leɡ",
+        "chân"
+      ],
+      [
+        "knee",
+        "niː",
+        "đầu gối"
+      ],
+      [
+        "foot",
+        "fʊt",
+        "bàn chân"
+      ],
+      [
+        "skin",
+        "skɪn",
+        "da"
+      ],
+      [
+        "heart",
+        "hɑːt",
+        "tim"
+      ],
+      [
+        "brain",
+        "breɪn",
+        "não"
+      ],
+      [
+        "blood",
+        "blʌd",
+        "máu"
+      ],
+      [
+        "bone",
+        "bəʊn",
+        "xương"
+      ],
+      [
+        "health",
+        "helθ",
+        "sức khỏe"
+      ],
+      [
+        "illness",
+        "ˈɪlnəs",
+        "bệnh tật"
+      ],
+      [
+        "pain",
+        "peɪn",
+        "cơn đau"
+      ],
+      [
+        "headache",
+        "ˈhedeɪk",
+        "đau đầu"
+      ],
+      [
+        "fever",
+        "ˈfiːvə(r)",
+        "sốt"
+      ],
+      [
+        "cough",
+        "kɒf",
+        "ho"
+      ],
+      [
+        "medicine",
+        "ˈmedsn",
+        "thuốc"
+      ],
+      [
+        "doctor",
+        "ˈdɒktə(r)",
+        "bác sĩ"
+      ],
+      [
+        "nurse",
+        "nɜːs",
+        "y tá"
+      ],
+      [
+        "patient",
+        "ˈpeɪʃnt",
+        "bệnh nhân"
+      ],
+      [
+        "surgery",
+        "ˈsɜːdʒəri",
+        "phẫu thuật"
+      ],
+      [
+        "exercise",
+        "ˈeksəsaɪz",
+        "tập thể dục"
+      ],
+      [
+        "diet",
+        "ˈdaɪət",
+        "chế độ ăn"
+      ],
+      [
+        "rest",
+        "rest",
+        "nghỉ ngơi"
+      ],
+      [
+        "tired",
+        "ˈtaɪəd",
+        "mệt mỏi"
+      ],
+      [
+        "healthy",
+        "ˈhelθi",
+        "khỏe mạnh"
+      ],
+      [
+        "sick",
+        "sɪk",
+        "ốm"
+      ],
+      [
+        "cure",
+        "kjʊə(r)",
+        "chữa khỏi"
+      ],
+      [
+        "treatment",
+        "ˈtriːtmənt",
+        "điều trị"
+      ],
+      [
+        "symptom",
+        "ˈsɪmptəm",
+        "triệu chứng"
+      ],
+      [
+        "allergy",
+        "ˈælədʒi",
+        "dị ứng"
+      ],
+      [
+        "wound",
+        "wuːnd",
+        "vết thương"
+      ],
+      [
+        "temperature",
+        "ˈtemprətʃə(r)",
+        "nhiệt độ (cơ thể)"
+      ],
+      [
+        "pulse",
+        "pʌls",
+        "mạch (đập)"
+      ],
+      [
+        "vitamin",
+        "ˈvɪtəmɪn",
+        "vitamin"
+      ]
+    ]
+  },
+  {
+    "cat": "cam-xuc-tinh-cach",
+    "catVi": "Cảm xúc & tính cách",
+    "catEn": "Feelings & personality",
+    "words": [
+      [
+        "afraid",
+        "əˈfreɪd",
+        "sợ hãi"
+      ],
+      [
+        "angry",
+        "ˈæŋɡri",
+        "tức giận"
+      ],
+      [
+        "worried",
+        "ˈwʌrid",
+        "lo lắng"
+      ],
+      [
+        "nervous",
+        "ˈnɜːvəs",
+        "hồi hộp"
+      ],
+      [
+        "excited",
+        "ɪkˈsaɪtɪd",
+        "hào hứng"
+      ],
+      [
+        "bored",
+        "bɔːd",
+        "chán"
+      ],
+      [
+        "confused",
+        "kənˈfjuːzd",
+        "bối rối"
+      ],
+      [
+        "surprised",
+        "səˈpraɪzd",
+        "ngạc nhiên"
+      ],
+      [
+        "proud",
+        "praʊd",
+        "tự hào"
+      ],
+      [
+        "ashamed",
+        "əˈʃeɪmd",
+        "xấu hổ"
+      ],
+      [
+        "jealous",
+        "ˈdʒeləs",
+        "ghen tị"
+      ],
+      [
+        "lonely",
+        "ˈləʊnli",
+        "cô đơn"
+      ],
+      [
+        "confident",
+        "ˈkɒnfɪdənt",
+        "tự tin"
+      ],
+      [
+        "shy",
+        "ʃaɪ",
+        "nhút nhát"
+      ],
+      [
+        "calm",
+        "kɑːm",
+        "bình tĩnh"
+      ],
+      [
+        "upset",
+        "ʌpˈset",
+        "buồn bực"
+      ],
+      [
+        "disappointed",
+        "ˌdɪsəˈpɔɪntɪd",
+        "thất vọng"
+      ],
+      [
+        "curious",
+        "ˈkjʊəriəs",
+        "tò mò"
+      ],
+      [
+        "grateful",
+        "ˈɡreɪtfl",
+        "biết ơn"
+      ],
+      [
+        "embarrassed",
+        "ɪmˈbærəst",
+        "ngượng ngùng"
+      ],
+      [
+        "scared",
+        "skeəd",
+        "sợ"
+      ],
+      [
+        "relaxed",
+        "rɪˈlækst",
+        "thư giãn"
+      ],
+      [
+        "anxious",
+        "ˈæŋkʃəs",
+        "lo âu"
+      ],
+      [
+        "cheerful",
+        "ˈtʃɪəfl",
+        "vui vẻ"
+      ],
+      [
+        "kind",
+        "kaɪnd",
+        "tốt bụng"
+      ],
+      [
+        "friendly",
+        "ˈfrendli",
+        "thân thiện"
+      ],
+      [
+        "honest",
+        "ˈɒnɪst",
+        "trung thực"
+      ],
+      [
+        "generous",
+        "ˈdʒenərəs",
+        "hào phóng"
+      ],
+      [
+        "polite",
+        "pəˈlaɪt",
+        "lịch sự"
+      ],
+      [
+        "rude",
+        "ruːd",
+        "thô lỗ"
+      ],
+      [
+        "lazy",
+        "ˈleɪzi",
+        "lười biếng"
+      ],
+      [
+        "hardworking",
+        "ˌhɑːdˈwɜːkɪŋ",
+        "chăm chỉ"
+      ],
+      [
+        "brave",
+        "breɪv",
+        "dũng cảm"
+      ],
+      [
+        "selfish",
+        "ˈselfɪʃ",
+        "ích kỷ"
+      ],
+      [
+        "stubborn",
+        "ˈstʌbən",
+        "bướng bỉnh"
+      ],
+      [
+        "funny",
+        "ˈfʌni",
+        "hài hước"
+      ],
+      [
+        "serious",
+        "ˈsɪəriəs",
+        "nghiêm túc"
+      ],
+      [
+        "strict",
+        "strɪkt",
+        "nghiêm khắc"
+      ],
+      [
+        "gentle",
+        "ˈdʒentl",
+        "dịu dàng"
+      ],
+      [
+        "careful",
+        "ˈkeəfl",
+        "cẩn thận"
+      ],
+      [
+        "careless",
+        "ˈkeələs",
+        "bất cẩn"
+      ],
+      [
+        "optimistic",
+        "ˌɒptɪˈmɪstɪk",
+        "lạc quan"
+      ],
+      [
+        "pessimistic",
+        "ˌpesɪˈmɪstɪk",
+        "bi quan"
+      ],
+      [
+        "sensitive",
+        "ˈsensətɪv",
+        "nhạy cảm"
+      ],
+      [
+        "emotion",
+        "ɪˈməʊʃn",
+        "cảm xúc"
+      ]
+    ]
+  },
+  {
+    "cat": "nha-cua-do-noi-that",
+    "catVi": "Nhà cửa & đồ nội thất",
+    "catEn": "Home & furniture",
+    "words": [
+      [
+        "room",
+        "ruːm",
+        "phòng"
+      ],
+      [
+        "bedroom",
+        "ˈbedruːm",
+        "phòng ngủ"
+      ],
+      [
+        "kitchen",
+        "ˈkɪtʃɪn",
+        "nhà bếp"
+      ],
+      [
+        "bathroom",
+        "ˈbɑːθruːm",
+        "phòng tắm"
+      ],
+      [
+        "garden",
+        "ˈɡɑːdn",
+        "vườn"
+      ],
+      [
+        "roof",
+        "ruːf",
+        "mái nhà"
+      ],
+      [
+        "wall",
+        "wɔːl",
+        "tường"
+      ],
+      [
+        "floor",
+        "flɔː(r)",
+        "sàn nhà"
+      ],
+      [
+        "ceiling",
+        "ˈsiːlɪŋ",
+        "trần nhà"
+      ],
+      [
+        "door",
+        "dɔː(r)",
+        "cửa"
+      ],
+      [
+        "window",
+        "ˈwɪndəʊ",
+        "cửa sổ"
+      ],
+      [
+        "table",
+        "ˈteɪbl",
+        "cái bàn"
+      ],
+      [
+        "chair",
+        "tʃeə(r)",
+        "cái ghế"
+      ],
+      [
+        "bed",
+        "bed",
+        "giường"
+      ],
+      [
+        "sofa",
+        "ˈsəʊfə",
+        "ghế sofa"
+      ],
+      [
+        "sink",
+        "sɪŋk",
+        "bồn rửa"
+      ],
+      [
+        "shower",
+        "ˈʃaʊə(r)",
+        "vòi hoa sen"
+      ],
+      [
+        "fridge",
+        "frɪdʒ",
+        "tủ lạnh"
+      ],
+      [
+        "cooker",
+        "ˈkʊkə(r)",
+        "bếp nấu"
+      ],
+      [
+        "oven",
+        "ˈʌvn",
+        "lò nướng"
+      ],
+      [
+        "microwave",
+        "ˈmaɪkrəʊweɪv",
+        "lò vi sóng"
+      ],
+      [
+        "cupboard",
+        "ˈkʌbəd",
+        "tủ đựng đồ"
+      ],
+      [
+        "shelf",
+        "ʃelf",
+        "kệ"
+      ],
+      [
+        "mirror",
+        "ˈmɪrə(r)",
+        "gương"
+      ],
+      [
+        "lamp",
+        "læmp",
+        "đèn"
+      ],
+      [
+        "curtain",
+        "ˈkɜːtn",
+        "rèm cửa"
+      ],
+      [
+        "carpet",
+        "ˈkɑːpɪt",
+        "thảm"
+      ],
+      [
+        "blanket",
+        "ˈblæŋkɪt",
+        "chăn"
+      ],
+      [
+        "pillow",
+        "ˈpɪləʊ",
+        "gối"
+      ],
+      [
+        "towel",
+        "ˈtaʊəl",
+        "khăn tắm"
+      ],
+      [
+        "garage",
+        "ˈɡærɑːʒ",
+        "nhà để xe"
+      ],
+      [
+        "stairs",
+        "steəz",
+        "cầu thang"
+      ],
+      [
+        "balcony",
+        "ˈbælkəni",
+        "ban công"
+      ],
+      [
+        "fence",
+        "fens",
+        "hàng rào"
+      ],
+      [
+        "yard",
+        "jɑːd",
+        "sân"
+      ],
+      [
+        "furniture",
+        "ˈfɜːnɪtʃə(r)",
+        "đồ nội thất"
+      ],
+      [
+        "drawer",
+        "drɔː(r)",
+        "ngăn kéo"
+      ],
+      [
+        "wardrobe",
+        "ˈwɔːdrəʊb",
+        "tủ quần áo"
+      ],
+      [
+        "lock",
+        "lɒk",
+        "ổ khóa"
+      ],
+      [
+        "key",
+        "kiː",
+        "chìa khóa"
+      ],
+      [
+        "switch",
+        "swɪtʃ",
+        "công tắc"
+      ],
+      [
+        "socket",
+        "ˈsɒkɪt",
+        "ổ cắm điện"
+      ],
+      [
+        "heater",
+        "ˈhiːtə(r)",
+        "máy sưởi"
+      ],
+      [
+        "address",
+        "əˈdres",
+        "địa chỉ"
+      ],
+      [
+        "neighbour",
+        "ˈneɪbə(r)",
+        "hàng xóm"
+      ],
+      [
+        "neighbourhood",
+        "ˈneɪbəhʊd",
+        "khu phố"
+      ],
+      [
+        "apartment",
+        "əˈpɑːtmənt",
+        "căn hộ"
+      ],
+      [
+        "flat",
+        "flæt",
+        "căn hộ"
+      ],
+      [
+        "rent",
+        "rent",
+        "tiền thuê nhà"
+      ],
+      [
+        "owner",
+        "ˈəʊnə(r)",
+        "chủ sở hữu"
+      ]
+    ]
+  },
+  {
+    "cat": "thoi-tiet-thien-nhien",
+    "catVi": "Thời tiết & thiên nhiên",
+    "catEn": "Weather & nature",
+    "words": [
+      [
+        "sun",
+        "sʌn",
+        "mặt trời"
+      ],
+      [
+        "moon",
+        "muːn",
+        "mặt trăng"
+      ],
+      [
+        "star",
+        "stɑː(r)",
+        "ngôi sao"
+      ],
+      [
+        "sky",
+        "skaɪ",
+        "bầu trời"
+      ],
+      [
+        "cloud",
+        "klaʊd",
+        "mây"
+      ],
+      [
+        "rain",
+        "reɪn",
+        "mưa"
+      ],
+      [
+        "snow",
+        "snəʊ",
+        "tuyết"
+      ],
+      [
+        "wind",
+        "wɪnd",
+        "gió"
+      ],
+      [
+        "storm",
+        "stɔːm",
+        "bão"
+      ],
+      [
+        "thunder",
+        "ˈθʌndə(r)",
+        "sấm"
+      ],
+      [
+        "lightning",
+        "ˈlaɪtnɪŋ",
+        "sét/chớp"
+      ],
+      [
+        "fog",
+        "fɒɡ",
+        "sương mù"
+      ],
+      [
+        "ice",
+        "aɪs",
+        "băng"
+      ],
+      [
+        "degree",
+        "dɪˈɡriː",
+        "độ (nhiệt độ)"
+      ],
+      [
+        "season",
+        "ˈsiːzn",
+        "mùa"
+      ],
+      [
+        "spring",
+        "sprɪŋ",
+        "mùa xuân"
+      ],
+      [
+        "summer",
+        "ˈsʌmə(r)",
+        "mùa hè"
+      ],
+      [
+        "autumn",
+        "ˈɔːtəm",
+        "mùa thu"
+      ],
+      [
+        "winter",
+        "ˈwɪntə(r)",
+        "mùa đông"
+      ],
+      [
+        "warm",
+        "wɔːm",
+        "ấm"
+      ],
+      [
+        "cool",
+        "kuːl",
+        "mát"
+      ],
+      [
+        "wet",
+        "wet",
+        "ướt"
+      ],
+      [
+        "dry",
+        "draɪ",
+        "khô"
+      ],
+      [
+        "humid",
+        "ˈhjuːmɪd",
+        "ẩm ướt"
+      ],
+      [
+        "forest",
+        "ˈfɒrɪst",
+        "rừng"
+      ],
+      [
+        "mountain",
+        "ˈmaʊntən",
+        "núi"
+      ],
+      [
+        "river",
+        "ˈrɪvə(r)",
+        "sông"
+      ],
+      [
+        "lake",
+        "leɪk",
+        "hồ"
+      ],
+      [
+        "sea",
+        "siː",
+        "biển"
+      ],
+      [
+        "ocean",
+        "ˈəʊʃn",
+        "đại dương"
+      ],
+      [
+        "beach",
+        "biːtʃ",
+        "bãi biển"
+      ],
+      [
+        "island",
+        "ˈaɪlənd",
+        "đảo"
+      ],
+      [
+        "desert",
+        "ˈdezət",
+        "sa mạc"
+      ],
+      [
+        "hill",
+        "hɪl",
+        "đồi"
+      ],
+      [
+        "rock",
+        "rɒk",
+        "đá"
+      ],
+      [
+        "sand",
+        "sænd",
+        "cát"
+      ],
+      [
+        "soil",
+        "sɔɪl",
+        "đất"
+      ],
+      [
+        "tree",
+        "triː",
+        "cây"
+      ],
+      [
+        "flower",
+        "ˈflaʊə(r)",
+        "hoa"
+      ],
+      [
+        "leaf",
+        "liːf",
+        "lá"
+      ],
+      [
+        "planet",
+        "ˈplænɪt",
+        "hành tinh"
+      ],
+      [
+        "earth",
+        "ɜːθ",
+        "trái đất"
+      ],
+      [
+        "environment",
+        "ɪnˈvaɪrənmənt",
+        "môi trường"
+      ],
+      [
+        "pollution",
+        "pəˈluːʃn",
+        "ô nhiễm"
+      ],
+      [
+        "climate",
+        "ˈklaɪmət",
+        "khí hậu"
+      ]
+    ]
+  },
+  {
+    "cat": "dong-vat",
+    "catVi": "Động vật",
+    "catEn": "Animals",
+    "words": [
+      [
+        "dog",
+        "dɒɡ",
+        "chó"
+      ],
+      [
+        "cat",
+        "kæt",
+        "mèo"
+      ],
+      [
+        "bird",
+        "bɜːd",
+        "chim"
+      ],
+      [
+        "horse",
+        "hɔːs",
+        "ngựa"
+      ],
+      [
+        "cow",
+        "kaʊ",
+        "bò"
+      ],
+      [
+        "pig",
+        "pɪɡ",
+        "lợn"
+      ],
+      [
+        "sheep",
+        "ʃiːp",
+        "cừu"
+      ],
+      [
+        "goat",
+        "ɡəʊt",
+        "dê"
+      ],
+      [
+        "chicken",
+        "ˈtʃɪkɪn",
+        "gà"
+      ],
+      [
+        "duck",
+        "dʌk",
+        "vịt"
+      ],
+      [
+        "rabbit",
+        "ˈræbɪt",
+        "thỏ"
+      ],
+      [
+        "mouse",
+        "maʊs",
+        "chuột"
+      ],
+      [
+        "elephant",
+        "ˈelɪfənt",
+        "voi"
+      ],
+      [
+        "lion",
+        "ˈlaɪən",
+        "sư tử"
+      ],
+      [
+        "tiger",
+        "ˈtaɪɡə(r)",
+        "hổ"
+      ],
+      [
+        "bear",
+        "beə(r)",
+        "gấu"
+      ],
+      [
+        "monkey",
+        "ˈmʌŋki",
+        "khỉ"
+      ],
+      [
+        "snake",
+        "sneɪk",
+        "rắn"
+      ],
+      [
+        "spider",
+        "ˈspaɪdə(r)",
+        "nhện"
+      ],
+      [
+        "insect",
+        "ˈɪnsekt",
+        "côn trùng"
+      ],
+      [
+        "bee",
+        "biː",
+        "ong"
+      ],
+      [
+        "butterfly",
+        "ˈbʌtəflaɪ",
+        "bướm"
+      ],
+      [
+        "ant",
+        "ænt",
+        "kiến"
+      ],
+      [
+        "frog",
+        "frɒɡ",
+        "ếch"
+      ],
+      [
+        "turtle",
+        "ˈtɜːtl",
+        "rùa"
+      ],
+      [
+        "whale",
+        "weɪl",
+        "cá voi"
+      ],
+      [
+        "dolphin",
+        "ˈdɒlfɪn",
+        "cá heo"
+      ],
+      [
+        "shark",
+        "ʃɑːk",
+        "cá mập"
+      ],
+      [
+        "wolf",
+        "wʊlf",
+        "sói"
+      ],
+      [
+        "fox",
+        "fɒks",
+        "cáo"
+      ],
+      [
+        "deer",
+        "dɪə(r)",
+        "hươu/nai"
+      ],
+      [
+        "squirrel",
+        "ˈskwɪrəl",
+        "sóc"
+      ],
+      [
+        "owl",
+        "aʊl",
+        "cú"
+      ],
+      [
+        "eagle",
+        "ˈiːɡl",
+        "đại bàng"
+      ],
+      [
+        "parrot",
+        "ˈpærət",
+        "vẹt"
+      ],
+      [
+        "penguin",
+        "ˈpeŋɡwɪn",
+        "chim cánh cụt"
+      ],
+      [
+        "kangaroo",
+        "ˌkæŋɡəˈruː",
+        "chuột túi"
+      ],
+      [
+        "zebra",
+        "ˈzebrə",
+        "ngựa vằn"
+      ],
+      [
+        "giraffe",
+        "dʒəˈrɑːf",
+        "hươu cao cổ"
+      ],
+      [
+        "animal",
+        "ˈænɪml",
+        "động vật"
+      ],
+      [
+        "wild",
+        "waɪld",
+        "hoang dã"
+      ],
+      [
+        "pet",
+        "pet",
+        "thú cưng"
+      ],
+      [
+        "wing",
+        "wɪŋ",
+        "cánh"
+      ],
+      [
+        "tail",
+        "teɪl",
+        "đuôi"
+      ],
+      [
+        "fur",
+        "fɜː(r)",
+        "lông thú"
+      ],
+      [
+        "paw",
+        "pɔː",
+        "bàn chân (thú)"
+      ],
+      [
+        "nest",
+        "nest",
+        "tổ"
+      ],
+      [
+        "zoo",
+        "zuː",
+        "sở thú"
+      ]
+    ]
+  },
+  {
+    "cat": "quan-ao-thoi-trang",
+    "catVi": "Quần áo & thời trang",
+    "catEn": "Clothes & fashion",
+    "words": [
+      [
+        "clothes",
+        "kləʊðz",
+        "quần áo"
+      ],
+      [
+        "shirt",
+        "ʃɜːt",
+        "áo sơ mi"
+      ],
+      [
+        "T-shirt",
+        "ˈtiː ʃɜːt",
+        "áo phông"
+      ],
+      [
+        "trousers",
+        "ˈtraʊzəz",
+        "quần dài"
+      ],
+      [
+        "jeans",
+        "dʒiːnz",
+        "quần jean"
+      ],
+      [
+        "dress",
+        "dres",
+        "váy liền"
+      ],
+      [
+        "skirt",
+        "skɜːt",
+        "chân váy"
+      ],
+      [
+        "jacket",
+        "ˈdʒækɪt",
+        "áo khoác"
+      ],
+      [
+        "coat",
+        "kəʊt",
+        "áo choàng"
+      ],
+      [
+        "sweater",
+        "ˈswetə(r)",
+        "áo len"
+      ],
+      [
+        "suit",
+        "suːt",
+        "bộ vest"
+      ],
+      [
+        "tie",
+        "taɪ",
+        "cà vạt"
+      ],
+      [
+        "hat",
+        "hæt",
+        "mũ (có vành)"
+      ],
+      [
+        "cap",
+        "kæp",
+        "mũ lưỡi trai"
+      ],
+      [
+        "scarf",
+        "skɑːf",
+        "khăn quàng"
+      ],
+      [
+        "gloves",
+        "ɡlʌvz",
+        "găng tay"
+      ],
+      [
+        "socks",
+        "sɒks",
+        "tất"
+      ],
+      [
+        "shoes",
+        "ʃuːz",
+        "giày"
+      ],
+      [
+        "boots",
+        "buːts",
+        "giày bốt"
+      ],
+      [
+        "sandals",
+        "ˈsændlz",
+        "dép xăng đan"
+      ],
+      [
+        "belt",
+        "belt",
+        "thắt lưng"
+      ],
+      [
+        "pocket",
+        "ˈpɒkɪt",
+        "túi áo/quần"
+      ],
+      [
+        "button",
+        "ˈbʌtn",
+        "cúc áo"
+      ],
+      [
+        "zip",
+        "zɪp",
+        "khóa kéo"
+      ],
+      [
+        "size",
+        "saɪz",
+        "kích cỡ"
+      ],
+      [
+        "fashion",
+        "ˈfæʃn",
+        "thời trang"
+      ],
+      [
+        "style",
+        "staɪl",
+        "phong cách"
+      ],
+      [
+        "fabric",
+        "ˈfæbrɪk",
+        "vải"
+      ],
+      [
+        "cotton",
+        "ˈkɒtn",
+        "vải cotton/bông"
+      ],
+      [
+        "wool",
+        "wʊl",
+        "len"
+      ],
+      [
+        "leather",
+        "ˈleðə(r)",
+        "da (thuộc)"
+      ],
+      [
+        "silk",
+        "sɪlk",
+        "lụa"
+      ],
+      [
+        "wear",
+        "weə(r)",
+        "mặc"
+      ],
+      [
+        "uniform",
+        "ˈjuːnɪfɔːm",
+        "đồng phục"
+      ],
+      [
+        "pyjamas",
+        "pəˈdʒɑːməz",
+        "đồ ngủ"
+      ],
+      [
+        "underwear",
+        "ˈʌndəweə(r)",
+        "đồ lót"
+      ],
+      [
+        "umbrella",
+        "ʌmˈbrelə",
+        "ô/dù"
+      ],
+      [
+        "jewellery",
+        "ˈdʒuːəlri",
+        "trang sức"
+      ],
+      [
+        "ring",
+        "rɪŋ",
+        "nhẫn"
+      ],
+      [
+        "necklace",
+        "ˈnekləs",
+        "vòng cổ"
+      ]
+    ]
+  },
+  {
+    "cat": "giao-thong-di-lai",
+    "catVi": "Giao thông & đi lại",
+    "catEn": "Transport & travel",
+    "words": [
+      [
+        "car",
+        "kɑː(r)",
+        "xe hơi"
+      ],
+      [
+        "bus",
+        "bʌs",
+        "xe buýt"
+      ],
+      [
+        "train",
+        "treɪn",
+        "tàu hỏa"
+      ],
+      [
+        "taxi",
+        "ˈtæksi",
+        "taxi"
+      ],
+      [
+        "bicycle",
+        "ˈbaɪsɪkl",
+        "xe đạp"
+      ],
+      [
+        "motorbike",
+        "ˈməʊtəbaɪk",
+        "xe máy"
+      ],
+      [
+        "plane",
+        "pleɪn",
+        "máy bay"
+      ],
+      [
+        "ship",
+        "ʃɪp",
+        "tàu thủy"
+      ],
+      [
+        "boat",
+        "bəʊt",
+        "thuyền"
+      ],
+      [
+        "underground",
+        "ˈʌndəɡraʊnd",
+        "tàu điện ngầm"
+      ],
+      [
+        "traffic",
+        "ˈtræfɪk",
+        "giao thông"
+      ],
+      [
+        "road",
+        "rəʊd",
+        "con đường"
+      ],
+      [
+        "street",
+        "striːt",
+        "phố"
+      ],
+      [
+        "highway",
+        "ˈhaɪweɪ",
+        "đường cao tốc/quốc lộ"
+      ],
+      [
+        "bridge",
+        "brɪdʒ",
+        "cầu"
+      ],
+      [
+        "tunnel",
+        "ˈtʌnl",
+        "đường hầm"
+      ],
+      [
+        "crossroads",
+        "ˈkrɒsrəʊdz",
+        "ngã tư"
+      ],
+      [
+        "roundabout",
+        "ˈraʊndəbaʊt",
+        "vòng xuyến"
+      ],
+      [
+        "pavement",
+        "ˈpeɪvmənt",
+        "vỉa hè"
+      ],
+      [
+        "ticket",
+        "ˈtɪkɪt",
+        "vé"
+      ],
+      [
+        "passenger",
+        "ˈpæsɪndʒə(r)",
+        "hành khách"
+      ],
+      [
+        "driver",
+        "ˈdraɪvə(r)",
+        "tài xế"
+      ],
+      [
+        "pilot",
+        "ˈpaɪlət",
+        "phi công"
+      ],
+      [
+        "luggage",
+        "ˈlʌɡɪdʒ",
+        "hành lý"
+      ],
+      [
+        "suitcase",
+        "ˈsuːtkeɪs",
+        "vali"
+      ],
+      [
+        "passport",
+        "ˈpɑːspɔːt",
+        "hộ chiếu"
+      ],
+      [
+        "visa",
+        "ˈviːzə",
+        "thị thực/visa"
+      ],
+      [
+        "journey",
+        "ˈdʒɜːni",
+        "hành trình"
+      ],
+      [
+        "trip",
+        "trɪp",
+        "chuyến đi"
+      ],
+      [
+        "arrive",
+        "əˈraɪv",
+        "đến nơi"
+      ],
+      [
+        "depart",
+        "dɪˈpɑːt",
+        "khởi hành"
+      ],
+      [
+        "delay",
+        "dɪˈleɪ",
+        "trì hoãn/hoãn"
+      ],
+      [
+        "platform",
+        "ˈplætfɔːm",
+        "sân ga"
+      ],
+      [
+        "terminal",
+        "ˈtɜːmɪnl",
+        "nhà ga/ga hàng không"
+      ],
+      [
+        "gate",
+        "ɡeɪt",
+        "cổng (lên máy bay)"
+      ],
+      [
+        "seatbelt",
+        "ˈsiːtbelt",
+        "dây an toàn"
+      ],
+      [
+        "petrol",
+        "ˈpetrəl",
+        "xăng"
+      ],
+      [
+        "parking",
+        "ˈpɑːkɪŋ",
+        "chỗ đậu xe"
+      ],
+      [
+        "speed",
+        "spiːd",
+        "tốc độ"
+      ],
+      [
+        "traffic jam",
+        "ˈtræfɪk dʒæm",
+        "tắc đường"
+      ],
+      [
+        "map",
+        "mæp",
+        "bản đồ"
+      ],
+      [
+        "direction",
+        "dəˈrekʃn",
+        "hướng đi"
+      ],
+      [
+        "distance",
+        "ˈdɪstəns",
+        "khoảng cách"
+      ],
+      [
+        "destination",
+        "ˌdestɪˈneɪʃn",
+        "điểm đến"
+      ],
+      [
+        "abroad",
+        "əˈbrɔːd",
+        "ở nước ngoài"
+      ],
+      [
+        "tourist",
+        "ˈtʊərɪst",
+        "khách du lịch"
+      ],
+      [
+        "guide",
+        "ɡaɪd",
+        "hướng dẫn viên"
+      ],
+      [
+        "itinerary",
+        "aɪˈtɪnərəri",
+        "lịch trình"
+      ],
+      [
+        "transport",
+        "ˈtrænspɔːt",
+        "giao thông vận tải"
+      ]
+    ]
+  },
+  {
+    "cat": "mua-sam-tien-bac",
+    "catVi": "Mua sắm & tiền bạc",
+    "catEn": "Shopping & money",
+    "words": [
+      [
+        "shop",
+        "ʃɒp",
+        "cửa hàng"
+      ],
+      [
+        "store",
+        "stɔː(r)",
+        "cửa hàng/cửa hiệu"
+      ],
+      [
+        "supermarket",
+        "ˈsuːpəmɑːkɪt",
+        "siêu thị"
+      ],
+      [
+        "mall",
+        "mɔːl",
+        "trung tâm mua sắm"
+      ],
+      [
+        "shopping",
+        "ˈʃɒpɪŋ",
+        "việc mua sắm"
+      ],
+      [
+        "customer",
+        "ˈkʌstəmə(r)",
+        "khách hàng"
+      ],
+      [
+        "seller",
+        "ˈselə(r)",
+        "người bán"
+      ],
+      [
+        "cashier",
+        "kæˈʃɪə(r)",
+        "thu ngân"
+      ],
+      [
+        "price",
+        "praɪs",
+        "giá"
+      ],
+      [
+        "cost",
+        "kɒst",
+        "chi phí"
+      ],
+      [
+        "cash",
+        "kæʃ",
+        "tiền mặt"
+      ],
+      [
+        "card",
+        "kɑːd",
+        "thẻ"
+      ],
+      [
+        "coin",
+        "kɔɪn",
+        "đồng xu"
+      ],
+      [
+        "note",
+        "nəʊt",
+        "tờ tiền giấy"
+      ],
+      [
+        "receipt",
+        "rɪˈsiːt",
+        "hóa đơn"
+      ],
+      [
+        "discount",
+        "ˈdɪskaʊnt",
+        "giảm giá"
+      ],
+      [
+        "sale",
+        "seɪl",
+        "đợt giảm giá"
+      ],
+      [
+        "bargain",
+        "ˈbɑːɡɪn",
+        "món hời"
+      ],
+      [
+        "free",
+        "friː",
+        "miễn phí"
+      ],
+      [
+        "pay",
+        "peɪ",
+        "trả tiền"
+      ],
+      [
+        "spend",
+        "spend",
+        "chi tiêu"
+      ],
+      [
+        "save",
+        "seɪv",
+        "tiết kiệm"
+      ],
+      [
+        "borrow",
+        "ˈbɒrəʊ",
+        "mượn/vay"
+      ],
+      [
+        "lend",
+        "lend",
+        "cho vay/cho mượn"
+      ],
+      [
+        "owe",
+        "əʊ",
+        "nợ"
+      ],
+      [
+        "debt",
+        "det",
+        "khoản nợ"
+      ],
+      [
+        "loan",
+        "ləʊn",
+        "khoản vay"
+      ],
+      [
+        "bank",
+        "bæŋk",
+        "ngân hàng"
+      ],
+      [
+        "account",
+        "əˈkaʊnt",
+        "tài khoản"
+      ],
+      [
+        "wallet",
+        "ˈwɒlɪt",
+        "ví (nam)"
+      ],
+      [
+        "purse",
+        "pɜːs",
+        "ví (nữ)/túi tiền"
+      ],
+      [
+        "budget",
+        "ˈbʌdʒɪt",
+        "ngân sách"
+      ],
+      [
+        "change",
+        "tʃeɪndʒ",
+        "tiền thối"
+      ],
+      [
+        "refund",
+        "ˈriːfʌnd",
+        "tiền hoàn lại"
+      ],
+      [
+        "exchange",
+        "ɪksˈtʃeɪndʒ",
+        "đổi (tiền/hàng)"
+      ],
+      [
+        "currency",
+        "ˈkʌrənsi",
+        "đơn vị tiền tệ"
+      ],
+      [
+        "tax",
+        "tæks",
+        "thuế"
+      ],
+      [
+        "queue",
+        "kjuː",
+        "hàng chờ (xếp hàng)"
+      ],
+      [
+        "order",
+        "ˈɔːdə(r)",
+        "đặt hàng/gọi món"
+      ],
+      [
+        "brand",
+        "brænd",
+        "thương hiệu"
+      ]
+    ]
+  },
+  {
+    "cat": "cong-viec-nghe-nghiep",
+    "catVi": "Công việc & nghề nghiệp",
+    "catEn": "Work & jobs",
+    "words": [
+      [
+        "career",
+        "kəˈrɪə(r)",
+        "sự nghiệp"
+      ],
+      [
+        "company",
+        "ˈkʌmpəni",
+        "công ty"
+      ],
+      [
+        "business",
+        "ˈbɪznəs",
+        "kinh doanh"
+      ],
+      [
+        "factory",
+        "ˈfæktri",
+        "nhà máy"
+      ],
+      [
+        "manager",
+        "ˈmænɪdʒə(r)",
+        "quản lý"
+      ],
+      [
+        "employee",
+        "ɪmˈplɔɪiː",
+        "nhân viên"
+      ],
+      [
+        "employer",
+        "ɪmˈplɔɪə(r)",
+        "chủ sử dụng lao động"
+      ],
+      [
+        "colleague",
+        "ˈkɒliːɡ",
+        "đồng nghiệp"
+      ],
+      [
+        "boss",
+        "bɒs",
+        "sếp"
+      ],
+      [
+        "staff",
+        "stɑːf",
+        "nhân sự/đội ngũ nhân viên"
+      ],
+      [
+        "employ",
+        "ɪmˈplɔɪ",
+        "tuyển dụng"
+      ],
+      [
+        "hire",
+        "ˈhaɪə(r)",
+        "thuê (nhân viên)"
+      ],
+      [
+        "fire",
+        "ˈfaɪə(r)",
+        "sa thải"
+      ],
+      [
+        "retire",
+        "rɪˈtaɪə(r)",
+        "nghỉ hưu"
+      ],
+      [
+        "resign",
+        "rɪˈzaɪn",
+        "từ chức"
+      ],
+      [
+        "apply",
+        "əˈplaɪ",
+        "nộp đơn (xin việc)"
+      ],
+      [
+        "interview",
+        "ˈɪntəvjuː",
+        "phỏng vấn"
+      ],
+      [
+        "CV",
+        "ˌsiːˈviː",
+        "hồ sơ xin việc"
+      ],
+      [
+        "qualification",
+        "ˌkwɒlɪfɪˈkeɪʃn",
+        "bằng cấp"
+      ],
+      [
+        "experience",
+        "ɪkˈspɪəriəns",
+        "kinh nghiệm"
+      ],
+      [
+        "skill",
+        "skɪl",
+        "kỹ năng"
+      ],
+      [
+        "salary",
+        "ˈsæləri",
+        "lương (cố định)"
+      ],
+      [
+        "wage",
+        "weɪdʒ",
+        "tiền công"
+      ],
+      [
+        "income",
+        "ˈɪnkʌm",
+        "thu nhập"
+      ],
+      [
+        "promotion",
+        "prəˈməʊʃn",
+        "thăng chức"
+      ],
+      [
+        "meeting",
+        "ˈmiːtɪŋ",
+        "cuộc họp"
+      ],
+      [
+        "deadline",
+        "ˈdedlaɪn",
+        "hạn chót"
+      ],
+      [
+        "task",
+        "tɑːsk",
+        "nhiệm vụ"
+      ],
+      [
+        "project",
+        "ˈprɒdʒekt",
+        "dự án"
+      ],
+      [
+        "teamwork",
+        "ˈtiːmwɜːk",
+        "làm việc nhóm"
+      ],
+      [
+        "workplace",
+        "ˈwɜːkpleɪs",
+        "nơi làm việc"
+      ],
+      [
+        "contract",
+        "ˈkɒntrækt",
+        "hợp đồng"
+      ],
+      [
+        "part-time",
+        "ˌpɑːtˈtaɪm",
+        "bán thời gian"
+      ],
+      [
+        "full-time",
+        "ˌfʊlˈtaɪm",
+        "toàn thời gian"
+      ],
+      [
+        "overtime",
+        "ˈəʊvətaɪm",
+        "làm thêm giờ"
+      ],
+      [
+        "shift",
+        "ʃɪft",
+        "ca làm việc"
+      ],
+      [
+        "unemployed",
+        "ˌʌnɪmˈplɔɪd",
+        "thất nghiệp"
+      ],
+      [
+        "profession",
+        "prəˈfeʃn",
+        "nghề nghiệp"
+      ],
+      [
+        "engineer",
+        "ˌendʒɪˈnɪə(r)",
+        "kỹ sư"
+      ],
+      [
+        "farmer",
+        "ˈfɑːmə(r)",
+        "nông dân"
+      ],
+      [
+        "lawyer",
+        "ˈlɔɪə(r)",
+        "luật sư"
+      ],
+      [
+        "accountant",
+        "əˈkaʊntənt",
+        "kế toán viên"
+      ],
+      [
+        "secretary",
+        "ˈsekrətri",
+        "thư ký"
+      ],
+      [
+        "electrician",
+        "ɪˌlekˈtrɪʃn",
+        "thợ điện"
+      ],
+      [
+        "plumber",
+        "ˈplʌmə(r)",
+        "thợ ống nước"
+      ],
+      [
+        "mechanic",
+        "məˈkænɪk",
+        "thợ máy"
+      ],
+      [
+        "chef",
+        "ʃef",
+        "đầu bếp"
+      ],
+      [
+        "waiter",
+        "ˈweɪtə(r)",
+        "phục vụ bàn"
+      ]
+    ]
+  },
+  {
+    "cat": "giao-duc-hoc-tap",
+    "catVi": "Giáo dục & học tập",
+    "catEn": "Education & study",
+    "words": [
+      [
+        "education",
+        "ˌedʒuˈkeɪʃn",
+        "giáo dục"
+      ],
+      [
+        "university",
+        "ˌjuːnɪˈvɜːsəti",
+        "đại học"
+      ],
+      [
+        "college",
+        "ˈkɒlɪdʒ",
+        "cao đẳng/trường"
+      ],
+      [
+        "class",
+        "klɑːs",
+        "lớp học"
+      ],
+      [
+        "classroom",
+        "ˈklɑːsruːm",
+        "phòng học"
+      ],
+      [
+        "lesson",
+        "ˈlesn",
+        "bài học"
+      ],
+      [
+        "subject",
+        "ˈsʌbdʒɪkt",
+        "môn học"
+      ],
+      [
+        "teacher",
+        "ˈtiːtʃə(r)",
+        "giáo viên"
+      ],
+      [
+        "student",
+        "ˈstjuːdnt",
+        "học sinh/sinh viên"
+      ],
+      [
+        "professor",
+        "prəˈfesə(r)",
+        "giáo sư"
+      ],
+      [
+        "principal",
+        "ˈprɪnsəpl",
+        "hiệu trưởng"
+      ],
+      [
+        "exam",
+        "ɪɡˈzæm",
+        "kỳ thi"
+      ],
+      [
+        "test",
+        "test",
+        "bài kiểm tra"
+      ],
+      [
+        "homework",
+        "ˈhəʊmwɜːk",
+        "bài tập về nhà"
+      ],
+      [
+        "assignment",
+        "əˈsaɪnmənt",
+        "bài tập lớn"
+      ],
+      [
+        "essay",
+        "ˈeseɪ",
+        "bài luận"
+      ],
+      [
+        "grade",
+        "ɡreɪd",
+        "điểm số/khối lớp"
+      ],
+      [
+        "mark",
+        "mɑːk",
+        "điểm (số)"
+      ],
+      [
+        "pass",
+        "pɑːs",
+        "đỗ/đạt"
+      ],
+      [
+        "fail",
+        "feɪl",
+        "trượt/rớt"
+      ],
+      [
+        "diploma",
+        "dɪˈpləʊmə",
+        "bằng tốt nghiệp"
+      ],
+      [
+        "certificate",
+        "səˈtɪfɪkət",
+        "chứng chỉ"
+      ],
+      [
+        "scholarship",
+        "ˈskɒləʃɪp",
+        "học bổng"
+      ],
+      [
+        "tuition",
+        "tjuˈɪʃn",
+        "học phí"
+      ],
+      [
+        "term",
+        "tɜːm",
+        "học kỳ"
+      ],
+      [
+        "semester",
+        "sɪˈmestə(r)",
+        "học kỳ (kiểu Mỹ)"
+      ],
+      [
+        "timetable",
+        "ˈtaɪmteɪbl",
+        "thời khóa biểu"
+      ],
+      [
+        "library",
+        "ˈlaɪbrəri",
+        "thư viện"
+      ],
+      [
+        "textbook",
+        "ˈtekstbʊk",
+        "sách giáo khoa"
+      ],
+      [
+        "notebook",
+        "ˈnəʊtbʊk",
+        "vở ghi chép"
+      ],
+      [
+        "pen",
+        "pen",
+        "bút mực"
+      ],
+      [
+        "pencil",
+        "ˈpensl",
+        "bút chì"
+      ],
+      [
+        "whiteboard",
+        "ˈwaɪtbɔːd",
+        "bảng trắng"
+      ],
+      [
+        "lecture",
+        "ˈlektʃə(r)",
+        "bài giảng"
+      ],
+      [
+        "seminar",
+        "ˈsemɪnɑː(r)",
+        "hội thảo/buổi seminar"
+      ],
+      [
+        "research",
+        "rɪˈsɜːtʃ",
+        "nghiên cứu"
+      ],
+      [
+        "knowledge",
+        "ˈnɒlɪdʒ",
+        "kiến thức"
+      ],
+      [
+        "learn",
+        "lɜːn",
+        "học (tiếp thu)"
+      ],
+      [
+        "revise",
+        "rɪˈvaɪz",
+        "ôn tập"
+      ],
+      [
+        "memorise",
+        "ˈmeməraɪz",
+        "ghi nhớ"
+      ],
+      [
+        "understand",
+        "ˌʌndəˈstænd",
+        "hiểu"
+      ],
+      [
+        "explain",
+        "ɪkˈspleɪn",
+        "giải thích"
+      ],
+      [
+        "question",
+        "ˈkwestʃən",
+        "câu hỏi"
+      ],
+      [
+        "answer",
+        "ˈɑːnsə(r)",
+        "câu trả lời"
+      ]
+    ]
+  },
+  {
+    "cat": "cong-nghe-truyen-thong",
+    "catVi": "Công nghệ & truyền thông",
+    "catEn": "Technology & communication",
+    "words": [
+      [
+        "computer",
+        "kəmˈpjuːtə(r)",
+        "máy tính"
+      ],
+      [
+        "laptop",
+        "ˈlæptɒp",
+        "máy tính xách tay"
+      ],
+      [
+        "keyboard",
+        "ˈkiːbɔːd",
+        "bàn phím"
+      ],
+      [
+        "screen",
+        "skriːn",
+        "màn hình"
+      ],
+      [
+        "monitor",
+        "ˈmɒnɪtə(r)",
+        "màn hình (máy tính)"
+      ],
+      [
+        "printer",
+        "ˈprɪntə(r)",
+        "máy in"
+      ],
+      [
+        "scanner",
+        "ˈskænə(r)",
+        "máy quét"
+      ],
+      [
+        "software",
+        "ˈsɒftweə(r)",
+        "phần mềm"
+      ],
+      [
+        "hardware",
+        "ˈhɑːdweə(r)",
+        "phần cứng"
+      ],
+      [
+        "application",
+        "ˌæplɪˈkeɪʃn",
+        "ứng dụng"
+      ],
+      [
+        "website",
+        "ˈwebsaɪt",
+        "trang web"
+      ],
+      [
+        "internet",
+        "ˈɪntənet",
+        "mạng internet"
+      ],
+      [
+        "browser",
+        "ˈbraʊzə(r)",
+        "trình duyệt"
+      ],
+      [
+        "email",
+        "ˈiːmeɪl",
+        "thư điện tử"
+      ],
+      [
+        "password",
+        "ˈpɑːswɜːd",
+        "mật khẩu"
+      ],
+      [
+        "username",
+        "ˈjuːzəneɪm",
+        "tên đăng nhập"
+      ],
+      [
+        "download",
+        "ˌdaʊnˈləʊd",
+        "tải xuống"
+      ],
+      [
+        "upload",
+        "ˌʌpˈləʊd",
+        "tải lên"
+      ],
+      [
+        "update",
+        "ʌpˈdeɪt",
+        "cập nhật"
+      ],
+      [
+        "install",
+        "ɪnˈstɔːl",
+        "cài đặt"
+      ],
+      [
+        "file",
+        "faɪl",
+        "tệp tin"
+      ],
+      [
+        "folder",
+        "ˈfəʊldə(r)",
+        "thư mục"
+      ],
+      [
+        "document",
+        "ˈdɒkjumənt",
+        "tài liệu"
+      ],
+      [
+        "data",
+        "ˈdeɪtə",
+        "dữ liệu"
+      ],
+      [
+        "database",
+        "ˈdeɪtəbeɪs",
+        "cơ sở dữ liệu"
+      ],
+      [
+        "network",
+        "ˈnetwɜːk",
+        "mạng lưới"
+      ],
+      [
+        "wifi",
+        "ˈwaɪfaɪ",
+        "wifi"
+      ],
+      [
+        "server",
+        "ˈsɜːvə(r)",
+        "máy chủ"
+      ],
+      [
+        "cloud storage",
+        "klaʊd ˈstɔːrɪdʒ",
+        "lưu trữ đám mây"
+      ],
+      [
+        "backup",
+        "ˈbækʌp",
+        "sao lưu"
+      ],
+      [
+        "virus",
+        "ˈvaɪərəs",
+        "vi-rút (máy tính)"
+      ],
+      [
+        "hacker",
+        "ˈhækə(r)",
+        "tin tặc"
+      ],
+      [
+        "security",
+        "sɪˈkjʊərəti",
+        "bảo mật"
+      ],
+      [
+        "code",
+        "kəʊd",
+        "mã (lập trình)"
+      ],
+      [
+        "programmer",
+        "ˈprəʊɡræmə(r)",
+        "lập trình viên"
+      ],
+      [
+        "programming",
+        "ˈprəʊɡræmɪŋ",
+        "lập trình"
+      ],
+      [
+        "robot",
+        "ˈrəʊbɒt",
+        "robot"
+      ],
+      [
+        "algorithm",
+        "ˈælɡərɪðəm",
+        "thuật toán"
+      ],
+      [
+        "device",
+        "dɪˈvaɪs",
+        "thiết bị"
+      ],
+      [
+        "gadget",
+        "ˈɡædʒɪt",
+        "thiết bị nhỏ gọn"
+      ],
+      [
+        "charger",
+        "ˈtʃɑːdʒə(r)",
+        "bộ sạc"
+      ],
+      [
+        "battery",
+        "ˈbætri",
+        "pin"
+      ],
+      [
+        "camera",
+        "ˈkæmrə",
+        "máy ảnh"
+      ],
+      [
+        "video",
+        "ˈvɪdiəʊ",
+        "video"
+      ],
+      [
+        "photo",
+        "ˈfəʊtəʊ",
+        "ảnh"
+      ],
+      [
+        "microphone",
+        "ˈmaɪkrəfəʊn",
+        "micro"
+      ],
+      [
+        "speaker",
+        "ˈspiːkə(r)",
+        "loa"
+      ],
+      [
+        "headphones",
+        "ˈhedfəʊnz",
+        "tai nghe"
+      ],
+      [
+        "signal",
+        "ˈsɪɡnəl",
+        "tín hiệu"
+      ],
+      [
+        "connection",
+        "kəˈnekʃn",
+        "kết nối"
+      ],
+      [
+        "online",
+        "ˌɒnˈlaɪn",
+        "trực tuyến"
+      ],
+      [
+        "offline",
+        "ˌɒfˈlaɪn",
+        "ngoại tuyến"
+      ],
+      [
+        "online platform",
+        "ˌɒnˈlaɪn ˈplætfɔːm",
+        "nền tảng trực tuyến"
+      ],
+      [
+        "post",
+        "pəʊst",
+        "đăng bài"
+      ],
+      [
+        "comment",
+        "ˈkɒment",
+        "bình luận"
+      ],
+      [
+        "message",
+        "ˈmesɪdʒ",
+        "tin nhắn"
+      ],
+      [
+        "chat",
+        "tʃæt",
+        "trò chuyện (nhắn tin)"
+      ],
+      [
+        "call",
+        "kɔːl",
+        "cuộc gọi"
+      ],
+      [
+        "text",
+        "tekst",
+        "nhắn tin/văn bản"
+      ],
+      [
+        "notification",
+        "ˌnəʊtɪfɪˈkeɪʃn",
+        "thông báo"
+      ],
+      [
+        "settings",
+        "ˈsetɪŋz",
+        "cài đặt"
+      ],
+      [
+        "touchscreen",
+        "ˈtʌtʃskriːn",
+        "màn hình cảm ứng"
+      ],
+      [
+        "tablet",
+        "ˈtæblət",
+        "máy tính bảng"
+      ],
+      [
+        "smartphone",
+        "ˈsmɑːtfəʊn",
+        "điện thoại thông minh"
+      ],
+      [
+        "memory",
+        "ˈmeməri",
+        "bộ nhớ"
+      ],
+      [
+        "storage",
+        "ˈstɔːrɪdʒ",
+        "dung lượng lưu trữ"
+      ],
+      [
+        "processor",
+        "ˈprəʊsesə(r)",
+        "bộ xử lý"
+      ],
+      [
+        "satellite",
+        "ˈsætəlaɪt",
+        "vệ tinh"
+      ],
+      [
+        "broadcast",
+        "ˈbrɔːdkɑːst",
+        "phát sóng"
+      ],
+      [
+        "channel",
+        "ˈtʃænl",
+        "kênh"
+      ],
+      [
+        "television",
+        "ˈtelɪvɪʒn",
+        "ti vi"
+      ],
+      [
+        "radio",
+        "ˈreɪdiəʊ",
+        "radio"
+      ],
+      [
+        "newspaper",
+        "ˈnjuːzpeɪpə(r)",
+        "báo giấy"
+      ],
+      [
+        "magazine",
+        "ˌmæɡəˈziːn",
+        "tạp chí"
+      ],
+      [
+        "journalist",
+        "ˈdʒɜːnəlɪst",
+        "nhà báo"
+      ],
+      [
+        "reporter",
+        "rɪˈpɔːtə(r)",
+        "phóng viên"
+      ],
+      [
+        "news",
+        "njuːz",
+        "tin tức"
+      ],
+      [
+        "headline",
+        "ˈhedlaɪn",
+        "tiêu đề tin"
+      ],
+      [
+        "article",
+        "ˈɑːtɪkl",
+        "bài báo"
+      ],
+      [
+        "advertisement",
+        "ədˈvɜːtɪsmənt",
+        "quảng cáo"
+      ],
+      [
+        "media",
+        "ˈmiːdiə",
+        "truyền thông"
+      ],
+      [
+        "communication",
+        "kəˌmjuːnɪˈkeɪʃn",
+        "giao tiếp/truyền thông"
+      ],
+      [
+        "information",
+        "ˌɪnfəˈmeɪʃn",
+        "thông tin"
+      ],
+      [
+        "technology",
+        "tekˈnɒlədʒi",
+        "công nghệ"
+      ],
+      [
+        "invention",
+        "ɪnˈvenʃn",
+        "phát minh"
+      ],
+      [
+        "innovation",
+        "ˌɪnəˈveɪʃn",
+        "đổi mới sáng tạo"
+      ],
+      [
+        "digital",
+        "ˈdɪdʒɪtl",
+        "kỹ thuật số"
+      ],
+      [
+        "virtual",
+        "ˈvɜːtʃuəl",
+        "ảo"
+      ],
+      [
+        "automatic",
+        "ˌɔːtəˈmætɪk",
+        "tự động"
+      ],
+      [
+        "electronic",
+        "ɪˌlekˈtrɒnɪk",
+        "điện tử"
+      ],
+      [
+        "app",
+        "æp",
+        "ứng dụng (viết tắt)"
+      ],
+      [
+        "click",
+        "klɪk",
+        "nhấp chuột"
+      ],
+      [
+        "type",
+        "taɪp",
+        "gõ (bàn phím)"
+      ],
+      [
+        "scroll",
+        "skrəʊl",
+        "cuộn (trang)"
+      ],
+      [
+        "link",
+        "lɪŋk",
+        "đường liên kết"
+      ],
+      [
+        "screenshot",
+        "ˈskriːnʃɒt",
+        "ảnh chụp màn hình"
+      ],
+      [
+        "font",
+        "fɒnt",
+        "phông chữ"
+      ],
+      [
+        "icon",
+        "ˈaɪkɒn",
+        "biểu tượng"
+      ],
+      [
+        "cursor",
+        "ˈkɜːsə(r)",
+        "con trỏ chuột"
+      ],
+      [
+        "wireless",
+        "ˈwaɪələs",
+        "không dây"
+      ]
+    ]
+  },
+  {
+    "cat": "xa-hoi-phap-luat",
+    "catVi": "Xã hội & pháp luật",
+    "catEn": "Society & law",
+    "words": [
+      [
+        "society",
+        "səˈsaɪəti",
+        "xã hội"
+      ],
+      [
+        "community",
+        "kəˈmjuːnəti",
+        "cộng đồng"
+      ],
+      [
+        "culture",
+        "ˈkʌltʃə(r)",
+        "văn hóa"
+      ],
+      [
+        "tradition",
+        "trəˈdɪʃn",
+        "truyền thống"
+      ],
+      [
+        "custom",
+        "ˈkʌstəm",
+        "phong tục"
+      ],
+      [
+        "value",
+        "ˈvæljuː",
+        "giá trị"
+      ],
+      [
+        "belief",
+        "bɪˈliːf",
+        "niềm tin"
+      ],
+      [
+        "religion",
+        "rɪˈlɪdʒən",
+        "tôn giáo"
+      ],
+      [
+        "nationality",
+        "ˌnæʃəˈnæləti",
+        "quốc tịch"
+      ],
+      [
+        "citizen",
+        "ˈsɪtɪzn",
+        "công dân"
+      ],
+      [
+        "citizenship",
+        "ˈsɪtɪznʃɪp",
+        "quyền công dân"
+      ],
+      [
+        "population",
+        "ˌpɒpjuˈleɪʃn",
+        "dân số"
+      ],
+      [
+        "generation",
+        "ˌdʒenəˈreɪʃn",
+        "thế hệ"
+      ],
+      [
+        "government",
+        "ˈɡʌvənmənt",
+        "chính phủ"
+      ],
+      [
+        "president",
+        "ˈprezɪdənt",
+        "tổng thống"
+      ],
+      [
+        "minister",
+        "ˈmɪnɪstə(r)",
+        "bộ trưởng"
+      ],
+      [
+        "parliament",
+        "ˈpɑːləmənt",
+        "quốc hội"
+      ],
+      [
+        "election",
+        "ɪˈlekʃn",
+        "cuộc bầu cử"
+      ],
+      [
+        "vote",
+        "vəʊt",
+        "bỏ phiếu"
+      ],
+      [
+        "democracy",
+        "dɪˈmɒkrəsi",
+        "nền dân chủ"
+      ],
+      [
+        "policy",
+        "ˈpɒləsi",
+        "chính sách"
+      ],
+      [
+        "law",
+        "lɔː",
+        "luật pháp"
+      ],
+      [
+        "rule",
+        "ruːl",
+        "quy tắc"
+      ],
+      [
+        "regulation",
+        "ˌreɡjuˈleɪʃn",
+        "quy định"
+      ],
+      [
+        "court",
+        "kɔːt",
+        "tòa án"
+      ],
+      [
+        "judge",
+        "dʒʌdʒ",
+        "thẩm phán"
+      ],
+      [
+        "jury",
+        "ˈdʒʊəri",
+        "bồi thẩm đoàn"
+      ],
+      [
+        "witness",
+        "ˈwɪtnəs",
+        "nhân chứng"
+      ],
+      [
+        "evidence",
+        "ˈevɪdəns",
+        "bằng chứng"
+      ],
+      [
+        "crime",
+        "kraɪm",
+        "tội phạm"
+      ],
+      [
+        "criminal",
+        "ˈkrɪmɪnl",
+        "kẻ phạm tội"
+      ],
+      [
+        "theft",
+        "θeft",
+        "tội trộm cắp"
+      ],
+      [
+        "robbery",
+        "ˈrɒbəri",
+        "vụ cướp"
+      ],
+      [
+        "murder",
+        "ˈmɜːdə(r)",
+        "vụ giết người"
+      ],
+      [
+        "victim",
+        "ˈvɪktɪm",
+        "nạn nhân"
+      ],
+      [
+        "arrest",
+        "əˈrest",
+        "bắt giữ"
+      ],
+      [
+        "police",
+        "pəˈliːs",
+        "cảnh sát"
+      ],
+      [
+        "prison",
+        "ˈprɪzn",
+        "nhà tù"
+      ],
+      [
+        "punishment",
+        "ˈpʌnɪʃmənt",
+        "hình phạt"
+      ],
+      [
+        "fine",
+        "faɪn",
+        "tiền phạt"
+      ],
+      [
+        "sentence",
+        "ˈsentəns",
+        "bản án"
+      ],
+      [
+        "justice",
+        "ˈdʒʌstɪs",
+        "công lý"
+      ],
+      [
+        "right",
+        "raɪt",
+        "quyền (lợi)"
+      ],
+      [
+        "freedom",
+        "ˈfriːdəm",
+        "tự do"
+      ],
+      [
+        "equality",
+        "iˈkwɒləti",
+        "sự bình đẳng"
+      ],
+      [
+        "discrimination",
+        "dɪˌskrɪmɪˈneɪʃn",
+        "sự phân biệt đối xử"
+      ],
+      [
+        "poverty",
+        "ˈpɒvəti",
+        "nghèo đói"
+      ],
+      [
+        "wealth",
+        "welθ",
+        "sự giàu có"
+      ],
+      [
+        "homeless",
+        "ˈhəʊmləs",
+        "vô gia cư"
+      ],
+      [
+        "charity",
+        "ˈtʃærəti",
+        "tổ chức từ thiện"
+      ],
+      [
+        "volunteer",
+        "ˌvɒlənˈtɪə(r)",
+        "tình nguyện viên"
+      ],
+      [
+        "protest",
+        "ˈprəʊtest",
+        "cuộc biểu tình"
+      ],
+      [
+        "strike",
+        "straɪk",
+        "cuộc đình công"
+      ],
+      [
+        "war",
+        "wɔː(r)",
+        "chiến tranh"
+      ],
+      [
+        "peace",
+        "piːs",
+        "hòa bình"
+      ],
+      [
+        "conflict",
+        "ˈkɒnflɪkt",
+        "xung đột"
+      ],
+      [
+        "refugee",
+        "ˌrefjuˈdʒiː",
+        "người tị nạn"
+      ],
+      [
+        "immigrant",
+        "ˈɪmɪɡrənt",
+        "người nhập cư"
+      ],
+      [
+        "immigration",
+        "ˌɪmɪˈɡreɪʃn",
+        "sự nhập cư"
+      ],
+      [
+        "gender",
+        "ˈdʒendə(r)",
+        "giới tính"
+      ],
+      [
+        "race",
+        "reɪs",
+        "chủng tộc"
+      ],
+      [
+        "public",
+        "ˈpʌblɪk",
+        "công cộng"
+      ],
+      [
+        "private",
+        "ˈpraɪvət",
+        "riêng tư"
+      ],
+      [
+        "official",
+        "əˈfɪʃl",
+        "chính thức"
+      ],
+      [
+        "authority",
+        "ɔːˈθɒrəti",
+        "chính quyền/thẩm quyền"
+      ],
+      [
+        "institution",
+        "ˌɪnstɪˈtjuːʃn",
+        "tổ chức/thể chế"
+      ],
+      [
+        "organization",
+        "ˌɔːɡənaɪˈzeɪʃn",
+        "tổ chức"
+      ],
+      [
+        "committee",
+        "kəˈmɪti",
+        "ủy ban"
+      ],
+      [
+        "council",
+        "ˈkaʊnsl",
+        "hội đồng"
+      ],
+      [
+        "mayor",
+        "meə(r)",
+        "thị trưởng"
+      ],
+      [
+        "embassy",
+        "ˈembəsi",
+        "đại sứ quán"
+      ],
+      [
+        "ambassador",
+        "æmˈbæsədə(r)",
+        "đại sứ"
+      ],
+      [
+        "treaty",
+        "ˈtriːti",
+        "hiệp ước"
+      ],
+      [
+        "constitution",
+        "ˌkɒnstɪˈtjuːʃn",
+        "hiến pháp"
+      ],
+      [
+        "republic",
+        "rɪˈpʌblɪk",
+        "nước cộng hòa"
+      ],
+      [
+        "monarchy",
+        "ˈmɒnəki",
+        "chế độ quân chủ"
+      ],
+      [
+        "king",
+        "kɪŋ",
+        "vua"
+      ],
+      [
+        "queen",
+        "kwiːn",
+        "nữ hoàng"
+      ],
+      [
+        "prince",
+        "prɪns",
+        "hoàng tử"
+      ],
+      [
+        "princess",
+        "prɪnˈses",
+        "công chúa"
+      ],
+      [
+        "capital",
+        "ˈkæpɪtl",
+        "thủ đô"
+      ],
+      [
+        "independence",
+        "ˌɪndɪˈpendəns",
+        "nền độc lập"
+      ],
+      [
+        "revolution",
+        "ˌrevəˈluːʃn",
+        "cuộc cách mạng"
+      ],
+      [
+        "campaign",
+        "kæmˈpeɪn",
+        "chiến dịch"
+      ],
+      [
+        "press",
+        "pres",
+        "báo chí"
+      ],
+      [
+        "censorship",
+        "ˈsensəʃɪp",
+        "sự kiểm duyệt"
+      ],
+      [
+        "propaganda",
+        "ˌprɒpəˈɡændə",
+        "tuyên truyền"
+      ],
+      [
+        "human rights",
+        "ˈhjuːmən raɪts",
+        "nhân quyền"
+      ],
+      [
+        "ethnic",
+        "ˈeθnɪk",
+        "(thuộc) sắc tộc"
+      ],
+      [
+        "minority",
+        "maɪˈnɒrəti",
+        "nhóm thiểu số"
+      ],
+      [
+        "majority",
+        "məˈdʒɒrəti",
+        "đa số"
+      ],
+      [
+        "legislation",
+        "ˌledʒɪsˈleɪʃn",
+        "luật pháp/lập pháp"
+      ],
+      [
+        "reform",
+        "rɪˈfɔːm",
+        "cải cách"
+      ],
+      [
+        "activist",
+        "ˈæktɪvɪst",
+        "nhà hoạt động (xã hội)"
+      ],
+      [
+        "trial",
+        "ˈtraɪəl",
+        "phiên tòa"
+      ],
+      [
+        "appeal",
+        "əˈpiːl",
+        "kháng cáo"
+      ],
+      [
+        "legal",
+        "ˈliːɡl",
+        "hợp pháp"
+      ],
+      [
+        "illegal",
+        "ɪˈliːɡl",
+        "bất hợp pháp"
+      ],
+      [
+        "senator",
+        "ˈsenətə(r)",
+        "thượng nghị sĩ"
+      ],
+      [
+        "diplomat",
+        "ˈdɪpləmæt",
+        "nhà ngoại giao"
+      ]
+    ]
+  },
+  {
+    "cat": "the-thao-giai-tri",
+    "catVi": "Thể thao & giải trí",
+    "catEn": "Sport & leisure",
+    "words": [
+      [
+        "sport",
+        "spɔːt",
+        "thể thao"
+      ],
+      [
+        "football",
+        "ˈfʊtbɔːl",
+        "bóng đá"
+      ],
+      [
+        "basketball",
+        "ˈbɑːskɪtbɔːl",
+        "bóng rổ"
+      ],
+      [
+        "tennis",
+        "ˈtenɪs",
+        "quần vợt"
+      ],
+      [
+        "swimming",
+        "ˈswɪmɪŋ",
+        "bơi lội"
+      ],
+      [
+        "running",
+        "ˈrʌnɪŋ",
+        "chạy bộ"
+      ],
+      [
+        "cycling",
+        "ˈsaɪklɪŋ",
+        "đạp xe"
+      ],
+      [
+        "boxing",
+        "ˈbɒksɪŋ",
+        "quyền anh"
+      ],
+      [
+        "volleyball",
+        "ˈvɒlibɔːl",
+        "bóng chuyền"
+      ],
+      [
+        "badminton",
+        "ˈbædmɪntən",
+        "cầu lông"
+      ],
+      [
+        "golf",
+        "ɡɒlf",
+        "golf"
+      ],
+      [
+        "athlete",
+        "ˈæθliːt",
+        "vận động viên"
+      ],
+      [
+        "player",
+        "ˈpleɪə(r)",
+        "cầu thủ"
+      ],
+      [
+        "team",
+        "tiːm",
+        "đội"
+      ],
+      [
+        "coach",
+        "kəʊtʃ",
+        "huấn luyện viên"
+      ],
+      [
+        "referee",
+        "ˌrefəˈriː",
+        "trọng tài"
+      ],
+      [
+        "match",
+        "mætʃ",
+        "trận đấu"
+      ],
+      [
+        "competition",
+        "ˌkɒmpəˈtɪʃn",
+        "cuộc thi đấu"
+      ],
+      [
+        "championship",
+        "ˈtʃæmpiənʃɪp",
+        "giải vô địch"
+      ],
+      [
+        "tournament",
+        "ˈtɔːnəmənt",
+        "giải đấu"
+      ],
+      [
+        "league",
+        "liːɡ",
+        "giải đấu (liên đoàn)"
+      ],
+      [
+        "score",
+        "skɔː(r)",
+        "tỷ số"
+      ],
+      [
+        "goal",
+        "ɡəʊl",
+        "bàn thắng"
+      ],
+      [
+        "win",
+        "wɪn",
+        "thắng"
+      ],
+      [
+        "lose",
+        "luːz",
+        "thua"
+      ],
+      [
+        "draw",
+        "drɔː",
+        "hòa"
+      ],
+      [
+        "defeat",
+        "dɪˈfiːt",
+        "đánh bại"
+      ],
+      [
+        "victory",
+        "ˈvɪktəri",
+        "chiến thắng"
+      ],
+      [
+        "medal",
+        "ˈmedl",
+        "huy chương"
+      ],
+      [
+        "trophy",
+        "ˈtrəʊfi",
+        "cúp"
+      ],
+      [
+        "stadium",
+        "ˈsteɪdiəm",
+        "sân vận động"
+      ],
+      [
+        "gym",
+        "dʒɪm",
+        "phòng tập gym"
+      ],
+      [
+        "fitness",
+        "ˈfɪtnəs",
+        "thể lực"
+      ],
+      [
+        "training",
+        "ˈtreɪnɪŋ",
+        "luyện tập"
+      ],
+      [
+        "practice",
+        "ˈpræktɪs",
+        "luyện tập (thực hành)"
+      ],
+      [
+        "warm-up",
+        "ˈwɔːm ʌp",
+        "khởi động"
+      ],
+      [
+        "muscle",
+        "ˈmʌsl",
+        "cơ bắp"
+      ],
+      [
+        "fit",
+        "fɪt",
+        "khỏe mạnh (thể chất)"
+      ],
+      [
+        "weak",
+        "wiːk",
+        "yếu"
+      ],
+      [
+        "hobby",
+        "ˈhɒbi",
+        "sở thích"
+      ],
+      [
+        "leisure",
+        "ˈleʒə(r)",
+        "thời gian rảnh"
+      ],
+      [
+        "entertainment",
+        "ˌentəˈteɪnmənt",
+        "giải trí"
+      ],
+      [
+        "cinema",
+        "ˈsɪnəmə",
+        "rạp chiếu phim"
+      ],
+      [
+        "movie",
+        "ˈmuːvi",
+        "phim"
+      ],
+      [
+        "film",
+        "fɪlm",
+        "phim (điện ảnh)"
+      ],
+      [
+        "actor",
+        "ˈæktə(r)",
+        "diễn viên nam"
+      ],
+      [
+        "actress",
+        "ˈæktrəs",
+        "diễn viên nữ"
+      ],
+      [
+        "director",
+        "dəˈrektə(r)",
+        "đạo diễn"
+      ],
+      [
+        "concert",
+        "ˈkɒnsət",
+        "buổi hòa nhạc"
+      ],
+      [
+        "music",
+        "ˈmjuːzɪk",
+        "âm nhạc"
+      ],
+      [
+        "song",
+        "sɒŋ",
+        "bài hát"
+      ],
+      [
+        "singer",
+        "ˈsɪŋə(r)",
+        "ca sĩ"
+      ],
+      [
+        "band",
+        "bænd",
+        "ban nhạc"
+      ],
+      [
+        "instrument",
+        "ˈɪnstrəmənt",
+        "nhạc cụ"
+      ],
+      [
+        "guitar",
+        "ɡɪˈtɑː(r)",
+        "đàn ghi ta"
+      ],
+      [
+        "piano",
+        "piˈænəʊ",
+        "đàn piano"
+      ],
+      [
+        "drum",
+        "drʌm",
+        "trống"
+      ],
+      [
+        "dance",
+        "dɑːns",
+        "khiêu vũ"
+      ],
+      [
+        "dancer",
+        "ˈdɑːnsə(r)",
+        "vũ công"
+      ],
+      [
+        "theatre",
+        "ˈθɪətə(r)",
+        "nhà hát"
+      ],
+      [
+        "play",
+        "pleɪ",
+        "vở kịch"
+      ],
+      [
+        "festival",
+        "ˈfestɪvl",
+        "lễ hội"
+      ],
+      [
+        "celebration",
+        "ˌselɪˈbreɪʃn",
+        "lễ kỷ niệm"
+      ],
+      [
+        "party",
+        "ˈpɑːti",
+        "bữa tiệc"
+      ],
+      [
+        "game",
+        "ɡeɪm",
+        "trò chơi"
+      ],
+      [
+        "chess",
+        "tʃes",
+        "cờ vua"
+      ],
+      [
+        "puzzle",
+        "ˈpʌzl",
+        "trò chơi ghép hình/đố"
+      ],
+      [
+        "painting",
+        "ˈpeɪntɪŋ",
+        "hội họa/bức tranh"
+      ],
+      [
+        "drawing",
+        "ˈdrɔːɪŋ",
+        "bản vẽ"
+      ],
+      [
+        "photography",
+        "fəˈtɒɡrəfi",
+        "nhiếp ảnh"
+      ],
+      [
+        "hiking",
+        "ˈhaɪkɪŋ",
+        "đi bộ đường dài"
+      ],
+      [
+        "camping",
+        "ˈkæmpɪŋ",
+        "cắm trại"
+      ],
+      [
+        "fishing",
+        "ˈfɪʃɪŋ",
+        "câu cá"
+      ],
+      [
+        "gardening",
+        "ˈɡɑːdnɪŋ",
+        "làm vườn"
+      ],
+      [
+        "cooking",
+        "ˈkʊkɪŋ",
+        "nấu ăn"
+      ],
+      [
+        "reading",
+        "ˈriːdɪŋ",
+        "đọc sách"
+      ],
+      [
+        "collect",
+        "kəˈlekt",
+        "sưu tầm"
+      ],
+      [
+        "relax",
+        "rɪˈlæks",
+        "thư giãn"
+      ],
+      [
+        "holiday",
+        "ˈhɒlədeɪ",
+        "kỳ nghỉ"
+      ],
+      [
+        "vacation",
+        "vəˈkeɪʃn",
+        "kỳ nghỉ (kiểu Mỹ)"
+      ],
+      [
+        "champion",
+        "ˈtʃæmpiən",
+        "nhà vô địch"
+      ],
+      [
+        "opponent",
+        "əˈpəʊnənt",
+        "đối thủ"
+      ],
+      [
+        "umpire",
+        "ˈʌmpaɪə(r)",
+        "trọng tài (một số môn)"
+      ],
+      [
+        "marathon",
+        "ˈmærəθən",
+        "chạy marathon"
+      ],
+      [
+        "gymnastics",
+        "dʒɪmˈnæstɪks",
+        "thể dục dụng cụ"
+      ],
+      [
+        "skiing",
+        "ˈskiːɪŋ",
+        "trượt tuyết"
+      ],
+      [
+        "surfing",
+        "ˈsɜːfɪŋ",
+        "lướt sóng"
+      ],
+      [
+        "yoga",
+        "ˈjəʊɡə",
+        "yoga"
+      ],
+      [
+        "meditation",
+        "ˌmedɪˈteɪʃn",
+        "thiền"
+      ],
+      [
+        "karaoke",
+        "ˌkæriˈəʊki",
+        "karaoke"
+      ]
+    ]
+  },
+  {
+    "cat": "khoa-hoc-moi-truong",
+    "catVi": "Khoa học & môi trường",
+    "catEn": "Science & environment",
+    "words": [
+      [
+        "science",
+        "ˈsaɪəns",
+        "khoa học"
+      ],
+      [
+        "scientist",
+        "ˈsaɪəntɪst",
+        "nhà khoa học"
+      ],
+      [
+        "experiment",
+        "ɪkˈsperɪmənt",
+        "thí nghiệm"
+      ],
+      [
+        "laboratory",
+        "ləˈbɒrətri",
+        "phòng thí nghiệm"
+      ],
+      [
+        "theory",
+        "ˈθɪəri",
+        "lý thuyết"
+      ],
+      [
+        "hypothesis",
+        "haɪˈpɒθəsɪs",
+        "giả thuyết"
+      ],
+      [
+        "observation",
+        "ˌɒbzəˈveɪʃn",
+        "sự quan sát"
+      ],
+      [
+        "discovery",
+        "dɪˈskʌvəri",
+        "khám phá"
+      ],
+      [
+        "biology",
+        "baɪˈɒlədʒi",
+        "sinh học"
+      ],
+      [
+        "chemistry",
+        "ˈkemɪstri",
+        "hóa học"
+      ],
+      [
+        "physics",
+        "ˈfɪzɪks",
+        "vật lý"
+      ],
+      [
+        "gravity",
+        "ˈɡrævəti",
+        "trọng lực"
+      ],
+      [
+        "atom",
+        "ˈætəm",
+        "nguyên tử"
+      ],
+      [
+        "molecule",
+        "ˈmɒlɪkjuːl",
+        "phân tử"
+      ],
+      [
+        "element",
+        "ˈelɪmənt",
+        "nguyên tố"
+      ],
+      [
+        "oxygen",
+        "ˈɒksɪdʒən",
+        "oxy"
+      ],
+      [
+        "hydrogen",
+        "ˈhaɪdrədʒən",
+        "hydro"
+      ],
+      [
+        "carbon",
+        "ˈkɑːbən",
+        "carbon"
+      ],
+      [
+        "energy",
+        "ˈenədʒi",
+        "năng lượng"
+      ],
+      [
+        "solar",
+        "ˈsəʊlə(r)",
+        "(thuộc) năng lượng mặt trời"
+      ],
+      [
+        "renewable",
+        "rɪˈnjuːəbl",
+        "có thể tái tạo"
+      ],
+      [
+        "sustainable",
+        "səˈsteɪnəbl",
+        "bền vững"
+      ],
+      [
+        "fuel",
+        "ˈfjuːəl",
+        "nhiên liệu"
+      ],
+      [
+        "electricity",
+        "ɪˌlekˈtrɪsəti",
+        "điện năng"
+      ],
+      [
+        "power plant",
+        "ˈpaʊə plɑːnt",
+        "nhà máy điện"
+      ],
+      [
+        "nuclear",
+        "ˈnjuːkliə(r)",
+        "hạt nhân"
+      ],
+      [
+        "greenhouse effect",
+        "ˈɡriːnhaʊs ɪˈfekt",
+        "hiệu ứng nhà kính"
+      ],
+      [
+        "global warming",
+        "ˌɡləʊbl ˈwɔːmɪŋ",
+        "nóng lên toàn cầu"
+      ],
+      [
+        "climate change",
+        "ˈklaɪmət tʃeɪndʒ",
+        "biến đổi khí hậu"
+      ],
+      [
+        "carbon footprint",
+        "ˈkɑːbən ˈfʊtprɪnt",
+        "dấu chân carbon"
+      ],
+      [
+        "emission",
+        "iˈmɪʃn",
+        "khí thải"
+      ],
+      [
+        "ozone layer",
+        "ˈəʊzəʊn ˈleɪə(r)",
+        "tầng ôzôn"
+      ],
+      [
+        "ecosystem",
+        "ˈiːkəʊsɪstəm",
+        "hệ sinh thái"
+      ],
+      [
+        "habitat",
+        "ˈhæbɪtæt",
+        "môi trường sống"
+      ],
+      [
+        "species",
+        "ˈspiːʃiːz",
+        "loài"
+      ],
+      [
+        "extinct",
+        "ɪkˈstɪŋkt",
+        "tuyệt chủng"
+      ],
+      [
+        "endangered",
+        "ɪnˈdeɪndʒəd",
+        "có nguy cơ tuyệt chủng"
+      ],
+      [
+        "wildlife",
+        "ˈwaɪldlaɪf",
+        "động vật hoang dã"
+      ],
+      [
+        "conservation",
+        "ˌkɒnsəˈveɪʃn",
+        "sự bảo tồn"
+      ],
+      [
+        "reserve",
+        "rɪˈzɜːv",
+        "khu bảo tồn"
+      ],
+      [
+        "recycle",
+        "ˌriːˈsaɪkl",
+        "tái chế"
+      ],
+      [
+        "reuse",
+        "ˌriːˈjuːz",
+        "tái sử dụng"
+      ],
+      [
+        "reduce",
+        "rɪˈdjuːs",
+        "giảm bớt"
+      ],
+      [
+        "waste",
+        "weɪst",
+        "rác thải"
+      ],
+      [
+        "rubbish",
+        "ˈrʌbɪʃ",
+        "rác"
+      ],
+      [
+        "plastic",
+        "ˈplæstɪk",
+        "nhựa"
+      ],
+      [
+        "packaging",
+        "ˈpækɪdʒɪŋ",
+        "bao bì"
+      ],
+      [
+        "landfill",
+        "ˈlændfɪl",
+        "bãi chôn rác"
+      ],
+      [
+        "drought",
+        "draʊt",
+        "hạn hán"
+      ],
+      [
+        "flood",
+        "flʌd",
+        "lũ lụt"
+      ],
+      [
+        "natural disaster",
+        "ˈnætʃrəl dɪˈzɑːstə(r)",
+        "thiên tai"
+      ],
+      [
+        "earthquake",
+        "ˈɜːθkweɪk",
+        "động đất"
+      ],
+      [
+        "volcano",
+        "vɒlˈkeɪnəʊ",
+        "núi lửa"
+      ],
+      [
+        "eruption",
+        "ɪˈrʌpʃn",
+        "sự phun trào"
+      ],
+      [
+        "tsunami",
+        "tsuːˈnɑːmi",
+        "sóng thần"
+      ],
+      [
+        "hurricane",
+        "ˈhʌrɪkən",
+        "bão (Đại Tây Dương)"
+      ],
+      [
+        "typhoon",
+        "taɪˈfuːn",
+        "bão (Thái Bình Dương)"
+      ],
+      [
+        "deforestation",
+        "diːˌfɒrɪˈsteɪʃn",
+        "nạn phá rừng"
+      ],
+      [
+        "desertification",
+        "dɪˌzɜːtɪfɪˈkeɪʃn",
+        "sa mạc hóa"
+      ],
+      [
+        "erosion",
+        "ɪˈrəʊʒn",
+        "sự xói mòn"
+      ],
+      [
+        "atmosphere",
+        "ˈætməsfɪə(r)",
+        "khí quyển"
+      ],
+      [
+        "universe",
+        "ˈjuːnɪvɜːs",
+        "vũ trụ"
+      ],
+      [
+        "galaxy",
+        "ˈɡæləksi",
+        "dải ngân hà"
+      ],
+      [
+        "telescope",
+        "ˈtelɪskəʊp",
+        "kính thiên văn"
+      ],
+      [
+        "microscope",
+        "ˈmaɪkrəskəʊp",
+        "kính hiển vi"
+      ],
+      [
+        "cell",
+        "sel",
+        "tế bào"
+      ],
+      [
+        "gene",
+        "dʒiːn",
+        "gen"
+      ],
+      [
+        "dna",
+        "ˌdiːenˈeɪ",
+        "ADN"
+      ],
+      [
+        "evolution",
+        "ˌiːvəˈluːʃn",
+        "sự tiến hóa"
+      ],
+      [
+        "bacteria",
+        "bækˈtɪəriə",
+        "vi khuẩn"
+      ],
+      [
+        "germ",
+        "dʒɜːm",
+        "vi trùng"
+      ],
+      [
+        "vaccine",
+        "ˈvæksiːn",
+        "vắc-xin"
+      ],
+      [
+        "immune",
+        "ɪˈmjuːn",
+        "miễn dịch"
+      ],
+      [
+        "astronaut",
+        "ˈæstrənɔːt",
+        "phi hành gia"
+      ],
+      [
+        "spacecraft",
+        "ˈspeɪskrɑːft",
+        "tàu vũ trụ"
+      ],
+      [
+        "rocket",
+        "ˈrɒkɪt",
+        "tên lửa"
+      ],
+      [
+        "orbit",
+        "ˈɔːbɪt",
+        "quỹ đạo"
+      ],
+      [
+        "astronomy",
+        "əˈstrɒnəmi",
+        "thiên văn học"
+      ],
+      [
+        "chemical",
+        "ˈkemɪkl",
+        "hóa chất"
+      ],
+      [
+        "substance",
+        "ˈsʌbstəns",
+        "chất"
+      ],
+      [
+        "liquid",
+        "ˈlɪkwɪd",
+        "chất lỏng"
+      ],
+      [
+        "solid",
+        "ˈsɒlɪd",
+        "chất rắn"
+      ],
+      [
+        "gas",
+        "ɡæs",
+        "khí"
+      ],
+      [
+        "mixture",
+        "ˈmɪkstʃə(r)",
+        "hỗn hợp"
+      ],
+      [
+        "reaction",
+        "riˈækʃn",
+        "phản ứng"
+      ],
+      [
+        "conservationist",
+        "ˌkɒnsəˈveɪʃənɪst",
+        "nhà bảo tồn"
+      ],
+      [
+        "biodiversity",
+        "ˌbaɪəʊdaɪˈvɜːsəti",
+        "đa dạng sinh học"
+      ],
+      [
+        "organism",
+        "ˈɔːɡənɪzəm",
+        "sinh vật"
+      ],
+      [
+        "predator",
+        "ˈpredətə(r)",
+        "động vật ăn thịt"
+      ],
+      [
+        "prey",
+        "preɪ",
+        "con mồi"
+      ],
+      [
+        "photosynthesis",
+        "ˌfəʊtəʊˈsɪnθəsɪs",
+        "sự quang hợp"
+      ],
+      [
+        "sunlight",
+        "ˈsʌnlaɪt",
+        "ánh nắng"
+      ]
+    ]
+  },
+  {
+    "cat": "tu-vung-hoc-thuat-ielts",
+    "catVi": "Từ vựng học thuật (IELTS)",
+    "catEn": "Academic vocabulary",
+    "words": [
+      [
+        "analyse",
+        "ˈænəlaɪz",
+        "phân tích"
+      ],
+      [
+        "analysis",
+        "əˈnæləsɪs",
+        "sự phân tích"
+      ],
+      [
+        "approach",
+        "əˈprəʊtʃ",
+        "cách tiếp cận"
+      ],
+      [
+        "aspect",
+        "ˈæspekt",
+        "khía cạnh"
+      ],
+      [
+        "assume",
+        "əˈsjuːm",
+        "giả định"
+      ],
+      [
+        "assumption",
+        "əˈsʌmpʃn",
+        "giả định (danh từ)"
+      ],
+      [
+        "benefit",
+        "ˈbenɪfɪt",
+        "lợi ích"
+      ],
+      [
+        "challenge",
+        "ˈtʃælɪndʒ",
+        "thách thức"
+      ],
+      [
+        "concept",
+        "ˈkɒnsept",
+        "khái niệm"
+      ],
+      [
+        "conclude",
+        "kənˈkluːd",
+        "kết luận"
+      ],
+      [
+        "conclusion",
+        "kənˈkluːʒn",
+        "kết luận (danh từ)"
+      ],
+      [
+        "consequence",
+        "ˈkɒnsɪkwəns",
+        "hậu quả"
+      ],
+      [
+        "considerable",
+        "kənˈsɪdərəbl",
+        "đáng kể"
+      ],
+      [
+        "consist",
+        "kənˈsɪst",
+        "bao gồm"
+      ],
+      [
+        "constant",
+        "ˈkɒnstənt",
+        "liên tục, không đổi"
+      ],
+      [
+        "context",
+        "ˈkɒntekst",
+        "bối cảnh"
+      ],
+      [
+        "contribute",
+        "kənˈtrɪbjuːt",
+        "đóng góp"
+      ],
+      [
+        "contribution",
+        "ˌkɒntrɪˈbjuːʃn",
+        "sự đóng góp"
+      ],
+      [
+        "create",
+        "kriˈeɪt",
+        "tạo ra"
+      ],
+      [
+        "define",
+        "dɪˈfaɪn",
+        "định nghĩa"
+      ],
+      [
+        "demonstrate",
+        "ˈdemənstreɪt",
+        "chứng minh"
+      ],
+      [
+        "derive",
+        "dɪˈraɪv",
+        "bắt nguồn"
+      ],
+      [
+        "despite",
+        "dɪˈspaɪt",
+        "mặc dù"
+      ],
+      [
+        "establish",
+        "ɪˈstæblɪʃ",
+        "thiết lập"
+      ],
+      [
+        "estimate",
+        "ˈestɪmeɪt",
+        "ước tính"
+      ],
+      [
+        "evaluate",
+        "ɪˈvæljueɪt",
+        "đánh giá"
+      ],
+      [
+        "eventually",
+        "ɪˈventʃuəli",
+        "cuối cùng"
+      ],
+      [
+        "factor",
+        "ˈfæktə(r)",
+        "yếu tố"
+      ],
+      [
+        "feature",
+        "ˈfiːtʃə(r)",
+        "đặc điểm"
+      ],
+      [
+        "focus",
+        "ˈfəʊkəs",
+        "tập trung"
+      ],
+      [
+        "function",
+        "ˈfʌŋkʃn",
+        "chức năng"
+      ],
+      [
+        "generate",
+        "ˈdʒenəreɪt",
+        "tạo ra"
+      ],
+      [
+        "identify",
+        "aɪˈdentɪfaɪ",
+        "xác định"
+      ],
+      [
+        "illustrate",
+        "ˈɪləstreɪt",
+        "minh họa"
+      ],
+      [
+        "impact",
+        "ˈɪmpækt",
+        "tác động"
+      ],
+      [
+        "imply",
+        "ɪmˈplaɪ",
+        "ngụ ý"
+      ],
+      [
+        "indicate",
+        "ˈɪndɪkeɪt",
+        "chỉ ra"
+      ],
+      [
+        "inevitable",
+        "ɪˈnevɪtəbl",
+        "không thể tránh khỏi"
+      ],
+      [
+        "issue",
+        "ˈɪʃuː",
+        "vấn đề"
+      ],
+      [
+        "maintain",
+        "meɪnˈteɪn",
+        "duy trì"
+      ],
+      [
+        "major",
+        "ˈmeɪdʒə(r)",
+        "chính, lớn"
+      ],
+      [
+        "minor",
+        "ˈmaɪnə(r)",
+        "nhỏ, thứ yếu"
+      ],
+      [
+        "obtain",
+        "əbˈteɪn",
+        "đạt được"
+      ],
+      [
+        "obvious",
+        "ˈɒbviəs",
+        "rõ ràng"
+      ],
+      [
+        "occur",
+        "əˈkɜː(r)",
+        "xảy ra"
+      ],
+      [
+        "outcome",
+        "ˈaʊtkʌm",
+        "kết quả"
+      ],
+      [
+        "perspective",
+        "pəˈspektɪv",
+        "quan điểm"
+      ],
+      [
+        "previous",
+        "ˈpriːviəs",
+        "trước đó"
+      ],
+      [
+        "primary",
+        "ˈpraɪməri",
+        "chủ yếu"
+      ],
+      [
+        "principle",
+        "ˈprɪnsəpl",
+        "nguyên tắc"
+      ],
+      [
+        "process",
+        "ˈprəʊses",
+        "quá trình"
+      ],
+      [
+        "relevant",
+        "ˈreləvənt",
+        "liên quan"
+      ],
+      [
+        "require",
+        "rɪˈkwaɪə(r)",
+        "yêu cầu"
+      ],
+      [
+        "respond",
+        "rɪˈspɒnd",
+        "phản hồi"
+      ],
+      [
+        "reveal",
+        "rɪˈviːl",
+        "tiết lộ"
+      ],
+      [
+        "role",
+        "rəʊl",
+        "vai trò"
+      ],
+      [
+        "significant",
+        "sɪɡˈnɪfɪkənt",
+        "đáng kể, quan trọng"
+      ],
+      [
+        "similar",
+        "ˈsɪmələ(r)",
+        "tương tự"
+      ],
+      [
+        "solution",
+        "səˈluːʃn",
+        "giải pháp"
+      ],
+      [
+        "specific",
+        "spəˈsɪfɪk",
+        "cụ thể"
+      ],
+      [
+        "structure",
+        "ˈstrʌktʃə(r)",
+        "cấu trúc"
+      ],
+      [
+        "sufficient",
+        "səˈfɪʃnt",
+        "đủ"
+      ],
+      [
+        "suggest",
+        "səˈdʒest",
+        "đề xuất"
+      ],
+      [
+        "summary",
+        "ˈsʌməri",
+        "bản tóm tắt"
+      ],
+      [
+        "tend",
+        "tend",
+        "có xu hướng"
+      ],
+      [
+        "tendency",
+        "ˈtendənsi",
+        "xu hướng"
+      ],
+      [
+        "trend",
+        "trend",
+        "xu hướng"
+      ],
+      [
+        "undergo",
+        "ˌʌndəˈɡəʊ",
+        "trải qua"
+      ],
+      [
+        "vary",
+        "ˈveəri",
+        "thay đổi, khác nhau"
+      ],
+      [
+        "various",
+        "ˈveəriəs",
+        "đa dạng"
+      ],
+      [
+        "via",
+        "ˈvaɪə",
+        "thông qua"
+      ],
+      [
+        "whereas",
+        "weərˈæz",
+        "trong khi đó"
+      ],
+      [
+        "widespread",
+        "ˈwaɪdspred",
+        "phổ biến rộng rãi"
+      ],
+      [
+        "debate",
+        "dɪˈbeɪt",
+        "cuộc tranh luận"
+      ],
+      [
+        "argument",
+        "ˈɑːɡjumənt",
+        "lập luận"
+      ],
+      [
+        "controversial",
+        "ˌkɒntrəˈvɜːʃl",
+        "gây tranh cãi"
+      ],
+      [
+        "advantage",
+        "ədˈvɑːntɪdʒ",
+        "lợi thế"
+      ],
+      [
+        "disadvantage",
+        "ˌdɪsədˈvɑːntɪdʒ",
+        "bất lợi"
+      ],
+      [
+        "overall",
+        "ˌəʊvərˈɔːl",
+        "nhìn chung"
+      ],
+      [
+        "statistic",
+        "stəˈtɪstɪk",
+        "số liệu thống kê"
+      ],
+      [
+        "proportion",
+        "prəˈpɔːʃn",
+        "tỷ lệ"
+      ],
+      [
+        "percentage",
+        "pəˈsentɪdʒ",
+        "phần trăm"
+      ],
+      [
+        "increase",
+        "ɪnˈkriːs",
+        "tăng"
+      ],
+      [
+        "decrease",
+        "dɪˈkriːs",
+        "giảm"
+      ],
+      [
+        "decline",
+        "dɪˈklaɪn",
+        "suy giảm"
+      ],
+      [
+        "rapid",
+        "ˈræpɪd",
+        "nhanh chóng"
+      ],
+      [
+        "gradual",
+        "ˈɡrædʒuəl",
+        "dần dần"
+      ],
+      [
+        "dramatic",
+        "drəˈmætɪk",
+        "đáng kể, kịch tính"
+      ],
+      [
+        "steady",
+        "ˈstedi",
+        "ổn định"
+      ],
+      [
+        "fluctuate",
+        "ˈflʌktʃueɪt",
+        "dao động"
+      ],
+      [
+        "peak",
+        "piːk",
+        "đỉnh điểm"
+      ],
+      [
+        "average",
+        "ˈævərɪdʒ",
+        "trung bình"
+      ],
+      [
+        "accurate",
+        "ˈækjərət",
+        "chính xác"
+      ],
+      [
+        "reliable",
+        "rɪˈlaɪəbl",
+        "đáng tin cậy"
+      ],
+      [
+        "valid",
+        "ˈvælɪd",
+        "có giá trị, hợp lệ"
+      ],
+      [
+        "essential",
+        "ɪˈsenʃl",
+        "thiết yếu"
+      ],
+      [
+        "crucial",
+        "ˈkruːʃl",
+        "quan trọng, cốt yếu"
+      ],
+      [
+        "beneficial",
+        "ˌbenɪˈfɪʃl",
+        "có lợi"
+      ]
+    ]
+  },
+  {
+    "cat": "hinh-dang-kich-thuoc",
+    "catVi": "Hình dạng, kích thước & số lượng",
+    "catEn": "Shapes, sizes & quantity",
+    "words": [
+      [
+        "round",
+        "raʊnd",
+        "tròn"
+      ],
+      [
+        "square",
+        "skweə(r)",
+        "hình vuông"
+      ],
+      [
+        "circle",
+        "ˈsɜːkl",
+        "hình tròn"
+      ],
+      [
+        "triangle",
+        "ˈtraɪæŋɡl",
+        "hình tam giác"
+      ],
+      [
+        "rectangle",
+        "ˈrektæŋɡl",
+        "hình chữ nhật"
+      ],
+      [
+        "oval",
+        "ˈəʊvl",
+        "hình bầu dục"
+      ],
+      [
+        "diamond",
+        "ˈdaɪəmənd",
+        "hình thoi"
+      ],
+      [
+        "straight",
+        "streɪt",
+        "thẳng"
+      ],
+      [
+        "curved",
+        "kɜːvd",
+        "cong"
+      ],
+      [
+        "wide",
+        "waɪd",
+        "rộng"
+      ],
+      [
+        "narrow",
+        "ˈnærəʊ",
+        "hẹp"
+      ],
+      [
+        "thick",
+        "θɪk",
+        "dày"
+      ],
+      [
+        "thin",
+        "θɪn",
+        "mỏng"
+      ],
+      [
+        "deep",
+        "diːp",
+        "sâu"
+      ],
+      [
+        "shallow",
+        "ˈʃæləʊ",
+        "nông"
+      ],
+      [
+        "length",
+        "leŋθ",
+        "chiều dài"
+      ],
+      [
+        "width",
+        "wɪdθ",
+        "chiều rộng"
+      ],
+      [
+        "height",
+        "haɪt",
+        "chiều cao"
+      ],
+      [
+        "depth",
+        "depθ",
+        "độ sâu"
+      ],
+      [
+        "weight",
+        "weɪt",
+        "trọng lượng"
+      ],
+      [
+        "measure",
+        "ˈmeʒə(r)",
+        "đo lường"
+      ],
+      [
+        "measurement",
+        "ˈmeʒəmənt",
+        "phép đo"
+      ],
+      [
+        "scale",
+        "skeɪl",
+        "tỷ lệ, quy mô"
+      ],
+      [
+        "dozen",
+        "ˈdʌzn",
+        "một tá (12)"
+      ],
+      [
+        "pair",
+        "peə(r)",
+        "một đôi"
+      ],
+      [
+        "couple",
+        "ˈkʌpl",
+        "một cặp"
+      ],
+      [
+        "several",
+        "ˈsevrəl",
+        "một vài"
+      ],
+      [
+        "many",
+        "ˈmeni",
+        "nhiều"
+      ],
+      [
+        "multiple",
+        "ˈmʌltɪpl",
+        "nhiều, đa"
+      ],
+      [
+        "quantity",
+        "ˈkwɒntəti",
+        "số lượng"
+      ],
+      [
+        "amount",
+        "əˈmaʊnt",
+        "lượng, số lượng"
+      ],
+      [
+        "whole",
+        "həʊl",
+        "toàn bộ"
+      ],
+      [
+        "half",
+        "hɑːf",
+        "một nửa"
+      ],
+      [
+        "quarter",
+        "ˈkwɔːtə(r)",
+        "một phần tư"
+      ],
+      [
+        "double",
+        "ˈdʌbl",
+        "gấp đôi"
+      ],
+      [
+        "triple",
+        "ˈtrɪpl",
+        "gấp ba"
+      ],
+      [
+        "single",
+        "ˈsɪŋɡl",
+        "đơn, độc thân"
+      ],
+      [
+        "empty",
+        "ˈempti",
+        "trống rỗng"
+      ],
+      [
+        "full",
+        "fʊl",
+        "đầy"
+      ],
+      [
+        "tall",
+        "tɔːl",
+        "cao"
+      ],
+      [
+        "short",
+        "ʃɔːt",
+        "thấp, ngắn"
+      ],
+      [
+        "heavy",
+        "ˈhevi",
+        "nặng"
+      ],
+      [
+        "light",
+        "laɪt",
+        "nhẹ"
+      ],
+      [
+        "broad",
+        "brɔːd",
+        "rộng lớn"
+      ],
+      [
+        "slim",
+        "slɪm",
+        "mảnh mai"
+      ],
+      [
+        "chubby",
+        "ˈtʃʌbi",
+        "mũm mĩm"
+      ],
+      [
+        "curvy",
+        "ˈkɜːvi",
+        "có đường cong"
+      ],
+      [
+        "pointed",
+        "ˈpɔɪntɪd",
+        "nhọn"
+      ],
+      [
+        "sharp",
+        "ʃɑːp",
+        "sắc, nhọn"
+      ],
+      [
+        "blunt",
+        "blʌnt",
+        "cùn, không sắc"
+      ],
+      [
+        "hollow",
+        "ˈhɒləʊ",
+        "rỗng"
+      ],
+      [
+        "symmetrical",
+        "sɪˈmetrɪkl",
+        "đối xứng"
+      ],
+      [
+        "rectangular",
+        "rekˈtæŋɡjələ(r)",
+        "hình chữ nhật (tính từ)"
+      ],
+      [
+        "cylindrical",
+        "səˈlɪndrɪkl",
+        "hình trụ"
+      ],
+      [
+        "spherical",
+        "ˈsferɪkl",
+        "hình cầu (tính từ)"
+      ],
+      [
+        "cube",
+        "kjuːb",
+        "khối lập phương"
+      ],
+      [
+        "sphere",
+        "sfɪə(r)",
+        "hình cầu"
+      ],
+      [
+        "cone",
+        "kəʊn",
+        "hình nón"
+      ],
+      [
+        "pyramid",
+        "ˈpɪrəmɪd",
+        "hình chóp, kim tự tháp"
+      ],
+      [
+        "edge",
+        "edʒ",
+        "cạnh, mép"
+      ],
+      [
+        "corner",
+        "ˈkɔːnə(r)",
+        "góc"
+      ],
+      [
+        "side",
+        "saɪd",
+        "cạnh, bên"
+      ],
+      [
+        "surface",
+        "ˈsɜːfɪs",
+        "bề mặt"
+      ],
+      [
+        "dimension",
+        "daɪˈmenʃn",
+        "kích thước, chiều"
+      ],
+      [
+        "capacity",
+        "kəˈpæsəti",
+        "sức chứa"
+      ],
+      [
+        "volume",
+        "ˈvɒljuːm",
+        "thể tích, âm lượng"
+      ],
+      [
+        "mass",
+        "mæs",
+        "khối lượng"
+      ],
+      [
+        "huge",
+        "hjuːdʒ",
+        "khổng lồ"
+      ],
+      [
+        "tiny",
+        "ˈtaɪni",
+        "nhỏ xíu"
+      ],
+      [
+        "enormous",
+        "ɪˈnɔːməs",
+        "to lớn"
+      ],
+      [
+        "giant",
+        "ˈdʒaɪənt",
+        "khổng lồ"
+      ],
+      [
+        "miniature",
+        "ˈmɪnətʃə(r)",
+        "thu nhỏ"
+      ]
+    ]
+  },
+  {
+    "cat": "nau-an-huong-vi",
+    "catVi": "Nấu ăn & hương vị",
+    "catEn": "Cooking & taste",
+    "words": [
+      [
+        "fry",
+        "fraɪ",
+        "chiên, rán"
+      ],
+      [
+        "boil",
+        "bɔɪl",
+        "luộc"
+      ],
+      [
+        "bake",
+        "beɪk",
+        "nướng (bằng lò)"
+      ],
+      [
+        "roast",
+        "rəʊst",
+        "quay, nướng"
+      ],
+      [
+        "grill",
+        "ɡrɪl",
+        "nướng vỉ"
+      ],
+      [
+        "steam",
+        "stiːm",
+        "hấp"
+      ],
+      [
+        "stir",
+        "stɜː(r)",
+        "khuấy"
+      ],
+      [
+        "chop",
+        "tʃɒp",
+        "băm, chặt"
+      ],
+      [
+        "slice",
+        "slaɪs",
+        "thái lát"
+      ],
+      [
+        "peel",
+        "piːl",
+        "gọt vỏ"
+      ],
+      [
+        "mix",
+        "mɪks",
+        "trộn"
+      ],
+      [
+        "blend",
+        "blend",
+        "xay trộn"
+      ],
+      [
+        "marinate",
+        "ˈmærɪneɪt",
+        "ướp"
+      ],
+      [
+        "taste",
+        "teɪst",
+        "nếm, hương vị"
+      ],
+      [
+        "flavour",
+        "ˈfleɪvə(r)",
+        "hương vị"
+      ],
+      [
+        "spicy",
+        "ˈspaɪsi",
+        "cay"
+      ],
+      [
+        "sour",
+        "ˈsaʊə(r)",
+        "chua"
+      ],
+      [
+        "sweet",
+        "swiːt",
+        "ngọt"
+      ],
+      [
+        "bitter",
+        "ˈbɪtə(r)",
+        "đắng"
+      ],
+      [
+        "salty",
+        "ˈsɔːlti",
+        "mặn"
+      ],
+      [
+        "bland",
+        "blænd",
+        "nhạt"
+      ],
+      [
+        "delicious",
+        "dɪˈlɪʃəs",
+        "ngon"
+      ],
+      [
+        "tasty",
+        "ˈteɪsti",
+        "ngon miệng"
+      ],
+      [
+        "fresh",
+        "freʃ",
+        "tươi"
+      ],
+      [
+        "rotten",
+        "ˈrɒtn",
+        "thối, hỏng"
+      ],
+      [
+        "ripe",
+        "raɪp",
+        "chín"
+      ],
+      [
+        "raw",
+        "rɔː",
+        "sống, chưa nấu"
+      ],
+      [
+        "cooked",
+        "kʊkt",
+        "đã nấu chín"
+      ],
+      [
+        "recipe",
+        "ˈresəpi",
+        "công thức nấu ăn"
+      ],
+      [
+        "ingredient",
+        "ɪnˈɡriːdiənt",
+        "nguyên liệu"
+      ],
+      [
+        "dish",
+        "dɪʃ",
+        "món ăn"
+      ],
+      [
+        "meal",
+        "miːl",
+        "bữa ăn"
+      ],
+      [
+        "portion",
+        "ˈpɔːʃn",
+        "khẩu phần"
+      ],
+      [
+        "serving",
+        "ˈsɜːvɪŋ",
+        "phần ăn"
+      ],
+      [
+        "cuisine",
+        "kwɪˈziːn",
+        "ẩm thực"
+      ],
+      [
+        "spice",
+        "spaɪs",
+        "gia vị"
+      ],
+      [
+        "herb",
+        "hɜːb",
+        "thảo mộc"
+      ],
+      [
+        "sauce",
+        "sɔːs",
+        "nước sốt"
+      ],
+      [
+        "dressing",
+        "ˈdresɪŋ",
+        "nước sốt trộn"
+      ],
+      [
+        "broth",
+        "brɒθ",
+        "nước dùng"
+      ],
+      [
+        "soup",
+        "suːp",
+        "súp"
+      ],
+      [
+        "stew",
+        "stjuː",
+        "món hầm"
+      ],
+      [
+        "dessert",
+        "dɪˈzɜːt",
+        "món tráng miệng"
+      ],
+      [
+        "snack",
+        "snæk",
+        "đồ ăn vặt"
+      ],
+      [
+        "appetizer",
+        "ˈæpɪtaɪzə(r)",
+        "món khai vị"
+      ],
+      [
+        "main course",
+        "meɪn kɔːs",
+        "món chính"
+      ],
+      [
+        "side dish",
+        "saɪd dɪʃ",
+        "món ăn kèm"
+      ],
+      [
+        "leftovers",
+        "ˈleftəʊvəz",
+        "đồ ăn thừa"
+      ],
+      [
+        "pan",
+        "pæn",
+        "chảo"
+      ],
+      [
+        "saucepan",
+        "ˈsɔːspən",
+        "nồi có cán"
+      ],
+      [
+        "frying pan",
+        "ˈfraɪɪŋ pæn",
+        "chảo chiên"
+      ],
+      [
+        "knife",
+        "naɪf",
+        "dao"
+      ],
+      [
+        "cutting board",
+        "ˈkʌtɪŋ bɔːd",
+        "thớt"
+      ],
+      [
+        "grater",
+        "ˈɡreɪtə(r)",
+        "dụng cụ bào"
+      ],
+      [
+        "whisk",
+        "wɪsk",
+        "dụng cụ đánh trứng"
+      ],
+      [
+        "ladle",
+        "ˈleɪdl",
+        "muôi, vá"
+      ],
+      [
+        "tablespoon",
+        "ˈteɪblspuːn",
+        "thìa canh"
+      ],
+      [
+        "teaspoon",
+        "ˈtiːspuːn",
+        "thìa cà phê"
+      ],
+      [
+        "cup",
+        "kʌp",
+        "cốc, chén (đơn vị đo)"
+      ],
+      [
+        "pinch",
+        "pɪntʃ",
+        "một nhúm"
+      ],
+      [
+        "simmer",
+        "ˈsɪmə(r)",
+        "ninh, đun liu riu"
+      ],
+      [
+        "garnish",
+        "ˈɡɑːnɪʃ",
+        "trang trí món ăn"
+      ],
+      [
+        "texture",
+        "ˈtekstʃə(r)",
+        "kết cấu (món ăn)"
+      ],
+      [
+        "aroma",
+        "əˈrəʊmə",
+        "hương thơm"
+      ],
+      [
+        "crispy",
+        "ˈkrɪspi",
+        "giòn"
+      ],
+      [
+        "crunchy",
+        "ˈkrʌntʃi",
+        "giòn tan"
+      ],
+      [
+        "tender",
+        "ˈtendə(r)",
+        "mềm (thịt)"
+      ],
+      [
+        "juicy",
+        "ˈdʒuːsi",
+        "mọng nước"
+      ],
+      [
+        "chewy",
+        "ˈtʃuːi",
+        "dai"
+      ],
+      [
+        "greasy",
+        "ˈɡriːsi",
+        "nhiều dầu mỡ"
+      ],
+      [
+        "stale",
+        "steɪl",
+        "ôi, không còn tươi"
+      ],
+      [
+        "overcooked",
+        "ˌəʊvəˈkʊkt",
+        "nấu quá chín"
+      ],
+      [
+        "undercooked",
+        "ˌʌndəˈkʊkt",
+        "nấu chưa chín"
+      ],
+      [
+        "homemade",
+        "ˌhəʊmˈmeɪd",
+        "tự làm tại nhà"
+      ],
+      [
+        "organic",
+        "ɔːˈɡænɪk",
+        "hữu cơ"
+      ],
+      [
+        "vegetarian",
+        "ˌvedʒəˈteəriən",
+        "người ăn chay"
+      ],
+      [
+        "vegan",
+        "ˈviːɡən",
+        "thuần chay"
+      ],
+      [
+        "nutritious",
+        "njuˈtrɪʃəs",
+        "bổ dưỡng"
+      ],
+      [
+        "calorie",
+        "ˈkæləri",
+        "calo"
+      ]
+    ]
+  },
+  {
+    "cat": "gia-dinh-giai-doan-cuoc-doi",
+    "catVi": "Gia đình & các giai đoạn cuộc đời",
+    "catEn": "Family & life stages",
+    "words": [
+      [
+        "childhood",
+        "ˈtʃaɪldhʊd",
+        "thời thơ ấu"
+      ],
+      [
+        "teenager",
+        "ˈtiːneɪdʒə(r)",
+        "thiếu niên"
+      ],
+      [
+        "adolescent",
+        "ˌædəˈlesnt",
+        "thanh thiếu niên"
+      ],
+      [
+        "adult",
+        "ˈædʌlt",
+        "người trưởng thành"
+      ],
+      [
+        "elderly",
+        "ˈeldəli",
+        "cao tuổi"
+      ],
+      [
+        "infant",
+        "ˈɪnfənt",
+        "trẻ sơ sinh"
+      ],
+      [
+        "toddler",
+        "ˈtɒdlə(r)",
+        "trẻ mới biết đi"
+      ],
+      [
+        "newborn",
+        "ˈnjuːbɔːn",
+        "trẻ mới sinh"
+      ],
+      [
+        "twin",
+        "twɪn",
+        "sinh đôi"
+      ],
+      [
+        "sibling",
+        "ˈsɪblɪŋ",
+        "anh chị em ruột"
+      ],
+      [
+        "cousin",
+        "ˈkʌzn",
+        "anh chị em họ"
+      ],
+      [
+        "uncle",
+        "ˈʌŋkl",
+        "chú, bác, cậu"
+      ],
+      [
+        "aunt",
+        "ɑːnt",
+        "cô, dì, bác gái"
+      ],
+      [
+        "nephew",
+        "ˈnefjuː",
+        "cháu trai"
+      ],
+      [
+        "niece",
+        "niːs",
+        "cháu gái"
+      ],
+      [
+        "grandparent",
+        "ˈɡrænpeərənt",
+        "ông bà"
+      ],
+      [
+        "grandfather",
+        "ˈɡrænfɑːðə(r)",
+        "ông"
+      ],
+      [
+        "grandmother",
+        "ˈɡrænmʌðə(r)",
+        "bà"
+      ],
+      [
+        "grandson",
+        "ˈɡrænsʌn",
+        "cháu trai (của ông bà)"
+      ],
+      [
+        "granddaughter",
+        "ˈɡrændɔːtə(r)",
+        "cháu gái (của ông bà)"
+      ],
+      [
+        "parent",
+        "ˈpeərənt",
+        "cha/mẹ"
+      ],
+      [
+        "spouse",
+        "spaʊs",
+        "vợ/chồng"
+      ],
+      [
+        "husband",
+        "ˈhʌzbənd",
+        "chồng"
+      ],
+      [
+        "wife",
+        "waɪf",
+        "vợ"
+      ],
+      [
+        "widow",
+        "ˈwɪdəʊ",
+        "góa phụ"
+      ],
+      [
+        "widower",
+        "ˈwɪdəʊə(r)",
+        "người đàn ông góa vợ"
+      ],
+      [
+        "divorce",
+        "dɪˈvɔːs",
+        "ly hôn"
+      ],
+      [
+        "marriage",
+        "ˈmærɪdʒ",
+        "hôn nhân"
+      ],
+      [
+        "wedding",
+        "ˈwedɪŋ",
+        "đám cưới"
+      ],
+      [
+        "engagement",
+        "ɪnˈɡeɪdʒmənt",
+        "lễ đính hôn"
+      ],
+      [
+        "fiancé",
+        "fiˈɒnseɪ",
+        "vị hôn phu"
+      ],
+      [
+        "fiancée",
+        "fiˈɒnseɪ",
+        "vị hôn thê"
+      ],
+      [
+        "ancestor",
+        "ˈænsestə(r)",
+        "tổ tiên"
+      ],
+      [
+        "descendant",
+        "dɪˈsendənt",
+        "hậu duệ"
+      ],
+      [
+        "heritage",
+        "ˈherɪtɪdʒ",
+        "di sản"
+      ],
+      [
+        "upbringing",
+        "ˈʌpbrɪŋɪŋ",
+        "cách nuôi dạy"
+      ],
+      [
+        "guardian",
+        "ˈɡɑːdiən",
+        "người giám hộ"
+      ],
+      [
+        "orphan",
+        "ˈɔːfən",
+        "trẻ mồ côi"
+      ],
+      [
+        "adoption",
+        "əˈdɒpʃn",
+        "việc nhận nuôi"
+      ],
+      [
+        "adopt",
+        "əˈdɒpt",
+        "nhận nuôi"
+      ],
+      [
+        "stepfather",
+        "ˈstepfɑːðə(r)",
+        "cha dượng"
+      ],
+      [
+        "stepmother",
+        "ˈstepmʌðə(r)",
+        "mẹ kế"
+      ],
+      [
+        "stepson",
+        "ˈstepsʌn",
+        "con trai riêng"
+      ],
+      [
+        "stepdaughter",
+        "ˈstepdɔːtə(r)",
+        "con gái riêng"
+      ],
+      [
+        "in-law",
+        "ɪn lɔː",
+        "họ hàng bên vợ/chồng"
+      ],
+      [
+        "relative",
+        "ˈrelətɪv",
+        "họ hàng"
+      ],
+      [
+        "only child",
+        "ˈəʊnli tʃaɪld",
+        "con một"
+      ],
+      [
+        "birth",
+        "bɜːθ",
+        "sự sinh ra"
+      ],
+      [
+        "milestone",
+        "ˈmaɪlstəʊn",
+        "cột mốc quan trọng"
+      ],
+      [
+        "retirement",
+        "rɪˈtaɪəmənt",
+        "sự nghỉ hưu"
+      ],
+      [
+        "pension",
+        "ˈpenʃn",
+        "lương hưu"
+      ],
+      [
+        "funeral",
+        "ˈfjuːnərəl",
+        "đám tang"
+      ],
+      [
+        "death",
+        "deθ",
+        "cái chết"
+      ],
+      [
+        "die",
+        "daɪ",
+        "chết, qua đời"
+      ],
+      [
+        "inherit",
+        "ɪnˈherɪt",
+        "thừa kế"
+      ],
+      [
+        "inheritance",
+        "ɪnˈherɪtəns",
+        "tài sản thừa kế"
+      ],
+      [
+        "legacy",
+        "ˈleɡəsi",
+        "di sản để lại"
+      ],
+      [
+        "reunion",
+        "riˈjuːniən",
+        "buổi đoàn tụ"
+      ],
+      [
+        "bond",
+        "bɒnd",
+        "mối gắn kết"
+      ]
+    ]
+  },
+  {
+    "cat": "thanh-pho-dich-vu-cong",
+    "catVi": "Thành phố & dịch vụ công",
+    "catEn": "City & public services",
+    "words": [
+      [
+        "suburb",
+        "ˈsʌbɜːb",
+        "ngoại ô"
+      ],
+      [
+        "downtown",
+        "ˌdaʊnˈtaʊn",
+        "trung tâm thành phố"
+      ],
+      [
+        "district",
+        "ˈdɪstrɪkt",
+        "quận, khu vực"
+      ],
+      [
+        "urban",
+        "ˈɜːbən",
+        "thuộc đô thị"
+      ],
+      [
+        "rural",
+        "ˈrʊərəl",
+        "thuộc nông thôn"
+      ],
+      [
+        "skyline",
+        "ˈskaɪlaɪn",
+        "đường chân trời thành phố"
+      ],
+      [
+        "skyscraper",
+        "ˈskaɪskreɪpə(r)",
+        "nhà chọc trời"
+      ],
+      [
+        "pedestrian",
+        "pəˈdestriən",
+        "người đi bộ"
+      ],
+      [
+        "crosswalk",
+        "ˈkrɒswɔːk",
+        "vạch qua đường"
+      ],
+      [
+        "overpass",
+        "ˈəʊvəpɑːs",
+        "cầu vượt"
+      ],
+      [
+        "underpass",
+        "ˈʌndəpɑːs",
+        "hầm chui"
+      ],
+      [
+        "infrastructure",
+        "ˈɪnfrəstrʌktʃə(r)",
+        "cơ sở hạ tầng"
+      ],
+      [
+        "facility",
+        "fəˈsɪləti",
+        "cơ sở vật chất"
+      ],
+      [
+        "amenity",
+        "əˈmiːnəti",
+        "tiện ích"
+      ],
+      [
+        "utility",
+        "juˈtɪləti",
+        "dịch vụ tiện ích (điện, nước)"
+      ],
+      [
+        "sewage",
+        "ˈsuːɪdʒ",
+        "nước thải"
+      ],
+      [
+        "drainage",
+        "ˈdreɪnɪdʒ",
+        "hệ thống thoát nước"
+      ],
+      [
+        "power supply",
+        "ˈpaʊə səˈplaɪ",
+        "nguồn điện"
+      ],
+      [
+        "waste management",
+        "weɪst ˈmænɪdʒmənt",
+        "quản lý rác thải"
+      ],
+      [
+        "public transport",
+        "ˈpʌblɪk ˈtrænspɔːt",
+        "giao thông công cộng"
+      ],
+      [
+        "subway",
+        "ˈsʌbweɪ",
+        "tàu điện ngầm (kiểu Mỹ)"
+      ],
+      [
+        "metro",
+        "ˈmetrəʊ",
+        "tàu điện ngầm"
+      ],
+      [
+        "tram",
+        "træm",
+        "tàu điện (mặt đất)"
+      ],
+      [
+        "fare",
+        "feə(r)",
+        "giá vé"
+      ],
+      [
+        "commute",
+        "kəˈmjuːt",
+        "đi làm hằng ngày"
+      ],
+      [
+        "congestion",
+        "kənˈdʒestʃən",
+        "tắc nghẽn"
+      ],
+      [
+        "rush hour",
+        "rʌʃ ˈaʊə(r)",
+        "giờ cao điểm"
+      ],
+      [
+        "town hall",
+        "taʊn hɔːl",
+        "tòa thị chính"
+      ],
+      [
+        "fire station",
+        "ˈfaɪə ˈsteɪʃn",
+        "trạm cứu hỏa"
+      ],
+      [
+        "fire brigade",
+        "ˈfaɪə brɪˈɡeɪd",
+        "đội cứu hỏa"
+      ],
+      [
+        "ambulance",
+        "ˈæmbjələns",
+        "xe cứu thương"
+      ],
+      [
+        "emergency",
+        "ɪˈmɜːdʒənsi",
+        "trường hợp khẩn cấp"
+      ],
+      [
+        "paramedic",
+        "ˌpærəˈmedɪk",
+        "nhân viên cấp cứu"
+      ],
+      [
+        "postal service",
+        "ˈpəʊstl ˈsɜːvɪs",
+        "dịch vụ bưu chính"
+      ],
+      [
+        "post office",
+        "ˈpəʊst ˈɒfɪs",
+        "bưu điện"
+      ],
+      [
+        "recreation",
+        "ˌrekriˈeɪʃn",
+        "hoạt động giải trí"
+      ],
+      [
+        "playground",
+        "ˈpleɪɡraʊnd",
+        "sân chơi"
+      ],
+      [
+        "monument",
+        "ˈmɒnjumənt",
+        "đài tưởng niệm"
+      ],
+      [
+        "statue",
+        "ˈstætʃuː",
+        "bức tượng"
+      ],
+      [
+        "plaza",
+        "ˈplɑːzə",
+        "quảng trường"
+      ],
+      [
+        "fountain",
+        "ˈfaʊntən",
+        "đài phun nước"
+      ],
+      [
+        "pedestrian zone",
+        "pəˈdestriən zəʊn",
+        "khu vực đi bộ"
+      ],
+      [
+        "sidewalk",
+        "ˈsaɪdwɔːk",
+        "vỉa hè (kiểu Mỹ)"
+      ],
+      [
+        "block",
+        "blɒk",
+        "dãy nhà, khối phố"
+      ],
+      [
+        "landmark",
+        "ˈlændmɑːk",
+        "địa danh nổi bật"
+      ],
+      [
+        "municipal",
+        "mjuˈnɪsɪpl",
+        "thuộc thành phố"
+      ],
+      [
+        "zone",
+        "zəʊn",
+        "khu vực"
+      ],
+      [
+        "permit",
+        "ˈpɜːmɪt",
+        "giấy phép"
+      ],
+      [
+        "license",
+        "ˈlaɪsns",
+        "giấy phép, bằng"
+      ],
+      [
+        "resident",
+        "ˈrezɪdənt",
+        "cư dân"
+      ],
+      [
+        "census",
+        "ˈsensəs",
+        "điều tra dân số"
+      ],
+      [
+        "overcrowded",
+        "ˌəʊvəˈkraʊdɪd",
+        "quá đông đúc"
+      ],
+      [
+        "slum",
+        "slʌm",
+        "khu ổ chuột"
+      ],
+      [
+        "gentrification",
+        "ˌdʒentrɪfɪˈkeɪʃn",
+        "sự chỉnh trang đô thị"
+      ]
+    ]
+  },
+  {
+    "cat": "dia-ly-the-gioi",
+    "catVi": "Địa lý & thế giới",
+    "catEn": "Geography & world",
+    "words": [
+      [
+        "continent",
+        "ˈkɒntɪnənt",
+        "lục địa"
+      ],
+      [
+        "country",
+        "ˈkʌntri",
+        "quốc gia"
+      ],
+      [
+        "nation",
+        "ˈneɪʃn",
+        "quốc gia, dân tộc"
+      ],
+      [
+        "region",
+        "ˈriːdʒən",
+        "khu vực, vùng"
+      ],
+      [
+        "territory",
+        "ˈterətri",
+        "lãnh thổ"
+      ],
+      [
+        "border",
+        "ˈbɔːdə(r)",
+        "biên giới"
+      ],
+      [
+        "boundary",
+        "ˈbaʊndri",
+        "ranh giới"
+      ],
+      [
+        "landscape",
+        "ˈlændskeɪp",
+        "phong cảnh"
+      ],
+      [
+        "terrain",
+        "təˈreɪn",
+        "địa hình"
+      ],
+      [
+        "valley",
+        "ˈvæli",
+        "thung lũng"
+      ],
+      [
+        "plain",
+        "pleɪn",
+        "đồng bằng"
+      ],
+      [
+        "plateau",
+        "ˈplætəʊ",
+        "cao nguyên"
+      ],
+      [
+        "peninsula",
+        "pəˈnɪnsjələ",
+        "bán đảo"
+      ],
+      [
+        "coast",
+        "kəʊst",
+        "bờ biển"
+      ],
+      [
+        "coastline",
+        "ˈkəʊstlaɪn",
+        "đường bờ biển"
+      ],
+      [
+        "cliff",
+        "klɪf",
+        "vách đá"
+      ],
+      [
+        "cave",
+        "keɪv",
+        "hang động"
+      ],
+      [
+        "canyon",
+        "ˈkænjən",
+        "hẻm núi"
+      ],
+      [
+        "glacier",
+        "ˈɡlæsiə(r)",
+        "sông băng"
+      ],
+      [
+        "iceberg",
+        "ˈaɪsbɜːɡ",
+        "núi băng trôi"
+      ],
+      [
+        "equator",
+        "ɪˈkweɪtə(r)",
+        "đường xích đạo"
+      ],
+      [
+        "hemisphere",
+        "ˈhemɪsfɪə(r)",
+        "bán cầu"
+      ],
+      [
+        "latitude",
+        "ˈlætɪtjuːd",
+        "vĩ độ"
+      ],
+      [
+        "longitude",
+        "ˈlɒndʒɪtjuːd",
+        "kinh độ"
+      ],
+      [
+        "altitude",
+        "ˈæltɪtjuːd",
+        "độ cao"
+      ],
+      [
+        "compass",
+        "ˈkʌmpəs",
+        "la bàn"
+      ],
+      [
+        "north",
+        "nɔːθ",
+        "phía bắc"
+      ],
+      [
+        "south",
+        "saʊθ",
+        "phía nam"
+      ],
+      [
+        "east",
+        "iːst",
+        "phía đông"
+      ],
+      [
+        "west",
+        "west",
+        "phía tây"
+      ],
+      [
+        "bay",
+        "beɪ",
+        "vịnh"
+      ],
+      [
+        "gulf",
+        "ɡʌlf",
+        "vịnh lớn"
+      ],
+      [
+        "strait",
+        "streɪt",
+        "eo biển"
+      ],
+      [
+        "reef",
+        "riːf",
+        "rạn san hô"
+      ],
+      [
+        "delta",
+        "ˈdeltə",
+        "đồng bằng châu thổ"
+      ],
+      [
+        "wetland",
+        "ˈwetlənd",
+        "đầm lầy"
+      ],
+      [
+        "rainforest",
+        "ˈreɪnfɒrɪst",
+        "rừng mưa nhiệt đới"
+      ],
+      [
+        "jungle",
+        "ˈdʒʌŋɡl",
+        "rừng rậm"
+      ],
+      [
+        "savanna",
+        "səˈvænə",
+        "xa van, thảo nguyên"
+      ],
+      [
+        "tundra",
+        "ˈtʌndrə",
+        "lãnh nguyên"
+      ],
+      [
+        "oasis",
+        "əʊˈeɪsɪs",
+        "ốc đảo"
+      ],
+      [
+        "dune",
+        "djuːn",
+        "đụn cát"
+      ],
+      [
+        "summit",
+        "ˈsʌmɪt",
+        "đỉnh núi"
+      ],
+      [
+        "slope",
+        "sləʊp",
+        "sườn dốc"
+      ],
+      [
+        "crater",
+        "ˈkreɪtə(r)",
+        "miệng núi lửa"
+      ],
+      [
+        "archipelago",
+        "ˌɑːkɪˈpeləɡəʊ",
+        "quần đảo"
+      ],
+      [
+        "mainland",
+        "ˈmeɪnlænd",
+        "đất liền"
+      ],
+      [
+        "overseas",
+        "ˌəʊvəˈsiːz",
+        "ở nước ngoài"
+      ],
+      [
+        "domestic",
+        "dəˈmestɪk",
+        "trong nước, nội địa"
+      ],
+      [
+        "foreign",
+        "ˈfɒrən",
+        "nước ngoài"
+      ],
+      [
+        "globe",
+        "ɡləʊb",
+        "địa cầu, quả địa cầu"
+      ],
+      [
+        "tropical",
+        "ˈtrɒpɪkl",
+        "nhiệt đới"
+      ],
+      [
+        "arctic",
+        "ˈɑːktɪk",
+        "thuộc Bắc Cực"
+      ],
+      [
+        "antarctic",
+        "æntˈɑːktɪk",
+        "thuộc Nam Cực"
+      ],
+      [
+        "climate zone",
+        "ˈklaɪmət zəʊn",
+        "đới khí hậu"
+      ],
+      [
+        "temperate",
+        "ˈtempərət",
+        "ôn đới"
+      ],
+      [
+        "wilderness",
+        "ˈwɪldənəs",
+        "vùng hoang dã"
+      ],
+      [
+        "topography",
+        "təˈpɒɡrəfi",
+        "địa hình học"
+      ],
+      [
+        "population density",
+        "ˌpɒpjuˈleɪʃn ˈdensəti",
+        "mật độ dân số"
+      ],
+      [
+        "gross domestic product",
+        "ɡrəʊs dəˈmestɪk ˈprɒdʌkt",
+        "tổng sản phẩm quốc nội"
+      ],
+      [
+        "time zone",
+        "taɪm zəʊn",
+        "múi giờ"
+      ]
+    ]
+  },
+  {
+    "cat": "kinh-te-ngan-hang",
+    "catVi": "Kinh tế & ngân hàng",
+    "catEn": "Economy & banking",
+    "words": [
+      [
+        "economy",
+        "ɪˈkɒnəmi",
+        "nền kinh tế"
+      ],
+      [
+        "economic",
+        "ˌiːkəˈnɒmɪk",
+        "thuộc kinh tế"
+      ],
+      [
+        "economist",
+        "ɪˈkɒnəmɪst",
+        "nhà kinh tế học"
+      ],
+      [
+        "gdp",
+        "ˌdʒiːdiːˈpiː",
+        "GDP, tổng sản phẩm quốc nội"
+      ],
+      [
+        "inflation",
+        "ɪnˈfleɪʃn",
+        "lạm phát"
+      ],
+      [
+        "recession",
+        "rɪˈseʃn",
+        "suy thoái kinh tế"
+      ],
+      [
+        "growth",
+        "ɡrəʊθ",
+        "tăng trưởng"
+      ],
+      [
+        "investment",
+        "ɪnˈvestmənt",
+        "sự đầu tư"
+      ],
+      [
+        "investor",
+        "ɪnˈvestə(r)",
+        "nhà đầu tư"
+      ],
+      [
+        "invest",
+        "ɪnˈvest",
+        "đầu tư"
+      ],
+      [
+        "stock",
+        "stɒk",
+        "cổ phiếu"
+      ],
+      [
+        "share",
+        "ʃeə(r)",
+        "cổ phần"
+      ],
+      [
+        "shareholder",
+        "ˈʃeəhəʊldə(r)",
+        "cổ đông"
+      ],
+      [
+        "stock market",
+        "stɒk ˈmɑːkɪt",
+        "thị trường chứng khoán"
+      ],
+      [
+        "exchange rate",
+        "ɪksˈtʃeɪndʒ reɪt",
+        "tỷ giá hối đoái"
+      ],
+      [
+        "bank account",
+        "bæŋk əˈkaʊnt",
+        "tài khoản ngân hàng"
+      ],
+      [
+        "savings",
+        "ˈseɪvɪŋz",
+        "tiền tiết kiệm"
+      ],
+      [
+        "deposit",
+        "dɪˈpɒzɪt",
+        "tiền gửi, đặt cọc"
+      ],
+      [
+        "withdraw",
+        "wɪðˈdrɔː",
+        "rút tiền"
+      ],
+      [
+        "transfer",
+        "trænsˈfɜː(r)",
+        "chuyển khoản"
+      ],
+      [
+        "transaction",
+        "trænˈzækʃn",
+        "giao dịch"
+      ],
+      [
+        "interest rate",
+        "ˈɪntrəst reɪt",
+        "lãi suất"
+      ],
+      [
+        "mortgage",
+        "ˈmɔːɡɪdʒ",
+        "khoản vay thế chấp"
+      ],
+      [
+        "credit",
+        "ˈkredɪt",
+        "tín dụng"
+      ],
+      [
+        "debit",
+        "ˈdebɪt",
+        "ghi nợ"
+      ],
+      [
+        "credit card",
+        "ˈkredɪt kɑːd",
+        "thẻ tín dụng"
+      ],
+      [
+        "debit card",
+        "ˈdebɪt kɑːd",
+        "thẻ ghi nợ"
+      ],
+      [
+        "atm",
+        "ˌeɪtiːˈem",
+        "máy ATM"
+      ],
+      [
+        "cashless",
+        "ˈkæʃləs",
+        "không dùng tiền mặt"
+      ],
+      [
+        "currency exchange",
+        "ˈkʌrənsi ɪksˈtʃeɪndʒ",
+        "đổi tiền tệ"
+      ],
+      [
+        "insurance",
+        "ɪnˈʃʊərəns",
+        "bảo hiểm"
+      ],
+      [
+        "premium",
+        "ˈpriːmiəm",
+        "phí bảo hiểm"
+      ],
+      [
+        "claim",
+        "kleɪm",
+        "yêu cầu bồi thường"
+      ],
+      [
+        "bankrupt",
+        "ˈbæŋkrʌpt",
+        "phá sản"
+      ],
+      [
+        "bankruptcy",
+        "ˈbæŋkrʌptsi",
+        "sự phá sản"
+      ],
+      [
+        "financial",
+        "faɪˈnænʃl",
+        "thuộc tài chính"
+      ],
+      [
+        "finance",
+        "ˈfaɪnæns",
+        "tài chính"
+      ],
+      [
+        "profit",
+        "ˈprɒfɪt",
+        "lợi nhuận"
+      ],
+      [
+        "loss",
+        "lɒs",
+        "khoản lỗ"
+      ],
+      [
+        "revenue",
+        "ˈrevənjuː",
+        "doanh thu"
+      ],
+      [
+        "expense",
+        "ɪkˈspens",
+        "chi phí"
+      ],
+      [
+        "asset",
+        "ˈæset",
+        "tài sản"
+      ],
+      [
+        "liability",
+        "ˌlaɪəˈbɪləti",
+        "khoản nợ, trách nhiệm pháp lý"
+      ],
+      [
+        "fund",
+        "fʌnd",
+        "quỹ"
+      ],
+      [
+        "trade",
+        "treɪd",
+        "thương mại"
+      ],
+      [
+        "trade deficit",
+        "treɪd ˈdefɪsɪt",
+        "thâm hụt thương mại"
+      ],
+      [
+        "export",
+        "ɪkˈspɔːt",
+        "xuất khẩu"
+      ],
+      [
+        "import",
+        "ɪmˈpɔːt",
+        "nhập khẩu"
+      ],
+      [
+        "supply and demand",
+        "səˈplaɪ ənd dɪˈmɑːnd",
+        "cung và cầu"
+      ],
+      [
+        "consumer",
+        "kənˈsjuːmə(r)",
+        "người tiêu dùng"
+      ],
+      [
+        "monopoly",
+        "məˈnɒpəli",
+        "độc quyền"
+      ],
+      [
+        "entrepreneur",
+        "ˌɒntrəprəˈnɜː(r)",
+        "doanh nhân khởi nghiệp"
+      ],
+      [
+        "startup",
+        "ˈstɑːtʌp",
+        "công ty khởi nghiệp"
+      ],
+      [
+        "corporation",
+        "ˌkɔːpəˈreɪʃn",
+        "tập đoàn"
+      ],
+      [
+        "merger",
+        "ˈmɜːdʒə(r)",
+        "sự sáp nhập"
+      ],
+      [
+        "subsidy",
+        "ˈsʌbsədi",
+        "trợ cấp"
+      ],
+      [
+        "taxation",
+        "tækˈseɪʃn",
+        "hệ thống thuế"
+      ],
+      [
+        "gross income",
+        "ɡrəʊs ˈɪnkʌm",
+        "thu nhập gộp"
+      ],
+      [
+        "net income",
+        "net ˈɪnkʌm",
+        "thu nhập ròng"
+      ],
+      [
+        "minimum wage",
+        "ˈmɪnɪməm weɪdʒ",
+        "lương tối thiểu"
+      ]
+    ]
+  },
+  {
+    "cat": "nghe-thuat-bao-tang",
+    "catVi": "Nghệ thuật thị giác & bảo tàng",
+    "catEn": "Visual arts & museums",
+    "words": [
+      [
+        "museum",
+        "mjuˈziːəm",
+        "bảo tàng"
+      ],
+      [
+        "gallery",
+        "ˈɡæləri",
+        "phòng trưng bày"
+      ],
+      [
+        "exhibition",
+        "ˌeksɪˈbɪʃn",
+        "triển lãm"
+      ],
+      [
+        "exhibit",
+        "ɪɡˈzɪbɪt",
+        "vật trưng bày"
+      ],
+      [
+        "artwork",
+        "ˈɑːtwɜːk",
+        "tác phẩm nghệ thuật"
+      ],
+      [
+        "masterpiece",
+        "ˈmɑːstəpiːs",
+        "kiệt tác"
+      ],
+      [
+        "sculpture",
+        "ˈskʌlptʃə(r)",
+        "tác phẩm điêu khắc"
+      ],
+      [
+        "sculptor",
+        "ˈskʌlptə(r)",
+        "nhà điêu khắc"
+      ],
+      [
+        "portrait",
+        "ˈpɔːtreɪt",
+        "chân dung"
+      ],
+      [
+        "still life",
+        "stɪl laɪf",
+        "tranh tĩnh vật"
+      ],
+      [
+        "canvas",
+        "ˈkænvəs",
+        "vải vẽ, khung toan"
+      ],
+      [
+        "brush",
+        "brʌʃ",
+        "cọ vẽ"
+      ],
+      [
+        "palette",
+        "ˈpælət",
+        "bảng pha màu"
+      ],
+      [
+        "sketch",
+        "sketʃ",
+        "bản phác thảo"
+      ],
+      [
+        "frame",
+        "freɪm",
+        "khung tranh"
+      ],
+      [
+        "curator",
+        "kjʊəˈreɪtə(r)",
+        "người phụ trách bảo tàng"
+      ],
+      [
+        "artefact",
+        "ˈɑːtɪfækt",
+        "hiện vật"
+      ],
+      [
+        "antique",
+        "ænˈtiːk",
+        "đồ cổ"
+      ],
+      [
+        "ceramic",
+        "səˈræmɪk",
+        "đồ gốm"
+      ],
+      [
+        "pottery",
+        "ˈpɒtəri",
+        "đồ gốm sứ"
+      ],
+      [
+        "craft",
+        "krɑːft",
+        "nghề thủ công"
+      ],
+      [
+        "craftsman",
+        "ˈkrɑːftsmən",
+        "thợ thủ công"
+      ],
+      [
+        "design",
+        "dɪˈzaɪn",
+        "thiết kế"
+      ],
+      [
+        "designer",
+        "dɪˈzaɪnə(r)",
+        "nhà thiết kế"
+      ],
+      [
+        "abstract",
+        "ˈæbstrækt",
+        "trừu tượng"
+      ],
+      [
+        "realistic",
+        "ˌrɪəˈlɪstɪk",
+        "hiện thực"
+      ],
+      [
+        "contemporary",
+        "kənˈtempərəri",
+        "đương đại"
+      ],
+      [
+        "classical",
+        "ˈklæsɪkl",
+        "cổ điển"
+      ],
+      [
+        "modern",
+        "ˈmɒdn",
+        "hiện đại"
+      ],
+      [
+        "technique",
+        "tekˈniːk",
+        "kỹ thuật"
+      ],
+      [
+        "inspiration",
+        "ˌɪnspəˈreɪʃn",
+        "nguồn cảm hứng"
+      ],
+      [
+        "creativity",
+        "ˌkriːeɪˈtɪvəti",
+        "sự sáng tạo"
+      ],
+      [
+        "imagination",
+        "ɪˌmædʒɪˈneɪʃn",
+        "trí tưởng tượng"
+      ],
+      [
+        "aesthetic",
+        "iːsˈθetɪk",
+        "thẩm mỹ"
+      ],
+      [
+        "composition",
+        "ˌkɒmpəˈzɪʃn",
+        "bố cục"
+      ],
+      [
+        "installation",
+        "ˌɪnstəˈleɪʃn",
+        "nghệ thuật sắp đặt"
+      ],
+      [
+        "mural",
+        "ˈmjʊərəl",
+        "tranh tường"
+      ],
+      [
+        "graffiti",
+        "ɡrəˈfiːti",
+        "tranh vẽ trên tường"
+      ],
+      [
+        "calligraphy",
+        "kəˈlɪɡrəfi",
+        "thư pháp"
+      ],
+      [
+        "carving",
+        "ˈkɑːvɪŋ",
+        "chạm khắc"
+      ],
+      [
+        "archive",
+        "ˈɑːkaɪv",
+        "kho lưu trữ"
+      ],
+      [
+        "heritage site",
+        "ˈherɪtɪdʒ saɪt",
+        "di tích lịch sử"
+      ],
+      [
+        "relic",
+        "ˈrelɪk",
+        "di vật, cổ vật"
+      ]
+    ]
+  },
+  {
+    "cat": "du-lich-khach-san",
+    "catVi": "Du lịch & khách sạn",
+    "catEn": "Travel & tourism",
+    "words": [
+      [
+        "tourism",
+        "ˈtʊərɪzəm",
+        "ngành du lịch"
+      ],
+      [
+        "traveller",
+        "ˈtrævələ(r)",
+        "người đi du lịch"
+      ],
+      [
+        "accommodation",
+        "əˌkɒməˈdeɪʃn",
+        "chỗ ở"
+      ],
+      [
+        "reservation",
+        "ˌrezəˈveɪʃn",
+        "việc đặt chỗ"
+      ],
+      [
+        "check in",
+        "tʃek ɪn",
+        "làm thủ tục nhận phòng"
+      ],
+      [
+        "check out",
+        "tʃek aʊt",
+        "trả phòng"
+      ],
+      [
+        "receptionist",
+        "rɪˈsepʃənɪst",
+        "lễ tân"
+      ],
+      [
+        "lobby",
+        "ˈlɒbi",
+        "sảnh khách sạn"
+      ],
+      [
+        "suite",
+        "swiːt",
+        "phòng suite"
+      ],
+      [
+        "single room",
+        "ˈsɪŋɡl ruːm",
+        "phòng đơn"
+      ],
+      [
+        "double room",
+        "ˈdʌbl ruːm",
+        "phòng đôi"
+      ],
+      [
+        "concierge",
+        "ˈkɒnsieəʒ",
+        "nhân viên hỗ trợ khách sạn"
+      ],
+      [
+        "resort",
+        "rɪˈzɔːt",
+        "khu nghỉ dưỡng"
+      ],
+      [
+        "hostel",
+        "ˈhɒstl",
+        "nhà nghỉ tập thể"
+      ],
+      [
+        "guesthouse",
+        "ˈɡesthaʊs",
+        "nhà khách"
+      ],
+      [
+        "campsite",
+        "ˈkæmpsaɪt",
+        "khu cắm trại"
+      ],
+      [
+        "sightseeing",
+        "ˈsaɪtsiːɪŋ",
+        "tham quan"
+      ],
+      [
+        "tour guide",
+        "tʊə ɡaɪd",
+        "hướng dẫn viên du lịch"
+      ],
+      [
+        "tour",
+        "tʊə(r)",
+        "chuyến tham quan"
+      ],
+      [
+        "excursion",
+        "ɪkˈskɜːʃn",
+        "chuyến du ngoạn ngắn"
+      ],
+      [
+        "backpack",
+        "ˈbækpæk",
+        "ba lô"
+      ],
+      [
+        "backpacker",
+        "ˈbækpækə(r)",
+        "người du lịch bụi"
+      ],
+      [
+        "souvenir",
+        "ˌsuːvəˈnɪə(r)",
+        "quà lưu niệm"
+      ],
+      [
+        "brochure",
+        "ˈbrəʊʃə(r)",
+        "tờ rơi quảng cáo"
+      ],
+      [
+        "customs",
+        "ˈkʌstəmz",
+        "hải quan"
+      ],
+      [
+        "boarding pass",
+        "ˈbɔːdɪŋ pɑːs",
+        "thẻ lên máy bay"
+      ],
+      [
+        "departure",
+        "dɪˈpɑːtʃə(r)",
+        "sự khởi hành"
+      ],
+      [
+        "arrival",
+        "əˈraɪvl",
+        "sự đến nơi"
+      ],
+      [
+        "layover",
+        "ˈleɪəʊvə(r)",
+        "thời gian quá cảnh"
+      ],
+      [
+        "jet lag",
+        "dʒet læɡ",
+        "mệt mỏi do lệch múi giờ"
+      ],
+      [
+        "cruise",
+        "kruːz",
+        "du thuyền"
+      ],
+      [
+        "voyage",
+        "ˈvɔɪɪdʒ",
+        "hải trình"
+      ],
+      [
+        "expedition",
+        "ˌekspəˈdɪʃn",
+        "cuộc thám hiểm"
+      ],
+      [
+        "adventure",
+        "ədˈventʃə(r)",
+        "cuộc phiêu lưu"
+      ],
+      [
+        "package tour",
+        "ˈpækɪdʒ tʊə(r)",
+        "tour trọn gói"
+      ],
+      [
+        "all-inclusive",
+        "ɔːl ɪnˈkluːsɪv",
+        "bao gồm tất cả"
+      ],
+      [
+        "peak season",
+        "piːk ˈsiːzn",
+        "mùa cao điểm"
+      ],
+      [
+        "off-season",
+        "ɒf ˈsiːzn",
+        "mùa thấp điểm"
+      ],
+      [
+        "local",
+        "ˈləʊkl",
+        "người/thuộc địa phương"
+      ],
+      [
+        "exotic",
+        "ɪɡˈzɒtɪk",
+        "kỳ lạ, xa lạ"
+      ],
+      [
+        "authentic",
+        "ɔːˈθentɪk",
+        "đích thực, nguyên bản"
+      ],
+      [
+        "cultural shock",
+        "ˈkʌltʃrəl ʃɒk",
+        "sốc văn hóa"
+      ]
+    ]
+  },
+  {
+    "cat": "dong-tu-tinh-tu-nang-cao",
+    "catVi": "Động từ & tính từ nâng cao (IELTS)",
+    "catEn": "Advanced verbs & adjectives",
+    "words": [
+      [
+        "achieve",
+        "əˈtʃiːv",
+        "đạt được"
+      ],
+      [
+        "acquire",
+        "əˈkwaɪə(r)",
+        "tiếp thu, có được"
+      ],
+      [
+        "adapt",
+        "əˈdæpt",
+        "thích nghi"
+      ],
+      [
+        "admit",
+        "ədˈmɪt",
+        "thừa nhận"
+      ],
+      [
+        "advocate",
+        "ˈædvəkeɪt",
+        "ủng hộ, đề xướng"
+      ],
+      [
+        "affect",
+        "əˈfekt",
+        "ảnh hưởng đến"
+      ],
+      [
+        "alter",
+        "ˈɔːltə(r)",
+        "thay đổi"
+      ],
+      [
+        "anticipate",
+        "ænˈtɪsɪpeɪt",
+        "dự đoán trước"
+      ],
+      [
+        "appreciate",
+        "əˈpriːʃieɪt",
+        "đánh giá cao"
+      ],
+      [
+        "arise",
+        "əˈraɪz",
+        "nảy sinh"
+      ],
+      [
+        "assess",
+        "əˈses",
+        "đánh giá"
+      ],
+      [
+        "associate",
+        "əˈsəʊʃieɪt",
+        "liên kết, gắn liền"
+      ],
+      [
+        "attain",
+        "əˈteɪn",
+        "đạt được"
+      ],
+      [
+        "avoid",
+        "əˈvɔɪd",
+        "tránh"
+      ],
+      [
+        "boost",
+        "buːst",
+        "thúc đẩy, tăng cường"
+      ],
+      [
+        "cease",
+        "siːs",
+        "ngừng, chấm dứt"
+      ],
+      [
+        "clarify",
+        "ˈklærɪfaɪ",
+        "làm rõ"
+      ],
+      [
+        "collaborate",
+        "kəˈlæbəreɪt",
+        "hợp tác"
+      ],
+      [
+        "combine",
+        "kəmˈbaɪn",
+        "kết hợp"
+      ],
+      [
+        "compensate",
+        "ˈkɒmpenseɪt",
+        "bồi thường, bù đắp"
+      ],
+      [
+        "compile",
+        "kəmˈpaɪl",
+        "biên soạn, tổng hợp"
+      ],
+      [
+        "comprise",
+        "kəmˈpraɪz",
+        "bao gồm"
+      ],
+      [
+        "conceal",
+        "kənˈsiːl",
+        "che giấu"
+      ],
+      [
+        "confirm",
+        "kənˈfɜːm",
+        "xác nhận"
+      ],
+      [
+        "conform",
+        "kənˈfɔːm",
+        "tuân theo"
+      ],
+      [
+        "confront",
+        "kənˈfrʌnt",
+        "đối mặt"
+      ],
+      [
+        "cope",
+        "kəʊp",
+        "đối phó, xoay xở"
+      ],
+      [
+        "convert",
+        "kənˈvɜːt",
+        "chuyển đổi"
+      ],
+      [
+        "convince",
+        "kənˈvɪns",
+        "thuyết phục"
+      ],
+      [
+        "cooperate",
+        "kəʊˈɒpəreɪt",
+        "hợp tác"
+      ],
+      [
+        "coordinate",
+        "kəʊˈɔːdɪneɪt",
+        "điều phối"
+      ],
+      [
+        "correspond",
+        "ˌkɒrəˈspɒnd",
+        "tương ứng"
+      ],
+      [
+        "deny",
+        "dɪˈnaɪ",
+        "phủ nhận"
+      ],
+      [
+        "depict",
+        "dɪˈpɪkt",
+        "miêu tả"
+      ],
+      [
+        "deteriorate",
+        "dɪˈtɪəriəreɪt",
+        "xấu đi, suy giảm"
+      ],
+      [
+        "determine",
+        "dɪˈtɜːmɪn",
+        "xác định, quyết định"
+      ],
+      [
+        "deviate",
+        "ˈdiːvieɪt",
+        "đi chệch hướng"
+      ],
+      [
+        "devote",
+        "dɪˈvəʊt",
+        "cống hiến, dành cho"
+      ],
+      [
+        "differ",
+        "ˈdɪfə(r)",
+        "khác nhau"
+      ],
+      [
+        "diminish",
+        "dɪˈmɪnɪʃ",
+        "giảm bớt"
+      ],
+      [
+        "disclose",
+        "dɪsˈkləʊz",
+        "tiết lộ"
+      ],
+      [
+        "discourage",
+        "dɪsˈkʌrɪdʒ",
+        "làm nản lòng"
+      ],
+      [
+        "dismiss",
+        "dɪsˈmɪs",
+        "bác bỏ, sa thải"
+      ],
+      [
+        "distinguish",
+        "dɪˈstɪŋɡwɪʃ",
+        "phân biệt"
+      ],
+      [
+        "diverge",
+        "daɪˈvɜːdʒ",
+        "phân kỳ, tách ra"
+      ],
+      [
+        "dominate",
+        "ˈdɒmɪneɪt",
+        "thống trị, chi phối"
+      ],
+      [
+        "elaborate",
+        "ɪˈlæbəreɪt",
+        "giải thích chi tiết"
+      ],
+      [
+        "eliminate",
+        "ɪˈlɪmɪneɪt",
+        "loại bỏ"
+      ],
+      [
+        "emerge",
+        "iˈmɜːdʒ",
+        "xuất hiện, nổi lên"
+      ],
+      [
+        "emphasize",
+        "ˈemfəsaɪz",
+        "nhấn mạnh"
+      ],
+      [
+        "enable",
+        "ɪˈneɪbl",
+        "cho phép, tạo điều kiện"
+      ],
+      [
+        "encounter",
+        "ɪnˈkaʊntə(r)",
+        "gặp phải"
+      ],
+      [
+        "enhance",
+        "ɪnˈhɑːns",
+        "nâng cao, cải thiện"
+      ],
+      [
+        "exceed",
+        "ɪkˈsiːd",
+        "vượt quá"
+      ],
+      [
+        "exclude",
+        "ɪkˈskluːd",
+        "loại trừ"
+      ],
+      [
+        "exert",
+        "ɪɡˈzɜːt",
+        "sử dụng, phát huy (ảnh hưởng)"
+      ],
+      [
+        "exploit",
+        "ɪkˈsplɔɪt",
+        "khai thác, lợi dụng"
+      ],
+      [
+        "extend",
+        "ɪkˈstend",
+        "mở rộng, kéo dài"
+      ],
+      [
+        "facilitate",
+        "fəˈsɪlɪteɪt",
+        "tạo điều kiện thuận lợi"
+      ],
+      [
+        "foster",
+        "ˈfɒstə(r)",
+        "nuôi dưỡng, thúc đẩy"
+      ],
+      [
+        "gather",
+        "ˈɡæðə(r)",
+        "tập hợp, thu thập"
+      ],
+      [
+        "grasp",
+        "ɡrɑːsp",
+        "nắm bắt, hiểu rõ"
+      ],
+      [
+        "guarantee",
+        "ˌɡærənˈtiː",
+        "đảm bảo"
+      ],
+      [
+        "highlight",
+        "ˈhaɪlaɪt",
+        "làm nổi bật"
+      ],
+      [
+        "hinder",
+        "ˈhɪndə(r)",
+        "cản trở"
+      ],
+      [
+        "implement",
+        "ˈɪmplɪment",
+        "thực hiện, thi hành"
+      ],
+      [
+        "incorporate",
+        "ɪnˈkɔːpəreɪt",
+        "kết hợp, sáp nhập"
+      ],
+      [
+        "induce",
+        "ɪnˈdjuːs",
+        "gây ra, thúc đẩy"
+      ],
+      [
+        "inhibit",
+        "ɪnˈhɪbɪt",
+        "ức chế, kìm hãm"
+      ],
+      [
+        "initiate",
+        "ɪˈnɪʃieɪt",
+        "khởi xướng"
+      ],
+      [
+        "integrate",
+        "ˈɪntɪɡreɪt",
+        "hòa nhập, tích hợp"
+      ],
+      [
+        "interact",
+        "ˌɪntərˈækt",
+        "tương tác"
+      ],
+      [
+        "interfere",
+        "ˌɪntəˈfɪə(r)",
+        "can thiệp"
+      ],
+      [
+        "intervene",
+        "ˌɪntəˈviːn",
+        "can thiệp, xen vào"
+      ],
+      [
+        "investigate",
+        "ɪnˈvestɪɡeɪt",
+        "điều tra"
+      ],
+      [
+        "isolate",
+        "ˈaɪsəleɪt",
+        "cô lập"
+      ],
+      [
+        "justify",
+        "ˈdʒʌstɪfaɪ",
+        "biện minh"
+      ],
+      [
+        "launch",
+        "lɔːntʃ",
+        "ra mắt, phát động"
+      ],
+      [
+        "manipulate",
+        "məˈnɪpjuleɪt",
+        "thao túng, điều khiển"
+      ],
+      [
+        "minimize",
+        "ˈmɪnɪmaɪz",
+        "giảm thiểu"
+      ],
+      [
+        "modify",
+        "ˈmɒdɪfaɪ",
+        "điều chỉnh, sửa đổi"
+      ],
+      [
+        "neglect",
+        "nɪˈɡlekt",
+        "sao lãng, bỏ bê"
+      ],
+      [
+        "obscure",
+        "əbˈskjʊə(r)",
+        "làm mờ đi, che khuất"
+      ],
+      [
+        "overcome",
+        "ˌəʊvəˈkʌm",
+        "vượt qua"
+      ],
+      [
+        "overlook",
+        "ˌəʊvəˈlʊk",
+        "bỏ sót, bỏ qua"
+      ],
+      [
+        "persist",
+        "pəˈsɪst",
+        "kiên trì, tiếp diễn"
+      ],
+      [
+        "precede",
+        "prɪˈsiːd",
+        "xảy ra trước, đi trước"
+      ],
+      [
+        "predict",
+        "prɪˈdɪkt",
+        "dự đoán"
+      ],
+      [
+        "prevail",
+        "prɪˈveɪl",
+        "chiếm ưu thế, phổ biến"
+      ],
+      [
+        "proceed",
+        "prəˈsiːd",
+        "tiếp tục thực hiện"
+      ],
+      [
+        "prohibit",
+        "prəˈhɪbɪt",
+        "cấm"
+      ],
+      [
+        "promote",
+        "prəˈməʊt",
+        "thúc đẩy, quảng bá"
+      ],
+      [
+        "pursue",
+        "pəˈsjuː",
+        "theo đuổi"
+      ],
+      [
+        "recognise",
+        "ˈrekəɡnaɪz",
+        "nhận ra, công nhận"
+      ],
+      [
+        "reflect",
+        "rɪˈflekt",
+        "phản ánh, suy ngẫm"
+      ],
+      [
+        "refrain",
+        "rɪˈfreɪn",
+        "kiềm chế, tránh làm"
+      ],
+      [
+        "reinforce",
+        "ˌriːɪnˈfɔːs",
+        "củng cố, tăng cường"
+      ],
+      [
+        "reject",
+        "rɪˈdʒekt",
+        "từ chối, bác bỏ"
+      ],
+      [
+        "rely",
+        "rɪˈlaɪ",
+        "phụ thuộc, dựa vào"
+      ],
+      [
+        "remain",
+        "rɪˈmeɪn",
+        "vẫn còn, duy trì"
+      ],
+      [
+        "reside",
+        "rɪˈzaɪd",
+        "cư trú"
+      ],
+      [
+        "resolve",
+        "rɪˈzɒlv",
+        "giải quyết"
+      ],
+      [
+        "restrain",
+        "rɪˈstreɪn",
+        "kiềm chế, hạn chế"
+      ],
+      [
+        "restrict",
+        "rɪˈstrɪkt",
+        "hạn chế"
+      ],
+      [
+        "retain",
+        "rɪˈteɪn",
+        "giữ lại"
+      ],
+      [
+        "reverse",
+        "rɪˈvɜːs",
+        "đảo ngược"
+      ],
+      [
+        "seek",
+        "siːk",
+        "tìm kiếm"
+      ],
+      [
+        "stem",
+        "stem",
+        "bắt nguồn từ"
+      ],
+      [
+        "stimulate",
+        "ˈstɪmjuleɪt",
+        "kích thích, thúc đẩy"
+      ],
+      [
+        "strengthen",
+        "ˈstreŋθn",
+        "củng cố, làm mạnh thêm"
+      ],
+      [
+        "submit",
+        "səbˈmɪt",
+        "nộp, đệ trình"
+      ],
+      [
+        "surpass",
+        "səˈpɑːs",
+        "vượt qua, vượt trội"
+      ],
+      [
+        "sustain",
+        "səˈsteɪn",
+        "duy trì"
+      ],
+      [
+        "tackle",
+        "ˈtækl",
+        "giải quyết, đối phó"
+      ],
+      [
+        "transform",
+        "trænsˈfɔːm",
+        "biến đổi"
+      ],
+      [
+        "undermine",
+        "ˌʌndəˈmaɪn",
+        "làm suy yếu"
+      ],
+      [
+        "utilise",
+        "ˈjuːtəlaɪz",
+        "sử dụng, tận dụng"
+      ],
+      [
+        "withstand",
+        "wɪðˈstænd",
+        "chịu đựng, chống chịu"
+      ],
+      [
+        "yield",
+        "jiːld",
+        "sinh lợi, nhượng bộ"
+      ],
+      [
+        "ambiguous",
+        "æmˈbɪɡjuəs",
+        "mơ hồ, không rõ ràng"
+      ],
+      [
+        "arbitrary",
+        "ˈɑːbɪtrəri",
+        "tùy tiện, độc đoán"
+      ],
+      [
+        "coherent",
+        "kəʊˈhɪərənt",
+        "mạch lạc, chặt chẽ"
+      ],
+      [
+        "comprehensive",
+        "ˌkɒmprɪˈhensɪv",
+        "toàn diện"
+      ],
+      [
+        "consistent",
+        "kənˈsɪstənt",
+        "nhất quán"
+      ],
+      [
+        "contradictory",
+        "ˌkɒntrəˈdɪktəri",
+        "mâu thuẫn"
+      ],
+      [
+        "conventional",
+        "kənˈvenʃənl",
+        "thông thường, truyền thống"
+      ],
+      [
+        "diverse",
+        "daɪˈvɜːs",
+        "đa dạng"
+      ],
+      [
+        "dynamic",
+        "daɪˈnæmɪk",
+        "năng động"
+      ],
+      [
+        "eligible",
+        "ˈelɪdʒəbl",
+        "đủ điều kiện"
+      ],
+      [
+        "feasible",
+        "ˈfiːzəbl",
+        "khả thi"
+      ],
+      [
+        "flexible",
+        "ˈfleksəbl",
+        "linh hoạt"
+      ],
+      [
+        "fundamental",
+        "ˌfʌndəˈmentl",
+        "cơ bản, nền tảng"
+      ],
+      [
+        "imperative",
+        "ɪmˈperətɪv",
+        "cấp thiết, bắt buộc"
+      ],
+      [
+        "inherent",
+        "ɪnˈherənt",
+        "vốn có"
+      ],
+      [
+        "innovative",
+        "ˈɪnəveɪtɪv",
+        "sáng tạo, đổi mới"
+      ],
+      [
+        "intricate",
+        "ˈɪntrɪkət",
+        "phức tạp, tinh vi"
+      ],
+      [
+        "legitimate",
+        "lɪˈdʒɪtɪmət",
+        "hợp pháp, chính đáng"
+      ],
+      [
+        "notable",
+        "ˈnəʊtəbl",
+        "đáng chú ý"
+      ],
+      [
+        "notorious",
+        "nəʊˈtɔːriəs",
+        "khét tiếng"
+      ],
+      [
+        "outstanding",
+        "aʊtˈstændɪŋ",
+        "nổi bật, xuất sắc"
+      ],
+      [
+        "plausible",
+        "ˈplɔːzəbl",
+        "hợp lý, có vẻ đúng"
+      ],
+      [
+        "precise",
+        "prɪˈsaɪs",
+        "chính xác"
+      ],
+      [
+        "predominant",
+        "prɪˈdɒmɪnənt",
+        "chiếm ưu thế"
+      ],
+      [
+        "profound",
+        "prəˈfaʊnd",
+        "sâu sắc"
+      ],
+      [
+        "prominent",
+        "ˈprɒmɪnənt",
+        "nổi bật, có tiếng"
+      ],
+      [
+        "rigorous",
+        "ˈrɪɡərəs",
+        "nghiêm ngặt"
+      ],
+      [
+        "robust",
+        "rəʊˈbʌst",
+        "chắc chắn, mạnh mẽ"
+      ],
+      [
+        "subtle",
+        "ˈsʌtl",
+        "tinh tế, khó nhận thấy"
+      ],
+      [
+        "substantial",
+        "səbˈstænʃl",
+        "đáng kể"
+      ],
+      [
+        "tangible",
+        "ˈtændʒəbl",
+        "hữu hình, cụ thể"
+      ],
+      [
+        "thorough",
+        "ˈθʌrə",
+        "kỹ lưỡng, triệt để"
+      ],
+      [
+        "ubiquitous",
+        "juˈbɪkwɪtəs",
+        "có mặt khắp nơi"
+      ],
+      [
+        "versatile",
+        "ˈvɜːsətaɪl",
+        "đa năng, linh hoạt"
+      ],
+      [
+        "vital",
+        "ˈvaɪtl",
+        "thiết yếu, sống còn"
+      ],
+      [
+        "vulnerable",
+        "ˈvʌlnərəbl",
+        "dễ bị tổn thương"
+      ]
+    ]
+  },
+  {
+    "cat": "suc-khoe-y-te-nang-cao",
+    "catVi": "Sức khỏe & y tế nâng cao",
+    "catEn": "Health & medical (advanced)",
+    "words": [
+      [
+        "diagnosis",
+        "ˌdaɪəɡˈnəʊsɪs",
+        "chẩn đoán"
+      ],
+      [
+        "diagnose",
+        "ˈdaɪəɡnəʊz",
+        "chẩn đoán (động từ)"
+      ],
+      [
+        "prescription",
+        "prɪˈskrɪpʃn",
+        "đơn thuốc"
+      ],
+      [
+        "prescribe",
+        "prɪˈskraɪb",
+        "kê đơn"
+      ],
+      [
+        "dose",
+        "dəʊs",
+        "liều lượng"
+      ],
+      [
+        "dosage",
+        "ˈdəʊsɪdʒ",
+        "liều dùng"
+      ],
+      [
+        "injection",
+        "ɪnˈdʒekʃn",
+        "mũi tiêm"
+      ],
+      [
+        "antibiotic",
+        "ˌæntibaɪˈɒtɪk",
+        "kháng sinh"
+      ],
+      [
+        "painkiller",
+        "ˈpeɪnkɪlə(r)",
+        "thuốc giảm đau"
+      ],
+      [
+        "side effect",
+        "saɪd ɪˈfekt",
+        "tác dụng phụ"
+      ],
+      [
+        "chronic",
+        "ˈkrɒnɪk",
+        "mãn tính"
+      ],
+      [
+        "acute",
+        "əˈkjuːt",
+        "cấp tính"
+      ],
+      [
+        "disorder",
+        "dɪsˈɔːdə(r)",
+        "rối loạn"
+      ],
+      [
+        "disease",
+        "dɪˈziːz",
+        "bệnh tật"
+      ],
+      [
+        "infection",
+        "ɪnˈfekʃn",
+        "nhiễm trùng"
+      ],
+      [
+        "infectious",
+        "ɪnˈfekʃəs",
+        "lây nhiễm"
+      ],
+      [
+        "contagious",
+        "kənˈteɪdʒəs",
+        "dễ lây lan"
+      ],
+      [
+        "epidemic",
+        "ˌepɪˈdemɪk",
+        "dịch bệnh"
+      ],
+      [
+        "pandemic",
+        "pænˈdemɪk",
+        "đại dịch"
+      ],
+      [
+        "outbreak",
+        "ˈaʊtbreɪk",
+        "sự bùng phát (dịch bệnh)"
+      ],
+      [
+        "immune system",
+        "ɪˈmjuːn ˈsɪstəm",
+        "hệ miễn dịch"
+      ],
+      [
+        "therapy",
+        "ˈθerəpi",
+        "liệu pháp"
+      ],
+      [
+        "therapist",
+        "ˈθerəpɪst",
+        "nhà trị liệu"
+      ],
+      [
+        "physiotherapy",
+        "ˌfɪziəʊˈθerəpi",
+        "vật lý trị liệu"
+      ],
+      [
+        "rehabilitation",
+        "ˌriːəbɪlɪˈteɪʃn",
+        "phục hồi chức năng"
+      ],
+      [
+        "recovery",
+        "rɪˈkʌvəri",
+        "sự hồi phục"
+      ],
+      [
+        "recover",
+        "rɪˈkʌvə(r)",
+        "hồi phục"
+      ],
+      [
+        "relapse",
+        "rɪˈlæps",
+        "tái phát"
+      ],
+      [
+        "remedy",
+        "ˈremədi",
+        "phương thuốc"
+      ],
+      [
+        "first aid",
+        "fɜːst eɪd",
+        "sơ cứu"
+      ],
+      [
+        "bandage",
+        "ˈbændɪdʒ",
+        "băng gạc"
+      ],
+      [
+        "cast",
+        "kɑːst",
+        "bó bột"
+      ],
+      [
+        "crutch",
+        "krʌtʃ",
+        "nạng"
+      ],
+      [
+        "wheelchair",
+        "ˈwiːltʃeə(r)",
+        "xe lăn"
+      ],
+      [
+        "stretcher",
+        "ˈstretʃə(r)",
+        "cáng cứu thương"
+      ],
+      [
+        "x-ray",
+        "ˈeksreɪ",
+        "chụp X-quang"
+      ],
+      [
+        "scan",
+        "skæn",
+        "chụp quét (CT/MRI)"
+      ],
+      [
+        "ultrasound",
+        "ˈʌltrəsaʊnd",
+        "siêu âm"
+      ],
+      [
+        "blood pressure",
+        "blʌd ˈpreʃə(r)",
+        "huyết áp"
+      ],
+      [
+        "cholesterol",
+        "kəˈlestərɒl",
+        "cholesterol"
+      ],
+      [
+        "obesity",
+        "əʊˈbiːsəti",
+        "bệnh béo phì"
+      ],
+      [
+        "obese",
+        "əʊˈbiːs",
+        "béo phì"
+      ],
+      [
+        "malnutrition",
+        "ˌmælnjuˈtrɪʃn",
+        "suy dinh dưỡng"
+      ],
+      [
+        "dehydration",
+        "ˌdiːhaɪˈdreɪʃn",
+        "mất nước"
+      ],
+      [
+        "fracture",
+        "ˈfræktʃə(r)",
+        "gãy xương"
+      ],
+      [
+        "sprain",
+        "spreɪn",
+        "bong gân"
+      ],
+      [
+        "bruise",
+        "bruːz",
+        "vết bầm tím"
+      ],
+      [
+        "burn",
+        "bɜːn",
+        "vết bỏng"
+      ],
+      [
+        "rash",
+        "ræʃ",
+        "phát ban"
+      ],
+      [
+        "swelling",
+        "ˈswelɪŋ",
+        "sưng tấy"
+      ],
+      [
+        "inflammation",
+        "ˌɪnfləˈmeɪʃn",
+        "viêm"
+      ],
+      [
+        "tumour",
+        "ˈtjuːmə(r)",
+        "khối u"
+      ],
+      [
+        "cancer",
+        "ˈkænsə(r)",
+        "ung thư"
+      ],
+      [
+        "diabetes",
+        "ˌdaɪəˈbiːtiːz",
+        "bệnh tiểu đường"
+      ],
+      [
+        "asthma",
+        "ˈæsmə",
+        "hen suyễn"
+      ],
+      [
+        "arthritis",
+        "ɑːˈθraɪtɪs",
+        "viêm khớp"
+      ],
+      [
+        "migraine",
+        "ˈmiːɡreɪn",
+        "chứng đau nửa đầu"
+      ],
+      [
+        "stroke",
+        "strəʊk",
+        "đột quỵ"
+      ],
+      [
+        "heart attack",
+        "hɑːt əˈtæk",
+        "cơn đau tim"
+      ],
+      [
+        "mental health",
+        "ˈmentl helθ",
+        "sức khỏe tâm thần"
+      ],
+      [
+        "stress",
+        "stres",
+        "căng thẳng"
+      ],
+      [
+        "anxiety",
+        "æŋˈzaɪəti",
+        "sự lo âu"
+      ],
+      [
+        "depression",
+        "dɪˈpreʃn",
+        "trầm cảm"
+      ],
+      [
+        "insomnia",
+        "ɪnˈsɒmniə",
+        "chứng mất ngủ"
+      ],
+      [
+        "checkup",
+        "ˈtʃekʌp",
+        "khám sức khỏe định kỳ"
+      ],
+      [
+        "screening",
+        "ˈskriːnɪŋ",
+        "sàng lọc, tầm soát"
+      ],
+      [
+        "vaccination",
+        "ˌvæksɪˈneɪʃn",
+        "tiêm chủng"
+      ],
+      [
+        "hygiene",
+        "ˈhaɪdʒiːn",
+        "vệ sinh"
+      ],
+      [
+        "sanitation",
+        "ˌsænɪˈteɪʃn",
+        "vệ sinh môi trường"
+      ],
+      [
+        "disability",
+        "ˌdɪsəˈbɪləti",
+        "khuyết tật"
+      ],
+      [
+        "disabled",
+        "dɪsˈeɪbld",
+        "bị khuyết tật"
+      ],
+      [
+        "impairment",
+        "ɪmˈpeəmənt",
+        "sự suy giảm chức năng"
+      ],
+      [
+        "well-being",
+        "ˌwelˈbiːɪŋ",
+        "sự an lành, sức khỏe tổng thể"
+      ],
+      [
+        "lifestyle",
+        "ˈlaɪfstaɪl",
+        "lối sống"
+      ],
+      [
+        "sedentary",
+        "ˈsedntri",
+        "ít vận động"
+      ],
+      [
+        "addiction",
+        "əˈdɪkʃn",
+        "sự nghiện"
+      ],
+      [
+        "nutrient",
+        "ˈnjuːtriənt",
+        "chất dinh dưỡng"
+      ],
+      [
+        "deficiency",
+        "dɪˈfɪʃnsi",
+        "sự thiếu hụt"
+      ],
+      [
+        "supplement",
+        "ˈsʌplɪmənt",
+        "thực phẩm bổ sung"
+      ],
+      [
+        "metabolism",
+        "məˈtæbəlɪzəm",
+        "sự trao đổi chất"
+      ]
+    ]
+  },
+  {
+    "cat": "quan-he-giao-tiep-xa-hoi",
+    "catVi": "Quan hệ & giao tiếp xã hội",
+    "catEn": "Social relationships & communication",
+    "words": [
+      [
+        "acquaintance",
+        "əˈkweɪntəns",
+        "người quen"
+      ],
+      [
+        "stranger",
+        "ˈstreɪndʒə(r)",
+        "người lạ"
+      ],
+      [
+        "companion",
+        "kəmˈpæniən",
+        "bạn đồng hành"
+      ],
+      [
+        "mate",
+        "meɪt",
+        "bạn thân (thông tục)"
+      ],
+      [
+        "buddy",
+        "ˈbʌdi",
+        "bạn thân"
+      ],
+      [
+        "peer",
+        "pɪə(r)",
+        "bạn đồng trang lứa"
+      ],
+      [
+        "rival",
+        "ˈraɪvl",
+        "đối thủ cạnh tranh"
+      ],
+      [
+        "ally",
+        "ˈælaɪ",
+        "đồng minh"
+      ],
+      [
+        "enemy",
+        "ˈenəmi",
+        "kẻ thù"
+      ],
+      [
+        "trust",
+        "trʌst",
+        "sự tin tưởng"
+      ],
+      [
+        "betray",
+        "bɪˈtreɪ",
+        "phản bội"
+      ],
+      [
+        "betrayal",
+        "bɪˈtreɪəl",
+        "sự phản bội"
+      ],
+      [
+        "loyalty",
+        "ˈlɔɪəlti",
+        "lòng trung thành"
+      ],
+      [
+        "loyal",
+        "ˈlɔɪəl",
+        "trung thành"
+      ],
+      [
+        "faithful",
+        "ˈfeɪθfl",
+        "chung thủy, trung thành"
+      ],
+      [
+        "honesty",
+        "ˈɒnəsti",
+        "sự trung thực"
+      ],
+      [
+        "respect",
+        "rɪˈspekt",
+        "sự tôn trọng"
+      ],
+      [
+        "admire",
+        "ədˈmaɪə(r)",
+        "ngưỡng mộ"
+      ],
+      [
+        "admiration",
+        "ˌædməˈreɪʃn",
+        "sự ngưỡng mộ"
+      ],
+      [
+        "sympathy",
+        "ˈsɪmpəθi",
+        "sự cảm thông"
+      ],
+      [
+        "empathy",
+        "ˈempəθi",
+        "sự thấu cảm"
+      ],
+      [
+        "compassion",
+        "kəmˈpæʃn",
+        "lòng trắc ẩn"
+      ],
+      [
+        "kindness",
+        "ˈkaɪndnəs",
+        "sự tử tế"
+      ],
+      [
+        "gratitude",
+        "ˈɡrætɪtjuːd",
+        "lòng biết ơn"
+      ],
+      [
+        "forgiveness",
+        "fəˈɡɪvnəs",
+        "sự tha thứ"
+      ],
+      [
+        "forgive",
+        "fəˈɡɪv",
+        "tha thứ"
+      ],
+      [
+        "apologise",
+        "əˈpɒlədʒaɪz",
+        "xin lỗi"
+      ],
+      [
+        "apology",
+        "əˈpɒlədʒi",
+        "lời xin lỗi"
+      ],
+      [
+        "compromise",
+        "ˈkɒmprəmaɪz",
+        "sự thỏa hiệp"
+      ],
+      [
+        "negotiate",
+        "nɪˈɡəʊʃieɪt",
+        "đàm phán"
+      ],
+      [
+        "negotiation",
+        "nɪˌɡəʊʃiˈeɪʃn",
+        "cuộc đàm phán"
+      ],
+      [
+        "persuade",
+        "pəˈsweɪd",
+        "thuyết phục"
+      ],
+      [
+        "persuasion",
+        "pəˈsweɪʒn",
+        "sự thuyết phục"
+      ],
+      [
+        "argue",
+        "ˈɑːɡjuː",
+        "tranh cãi"
+      ],
+      [
+        "quarrel",
+        "ˈkwɒrəl",
+        "cuộc cãi vã"
+      ],
+      [
+        "reconcile",
+        "ˈrekənsaɪl",
+        "hòa giải"
+      ],
+      [
+        "reconciliation",
+        "ˌrekənsɪliˈeɪʃn",
+        "sự hòa giải"
+      ],
+      [
+        "misunderstanding",
+        "ˌmɪsʌndəˈstændɪŋ",
+        "sự hiểu lầm"
+      ],
+      [
+        "gossip",
+        "ˈɡɒsɪp",
+        "chuyện ngồi lê đôi mách"
+      ],
+      [
+        "rumour",
+        "ˈruːmə(r)",
+        "tin đồn"
+      ],
+      [
+        "criticise",
+        "ˈkrɪtɪsaɪz",
+        "chỉ trích"
+      ],
+      [
+        "criticism",
+        "ˈkrɪtɪsɪzəm",
+        "sự chỉ trích"
+      ],
+      [
+        "compliment",
+        "ˈkɒmplɪmənt",
+        "lời khen"
+      ],
+      [
+        "praise",
+        "preɪz",
+        "lời khen ngợi"
+      ],
+      [
+        "flattery",
+        "ˈflætəri",
+        "sự nịnh hót"
+      ],
+      [
+        "insult",
+        "ˈɪnsʌlt",
+        "sự xúc phạm"
+      ],
+      [
+        "offend",
+        "əˈfend",
+        "xúc phạm"
+      ],
+      [
+        "offensive",
+        "əˈfensɪv",
+        "mang tính xúc phạm"
+      ],
+      [
+        "tease",
+        "tiːz",
+        "trêu chọc"
+      ],
+      [
+        "mock",
+        "mɒk",
+        "chế giễu"
+      ],
+      [
+        "bully",
+        "ˈbʊli",
+        "bắt nạt"
+      ],
+      [
+        "bullying",
+        "ˈbʊliɪŋ",
+        "sự bắt nạt"
+      ],
+      [
+        "harassment",
+        "ˈhærəsmənt",
+        "sự quấy rối"
+      ],
+      [
+        "discriminate",
+        "dɪˈskrɪmɪneɪt",
+        "phân biệt đối xử"
+      ],
+      [
+        "prejudice",
+        "ˈpredʒudɪs",
+        "thành kiến"
+      ],
+      [
+        "stereotype",
+        "ˈsteriətaɪp",
+        "định kiến rập khuôn"
+      ],
+      [
+        "tolerance",
+        "ˈtɒlərəns",
+        "sự khoan dung"
+      ],
+      [
+        "tolerant",
+        "ˈtɒlərənt",
+        "khoan dung"
+      ],
+      [
+        "intolerant",
+        "ɪnˈtɒlərənt",
+        "không khoan dung"
+      ],
+      [
+        "acceptance",
+        "əkˈseptəns",
+        "sự chấp nhận"
+      ],
+      [
+        "accept",
+        "əkˈsept",
+        "chấp nhận"
+      ],
+      [
+        "embrace",
+        "ɪmˈbreɪs",
+        "đón nhận, ôm lấy"
+      ],
+      [
+        "intimacy",
+        "ˈɪntɪməsi",
+        "sự thân mật"
+      ],
+      [
+        "intimate",
+        "ˈɪntɪmət",
+        "thân mật"
+      ],
+      [
+        "affection",
+        "əˈfekʃn",
+        "tình cảm yêu mến"
+      ],
+      [
+        "affectionate",
+        "əˈfekʃənət",
+        "trìu mến"
+      ],
+      [
+        "attachment",
+        "əˈtætʃmənt",
+        "sự gắn bó"
+      ],
+      [
+        "commitment",
+        "kəˈmɪtmənt",
+        "sự cam kết"
+      ],
+      [
+        "committed",
+        "kəˈmɪtɪd",
+        "tận tâm, cam kết"
+      ],
+      [
+        "dependable",
+        "dɪˈpendəbl",
+        "đáng tin cậy"
+      ],
+      [
+        "supportive",
+        "səˈpɔːtɪv",
+        "hay giúp đỡ, ủng hộ"
+      ],
+      [
+        "considerate",
+        "kənˈsɪdərət",
+        "chu đáo, biết quan tâm"
+      ],
+      [
+        "inconsiderate",
+        "ˌɪnkənˈsɪdərət",
+        "thiếu chu đáo"
+      ],
+      [
+        "empathetic",
+        "ˌempəˈθetɪk",
+        "biết thấu cảm"
+      ],
+      [
+        "introvert",
+        "ˈɪntrəvɜːt",
+        "người hướng nội"
+      ],
+      [
+        "extrovert",
+        "ˈekstrəvɜːt",
+        "người hướng ngoại"
+      ],
+      [
+        "sociable",
+        "ˈsəʊʃəbl",
+        "hòa đồng, thích giao tiếp"
+      ],
+      [
+        "antisocial",
+        "ˌæntiˈsəʊʃl",
+        "khép kín, chống đối xã hội"
+      ],
+      [
+        "outgoing",
+        "ˈaʊtɡəʊɪŋ",
+        "cởi mở, hoạt bát"
+      ],
+      [
+        "reserved",
+        "rɪˈzɜːvd",
+        "kín đáo, dè dặt"
+      ],
+      [
+        "diplomatic",
+        "ˌdɪpləˈmætɪk",
+        "khéo léo, ngoại giao"
+      ],
+      [
+        "tactful",
+        "ˈtæktfl",
+        "tế nhị"
+      ],
+      [
+        "tactless",
+        "ˈtæktləs",
+        "thiếu tế nhị"
+      ],
+      [
+        "assertive",
+        "əˈsɜːtɪv",
+        "quyết đoán"
+      ],
+      [
+        "passive",
+        "ˈpæsɪv",
+        "thụ động"
+      ],
+      [
+        "aggressive",
+        "əˈɡresɪv",
+        "hung hăng"
+      ],
+      [
+        "cooperative",
+        "kəʊˈɒpərətɪv",
+        "hợp tác, sẵn lòng giúp đỡ"
+      ]
+    ]
+  },
+  {
+    "cat": "thoi-gian-tan-suat",
+    "catVi": "Thời gian, tần suất & trình tự",
+    "catEn": "Time, frequency & sequence",
+    "words": [
+      [
+        "constantly",
+        "ˈkɒnstəntli",
+        "liên tục"
+      ],
+      [
+        "frequently",
+        "ˈfriːkwəntli",
+        "thường xuyên"
+      ],
+      [
+        "occasionally",
+        "əˈkeɪʒnəli",
+        "thỉnh thoảng"
+      ],
+      [
+        "rarely",
+        "ˈreəli",
+        "hiếm khi"
+      ],
+      [
+        "seldom",
+        "ˈseldəm",
+        "hiếm khi"
+      ],
+      [
+        "periodically",
+        "ˌpɪəriˈɒdɪkli",
+        "định kỳ"
+      ],
+      [
+        "momentarily",
+        "ˈməʊməntrəli",
+        "trong chốc lát"
+      ],
+      [
+        "instantly",
+        "ˈɪnstəntli",
+        "ngay lập tức"
+      ],
+      [
+        "immediately",
+        "ɪˈmiːdiətli",
+        "ngay lập tức"
+      ],
+      [
+        "gradually",
+        "ˈɡrædʒuəli",
+        "dần dần"
+      ],
+      [
+        "simultaneously",
+        "ˌsɪmlˈteɪniəsli",
+        "đồng thời"
+      ],
+      [
+        "meanwhile",
+        "ˈmiːnwaɪl",
+        "trong khi đó"
+      ],
+      [
+        "beforehand",
+        "bɪˈfɔːhænd",
+        "trước đó, từ trước"
+      ],
+      [
+        "afterwards",
+        "ˈɑːftəwədz",
+        "sau đó"
+      ],
+      [
+        "subsequently",
+        "ˈsʌbsɪkwəntli",
+        "sau đó, tiếp theo"
+      ],
+      [
+        "previously",
+        "ˈpriːviəsli",
+        "trước đây"
+      ],
+      [
+        "currently",
+        "ˈkʌrəntli",
+        "hiện tại"
+      ],
+      [
+        "recently",
+        "ˈriːsntli",
+        "gần đây"
+      ],
+      [
+        "shortly",
+        "ˈʃɔːtli",
+        "chẳng bao lâu nữa"
+      ],
+      [
+        "promptly",
+        "ˈprɒmptli",
+        "đúng giờ, ngay lập tức"
+      ],
+      [
+        "punctual",
+        "ˈpʌŋktʃuəl",
+        "đúng giờ"
+      ],
+      [
+        "punctuality",
+        "ˌpʌŋktʃuˈæləti",
+        "tính đúng giờ"
+      ],
+      [
+        "overdue",
+        "ˌəʊvəˈdjuː",
+        "quá hạn"
+      ],
+      [
+        "in advance",
+        "ɪn ədˈvɑːns",
+        "trước, trước thời hạn"
+      ],
+      [
+        "at once",
+        "ət wʌns",
+        "ngay lập tức"
+      ],
+      [
+        "sooner or later",
+        "ˈsuːnər ɔː ˈleɪtə(r)",
+        "sớm muộn gì cũng"
+      ],
+      [
+        "in the meantime",
+        "ɪn ðə ˈmiːntaɪm",
+        "trong lúc đó"
+      ],
+      [
+        "on time",
+        "ɒn taɪm",
+        "đúng giờ"
+      ],
+      [
+        "ahead of schedule",
+        "əˈhed əv ˈʃedjuːl",
+        "sớm hơn dự kiến"
+      ],
+      [
+        "behind schedule",
+        "bɪˈhaɪnd ˈʃedjuːl",
+        "chậm hơn dự kiến"
+      ],
+      [
+        "chronological",
+        "ˌkrɒnəˈlɒdʒɪkl",
+        "theo trình tự thời gian"
+      ],
+      [
+        "duration",
+        "djʊˈreɪʃn",
+        "khoảng thời gian kéo dài"
+      ],
+      [
+        "interval",
+        "ˈɪntəvl",
+        "khoảng thời gian nghỉ"
+      ],
+      [
+        "span",
+        "spæn",
+        "khoảng thời gian, nhịp độ"
+      ],
+      [
+        "era",
+        "ˈɪərə",
+        "thời đại, kỷ nguyên"
+      ],
+      [
+        "epoch",
+        "ˈiːpɒk",
+        "kỷ nguyên"
+      ],
+      [
+        "decade",
+        "ˈdekeɪd",
+        "thập kỷ"
+      ],
+      [
+        "century",
+        "ˈsentʃəri",
+        "thế kỷ"
+      ],
+      [
+        "millennium",
+        "mɪˈleniəm",
+        "thiên niên kỷ"
+      ],
+      [
+        "phase",
+        "feɪz",
+        "giai đoạn"
+      ],
+      [
+        "stage",
+        "steɪdʒ",
+        "giai đoạn, sân khấu"
+      ],
+      [
+        "sequence",
+        "ˈsiːkwəns",
+        "trình tự, chuỗi"
+      ],
+      [
+        "sequential",
+        "sɪˈkwenʃl",
+        "tuần tự"
+      ],
+      [
+        "consecutive",
+        "kənˈsekjətɪv",
+        "liên tiếp"
+      ],
+      [
+        "ongoing",
+        "ˈɒnɡəʊɪŋ",
+        "đang diễn ra"
+      ],
+      [
+        "recurring",
+        "rɪˈkɜːrɪŋ",
+        "tái diễn, lặp lại"
+      ],
+      [
+        "recurrent",
+        "rɪˈkʌrənt",
+        "tái phát, thường xuyên"
+      ],
+      [
+        "permanent",
+        "ˈpɜːmənənt",
+        "vĩnh viễn"
+      ],
+      [
+        "temporary",
+        "ˈtemprəri",
+        "tạm thời"
+      ],
+      [
+        "indefinite",
+        "ɪnˈdefɪnət",
+        "không xác định"
+      ],
+      [
+        "perpetual",
+        "pəˈpetʃuəl",
+        "vĩnh cửu, liên miên"
+      ],
+      [
+        "momentary",
+        "ˈməʊməntri",
+        "nhất thời, thoáng qua"
+      ],
+      [
+        "fleeting",
+        "ˈfliːtɪŋ",
+        "thoáng qua, ngắn ngủi"
+      ]
+    ]
+  },
+  {
+    "cat": "giao-duc-ky-nang-nang-cao",
+    "catVi": "Giáo dục nâng cao & kỹ năng",
+    "catEn": "Advanced education & skills",
+    "words": [
+      [
+        "curriculum",
+        "kəˈrɪkjələm",
+        "chương trình học"
+      ],
+      [
+        "syllabus",
+        "ˈsɪləbəs",
+        "đề cương môn học"
+      ],
+      [
+        "pedagogy",
+        "ˈpedəɡɒdʒi",
+        "phương pháp sư phạm"
+      ],
+      [
+        "literacy",
+        "ˈlɪtərəsi",
+        "khả năng đọc viết"
+      ],
+      [
+        "numeracy",
+        "ˈnjuːmərəsi",
+        "khả năng tính toán"
+      ],
+      [
+        "illiterate",
+        "ɪˈlɪtərət",
+        "mù chữ"
+      ],
+      [
+        "enrol",
+        "ɪnˈrəʊl",
+        "ghi danh, nhập học"
+      ],
+      [
+        "enrolment",
+        "ɪnˈrəʊlmənt",
+        "sự ghi danh"
+      ],
+      [
+        "dropout",
+        "ˈdrɒpaʊt",
+        "người bỏ học"
+      ],
+      [
+        "graduate",
+        "ˈɡrædʒuət",
+        "tốt nghiệp, người tốt nghiệp"
+      ],
+      [
+        "graduation",
+        "ˌɡrædʒuˈeɪʃn",
+        "lễ tốt nghiệp"
+      ],
+      [
+        "alumni",
+        "əˈlʌmnaɪ",
+        "cựu sinh viên (số nhiều)"
+      ],
+      [
+        "alumnus",
+        "əˈlʌmnəs",
+        "cựu sinh viên (nam, số ít)"
+      ],
+      [
+        "faculty",
+        "ˈfæklti",
+        "khoa (trong trường đại học)"
+      ],
+      [
+        "dean",
+        "diːn",
+        "trưởng khoa"
+      ],
+      [
+        "campus",
+        "ˈkæmpəs",
+        "khuôn viên trường"
+      ],
+      [
+        "dormitory",
+        "ˈdɔːmətri",
+        "ký túc xá"
+      ],
+      [
+        "thesis",
+        "ˈθiːsɪs",
+        "luận văn"
+      ],
+      [
+        "dissertation",
+        "ˌdɪsəˈteɪʃn",
+        "luận án"
+      ],
+      [
+        "plagiarism",
+        "ˈpleɪdʒərɪzəm",
+        "đạo văn"
+      ],
+      [
+        "plagiarise",
+        "ˈpleɪdʒəraɪz",
+        "đạo văn (động từ)"
+      ],
+      [
+        "cite",
+        "saɪt",
+        "trích dẫn"
+      ],
+      [
+        "citation",
+        "saɪˈteɪʃn",
+        "trích dẫn (danh từ)"
+      ],
+      [
+        "bibliography",
+        "ˌbɪbliˈɒɡrəfi",
+        "danh mục tài liệu tham khảo"
+      ],
+      [
+        "footnote",
+        "ˈfʊtnəʊt",
+        "chú thích cuối trang"
+      ],
+      [
+        "peer review",
+        "pɪə(r) rɪˈvjuː",
+        "bình duyệt đồng nghiệp"
+      ],
+      [
+        "academic",
+        "ˌækəˈdemɪk",
+        "thuộc học thuật"
+      ],
+      [
+        "academia",
+        "ˌækəˈdiːmiə",
+        "giới học thuật"
+      ],
+      [
+        "scholarly",
+        "ˈskɒləli",
+        "mang tính học thuật"
+      ],
+      [
+        "intellectual",
+        "ˌɪntəˈlektʃuəl",
+        "trí thức, trí tuệ"
+      ],
+      [
+        "cognitive",
+        "ˈkɒɡnətɪv",
+        "thuộc nhận thức"
+      ],
+      [
+        "comprehension",
+        "ˌkɒmprɪˈhenʃn",
+        "khả năng hiểu"
+      ],
+      [
+        "memorisation",
+        "ˌmeməraɪˈzeɪʃn",
+        "sự ghi nhớ"
+      ],
+      [
+        "critical thinking",
+        "ˈkrɪtɪkl ˈθɪŋkɪŋ",
+        "tư duy phản biện"
+      ],
+      [
+        "analytical",
+        "ˌænəˈlɪtɪkl",
+        "có tính phân tích"
+      ],
+      [
+        "logical",
+        "ˈlɒdʒɪkl",
+        "hợp lý, logic"
+      ],
+      [
+        "reasoning",
+        "ˈriːzənɪŋ",
+        "lập luận"
+      ],
+      [
+        "aptitude",
+        "ˈæptɪtjuːd",
+        "năng khiếu"
+      ],
+      [
+        "potential",
+        "pəˈtenʃl",
+        "tiềm năng"
+      ],
+      [
+        "talent",
+        "ˈtælənt",
+        "tài năng"
+      ],
+      [
+        "gifted",
+        "ˈɡɪftɪd",
+        "có năng khiếu"
+      ],
+      [
+        "prodigy",
+        "ˈprɒdɪdʒi",
+        "thần đồng"
+      ],
+      [
+        "mentor",
+        "ˈmentɔː(r)",
+        "người cố vấn"
+      ],
+      [
+        "mentorship",
+        "ˈmentɔːʃɪp",
+        "sự cố vấn, hướng dẫn"
+      ],
+      [
+        "apprenticeship",
+        "əˈprentɪʃɪp",
+        "học nghề"
+      ],
+      [
+        "internship",
+        "ˈɪntɜːnʃɪp",
+        "thực tập"
+      ],
+      [
+        "vocational",
+        "vəʊˈkeɪʃənl",
+        "thuộc dạy nghề"
+      ],
+      [
+        "extracurricular",
+        "ˌekstrəkəˈrɪkjələ(r)",
+        "ngoại khóa"
+      ],
+      [
+        "homeschool",
+        "ˈhəʊmskuːl",
+        "học tại nhà"
+      ],
+      [
+        "distance learning",
+        "ˈdɪstəns ˈlɜːnɪŋ",
+        "học từ xa"
+      ],
+      [
+        "e-learning",
+        "ˈiːlɜːnɪŋ",
+        "học trực tuyến"
+      ],
+      [
+        "online course",
+        "ˌɒnˈlaɪn kɔːs",
+        "khóa học trực tuyến"
+      ],
+      [
+        "self-study",
+        "self ˈstʌdi",
+        "tự học"
+      ],
+      [
+        "self-taught",
+        "self ˈtɔːt",
+        "tự học (tính từ)"
+      ],
+      [
+        "lifelong learning",
+        "ˈlaɪflɒŋ ˈlɜːnɪŋ",
+        "học tập suốt đời"
+      ],
+      [
+        "literacy rate",
+        "ˈlɪtərəsi reɪt",
+        "tỷ lệ biết chữ"
+      ],
+      [
+        "standardized test",
+        "ˈstændədaɪzd test",
+        "bài kiểm tra chuẩn hóa"
+      ],
+      [
+        "multiple choice",
+        "ˈmʌltɪpl tʃɔɪs",
+        "trắc nghiệm nhiều lựa chọn"
+      ],
+      [
+        "oral exam",
+        "ˈɔːrəl ɪɡˈzæm",
+        "thi vấn đáp"
+      ],
+      [
+        "practical exam",
+        "ˈpræktɪkl ɪɡˈzæm",
+        "thi thực hành"
+      ],
+      [
+        "pass mark",
+        "pɑːs mɑːk",
+        "điểm đạt"
+      ],
+      [
+        "resit",
+        "ˌriːˈsɪt",
+        "thi lại"
+      ],
+      [
+        "coursework",
+        "ˈkɔːswɜːk",
+        "bài tập trong khóa học"
+      ],
+      [
+        "workshop",
+        "ˈwɜːkʃɒp",
+        "buổi hội thảo thực hành"
+      ]
+    ]
+  },
+  {
+    "cat": "toan-hoc",
+    "catVi": "Toán học",
+    "catEn": "Mathematics",
+    "words": [
+      [
+        "add",
+        "æd",
+        "cộng"
+      ],
+      [
+        "subtract",
+        "səbˈtrækt",
+        "trừ"
+      ],
+      [
+        "multiply",
+        "ˈmʌltɪplaɪ",
+        "nhân"
+      ],
+      [
+        "divide",
+        "dɪˈvaɪd",
+        "chia"
+      ],
+      [
+        "addition",
+        "əˈdɪʃn",
+        "phép cộng"
+      ],
+      [
+        "subtraction",
+        "səbˈtrækʃn",
+        "phép trừ"
+      ],
+      [
+        "multiplication",
+        "ˌmʌltɪplɪˈkeɪʃn",
+        "phép nhân"
+      ],
+      [
+        "division",
+        "dɪˈvɪʒn",
+        "phép chia"
+      ],
+      [
+        "equation",
+        "ɪˈkweɪʒn",
+        "phương trình"
+      ],
+      [
+        "formula",
+        "ˈfɔːmjələ",
+        "công thức"
+      ],
+      [
+        "calculate",
+        "ˈkælkjuleɪt",
+        "tính toán"
+      ],
+      [
+        "calculation",
+        "ˌkælkjuˈleɪʃn",
+        "phép tính"
+      ],
+      [
+        "sum",
+        "sʌm",
+        "tổng"
+      ],
+      [
+        "total",
+        "ˈtəʊtl",
+        "tổng số"
+      ],
+      [
+        "fraction",
+        "ˈfrækʃn",
+        "phân số"
+      ],
+      [
+        "decimal",
+        "ˈdesɪml",
+        "số thập phân"
+      ],
+      [
+        "percent",
+        "pəˈsent",
+        "phần trăm"
+      ],
+      [
+        "ratio",
+        "ˈreɪʃiəʊ",
+        "tỷ lệ"
+      ],
+      [
+        "angle",
+        "ˈæŋɡl",
+        "góc"
+      ],
+      [
+        "axis",
+        "ˈæksɪs",
+        "trục"
+      ],
+      [
+        "coordinates",
+        "kəʊˈɔːdɪnəts",
+        "tọa độ"
+      ],
+      [
+        "graph",
+        "ɡrɑːf",
+        "đồ thị"
+      ],
+      [
+        "chart",
+        "tʃɑːt",
+        "biểu đồ"
+      ],
+      [
+        "diagram",
+        "ˈdaɪəɡræm",
+        "sơ đồ"
+      ],
+      [
+        "probability",
+        "ˌprɒbəˈbɪləti",
+        "xác suất"
+      ],
+      [
+        "variable",
+        "ˈveəriəbl",
+        "biến số"
+      ],
+      [
+        "integer",
+        "ˈɪntɪdʒə(r)",
+        "số nguyên"
+      ],
+      [
+        "prime number",
+        "praɪm ˈnʌmbə(r)",
+        "số nguyên tố"
+      ],
+      [
+        "even number",
+        "ˈiːvn ˈnʌmbə(r)",
+        "số chẵn"
+      ],
+      [
+        "odd number",
+        "ɒd ˈnʌmbə(r)",
+        "số lẻ"
+      ],
+      [
+        "positive",
+        "ˈpɒzətɪv",
+        "số dương"
+      ],
+      [
+        "negative",
+        "ˈneɡətɪv",
+        "số âm"
+      ],
+      [
+        "exponent",
+        "ɪkˈspəʊnənt",
+        "số mũ"
+      ],
+      [
+        "square root",
+        "skweə(r) ruːt",
+        "căn bậc hai"
+      ],
+      [
+        "geometry",
+        "dʒiˈɒmətri",
+        "hình học"
+      ],
+      [
+        "algebra",
+        "ˈældʒɪbrə",
+        "đại số"
+      ],
+      [
+        "arithmetic",
+        "əˈrɪθmətɪk",
+        "số học"
+      ],
+      [
+        "calculator",
+        "ˈkælkjuleɪtə(r)",
+        "máy tính bỏ túi"
+      ],
+      [
+        "digit",
+        "ˈdɪdʒɪt",
+        "chữ số"
+      ],
+      [
+        "numeral",
+        "ˈnjuːmərəl",
+        "chữ số, con số"
+      ],
+      [
+        "infinity",
+        "ɪnˈfɪnəti",
+        "vô cực"
+      ],
+      [
+        "zero",
+        "ˈzɪərəʊ",
+        "số không"
+      ],
+      [
+        "round up",
+        "raʊnd ʌp",
+        "làm tròn lên"
+      ],
+      [
+        "round down",
+        "raʊnd daʊn",
+        "làm tròn xuống"
+      ],
+      [
+        "plus",
+        "plʌs",
+        "cộng, dấu cộng"
+      ],
+      [
+        "minus",
+        "ˈmaɪnəs",
+        "trừ, dấu trừ"
+      ],
+      [
+        "equals",
+        "ˈiːkwəlz",
+        "bằng"
+      ],
+      [
+        "pi",
+        "paɪ",
+        "số pi"
+      ],
+      [
+        "symmetry",
+        "ˈsɪmətri",
+        "tính đối xứng"
+      ],
+      [
+        "pattern",
+        "ˈpætn",
+        "quy luật, hoa văn"
+      ],
+      [
+        "set",
+        "set",
+        "tập hợp"
+      ],
+      [
+        "approximate",
+        "əˈprɒksɪmət",
+        "gần đúng, xấp xỉ"
+      ]
+    ]
+  }
+];
+
+  var root = document.getElementById("categories");
+  var chips = document.getElementById("chips");
+  var counter = 0;
+
+  DATA.forEach(function (group) {
+    var a = document.createElement("a");
+    a.href = "#" + group.cat;
+    a.textContent = group.catVi;
+    chips.appendChild(a);
+
+    var section = document.createElement("section");
+    section.className = "category";
+    section.id = group.cat;
+
+    var head = document.createElement("div");
+    head.className = "category-head";
+    head.innerHTML = "<h2>" + group.catVi + "</h2><span class=\"en\">" + group.catEn + "</span><span class=\"count\">" + group.words.length + " từ</span>";
+    section.appendChild(head);
+
+    var tablewrap = document.createElement("div");
+    tablewrap.className = "tablewrap";
+    var table = document.createElement("table");
+    table.innerHTML =
+      "<thead><tr>" +
+      "<th class=\"num\">#</th><th>Từ</th><th>Phiên âm IPA</th><th>Nghĩa</th><th class=\"play\"></th>" +
+      "</tr></thead>";
+    var tbody = document.createElement("tbody");
+
+    group.words.forEach(function (w) {
+      counter++;
+      var word = w[0], ipa = w[1], meaning = w[2];
+      var tr = document.createElement("tr");
+      tr.dataset.search = (word + " " + meaning + " " + ipa).toLowerCase();
+      tr.innerHTML =
+        "<td class=\"num\">" + counter + "</td>" +
+        "<td class=\"word\">" + word + "</td>" +
+        "<td class=\"ipa\">/" + ipa + "/</td>" +
+        "<td class=\"meaning\">" + meaning + "</td>" +
+        "<td class=\"play\"></td>";
+
+      var playCell = tr.querySelector("td.play");
+      var btn = document.createElement("button");
+      btn.className = "play-btn";
+      btn.type = "button";
+      btn.setAttribute("aria-label", "Nghe phát âm " + word);
+      btn.innerHTML = "<svg viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M4 9v6h4l5 5V4L8 9H4z\"/></svg>";
+      btn.addEventListener("click", function () {
+        try {
+          window.speechSynthesis.cancel();
+          var u = new SpeechSynthesisUtterance(word);
+          u.lang = "en-GB";
+          u.rate = 0.85;
+          window.speechSynthesis.speak(u);
+        } catch (e) {}
+      });
+      playCell.appendChild(btn);
+
+      tbody.appendChild(tr);
+    });
+
+    table.appendChild(tbody);
+    tablewrap.appendChild(table);
+    section.appendChild(tablewrap);
+    root.appendChild(section);
+  });
+
+  if (!("speechSynthesis" in window)) {
+    document.body.classList.add("no-speech");
+  }
+
+  var input = document.getElementById("q");
+  var empty = document.getElementById("empty");
+  input.addEventListener("input", function () {
+    var q = input.value.trim().toLowerCase();
+    var anyVisible = false;
+    document.querySelectorAll(".category").forEach(function (section) {
+      var visibleInSection = 0;
+      section.querySelectorAll("tbody tr").forEach(function (tr) {
+        var match = !q || tr.dataset.search.indexOf(q) !== -1;
+        tr.classList.toggle("hide", !match);
+        if (match) { visibleInSection++; anyVisible = true; }
+      });
+      section.style.display = visibleInSection ? "" : "none";
+    });
+    empty.classList.toggle("show", !anyVisible);
+  });
+})();
+</script>
+</body>
+</html>
